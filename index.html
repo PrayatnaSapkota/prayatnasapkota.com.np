@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prayatna Sapkota | Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanta/0.5.24/vanta.net.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            color: #fff;
+            text-align: center;
+            background: #111;
+        }
+
+        #vanta-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            padding: 15px 0;
+            z-index: 100;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #00d4ff;
+        }
+
+        section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 60px 20px;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .hero {
+            font-size: 2rem;
+            font-weight: bold;
+            background: linear-gradient(90deg, #00d4ff, #ff00ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: glow 1.5s infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+                opacity: 0.7;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .contact a {
+            color: #00d4ff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .projects,
+        .tech-stack {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .tech-list {
+            display: flex;
+            gap: 20px;
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="vanta-bg"></div>
+
+    <nav>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#tech-stack">Tech Stack</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section id="home">
+        <h1 class="hero">A curious mind, always questioning, exploring, and pushing the boundaries of AI and beyond, one
+            discovery at a time.</h1>
+    </section>
+
+    <section id="about">
+        <h2 class="section-title">About Me</h2>
+        <p>"I’m Prayatna. I’m always questioning, exploring, and challenging the norms around me. I don’t fit into the
+            boxes others try to put me in—whether it’s school or society. People might not always get me, and that’s
+            fine. I’m here to do things my way, learn my own lessons, and keep pushing toward what feels right for me."
+
+        </p>
+    </section>
+
+    <section id="projects" class="projects">
+        <h2 class="section-title">Projects</h2>
+        <p>Coming Soon! I'm working on exciting things!!!</p>
+    </section>
+
+    <section id="tech-stack" class="tech-stack">
+        <h2 class="section-title">Tech Stack</h2>
+        <div class="tech-list">
+            <span>HTML</span>
+            <span>Little-bit CSS</span>
+            <span>Learning Python & C</span>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <h2 class="section-title">Contact</h2>
+        <p>Reach me on Signal: <a
+                href="https://signal.me/#eu/DQWrcF0nHfsvhdsGXE6NeDuujot4HZirRwiapg7iBilF1pa9IhpLjKKEA15nIHA4"
+                target="_blank">Prayatna.911</a></p>
+        <a href="https://github.com/PrayatnaSapkota">
+            GITHUB
+        </a>
+    </section>
+
+    <script>
+        VANTA.NET({
+            el: "#vanta-bg",
+            color: 0x00d4ff,
+            backgroundColor: 0x111,
+            maxDistance: 20,
+            spacing: 15
+        });
+    </script>
+</body>
+
+</html>
