@@ -169,6 +169,24 @@
             font-weight: bold;
             margin: 5px 0;
         }
+        .project {
+    background: #222;
+    color: white;
+    padding: 20px;
+    margin: 10px 0;
+    border-radius: 8px;
+}
+
+.project a {
+    color: #00ffcc;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.project a:hover {
+    text-decoration: underline;
+}
+
     </style>
 </head>
 
@@ -202,7 +220,13 @@
 
         <section id="projects" class="projects">
             <h2 class="section-title">Projects</h2>
-            <p>Coming Soon! I'm working on exciting things!!!</p>
+            <div class="project">
+    <h2>Number Guessing Game</h2>
+    <p>A simple C program where you guess a number between 1 and 100.</p>
+    <a href="https://github.com/PrayatnaSapkota/Number-Guess-GAME" target="_blank">View on GitHub</a>
+</div>
+        <pre>This is just a simple game I'll delete  this after my big project publish !
+                    !!!I'm working on exciting thing...SEE YOU S00N!!!</pre>
         </section>
 
         <section id="tech-stack" class="tech-stack">
@@ -234,7 +258,7 @@
                 </div>
             </div>
             <div class="repositories">
-                <h4>Latest Repositories</h4>
+                <h4> My Latest Repositories</h4>
                 <div id="repositories-list"></div>
             </div>
         </section>
@@ -267,7 +291,7 @@
                 fetch(`https://api.github.com/users/${username}/repos?sort=updated`)
                     .then(response => response.json())
                     .then(repos => {
-                        const repoList = repos.slice(0, 5); // Get 5 latest repositories
+                        const repoList = repos.slice(0, 1); // Get 5 latest repositories
                         const repoContainer = document.getElementById('repositories-list');
                         repoList.forEach(repo => {
                             const repoLink = document.createElement('a');
