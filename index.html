@@ -1,10 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Prayatna Sapkota | Portfolio</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanta/0.5.24/vanta.net.min.js"></script>
+    <title>Prayatna's Portfolio</title>
     <style>
         * {
             margin: 0;
@@ -13,292 +10,193 @@
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Arial', sans-serif;
+            background-color: #121212;
             color: #fff;
-            background: #111;
-            scroll-behavior: smooth;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
+            text-align: center;
+            padding: 0;
+            margin: 0;
+            overflow-x: hidden;
         }
 
-        #vanta-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: -1;
+        header {
+            background-color: #1f1f1f;
+            padding: 70px 20px;
+            border-bottom: 2px solid #444;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 2s ease-out;
         }
 
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            padding: 15px 0;
-            z-index: 100;
-            display: flex;
-            justify-content: center;
+        header h1 {
+            font-size: 3.5em;
+            font-weight: bold;
+            color: #61dafb;
+            margin-bottom: 10px;
+            animation: slideIn 1s ease-out;
         }
 
-        nav ul {
-            list-style: none;
-            display: flex;
-            gap: 25px;
-        }
-
-        nav a {
-            color: #fff;
-            text-decoration: none;
-            font-size: 1.1rem;
-            transition: color 0.3s;
-        }
-
-        nav a:hover {
-            color: #00d4ff;
+        header p {
+            font-size: 1.5em;
+            color: #a3a3a3;
+            animation: fadeInUp 2s ease-out;
         }
 
         section {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
             padding: 60px 20px;
+            margin: 20px 0;
+            animation: fadeInUp 2s ease-out;
+        }
+
+        h2 {
+            font-size: 2.5em;
+            color: #61dafb;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 1.1em;
+            color: #bbb;
+            line-height: 1.6;
+        }
+
+        .skills {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .skill {
+            background: #333;
+            padding: 30px;
+            border-radius: 15px;
+            transition: transform 0.3s ease-in-out, background-color 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .skill:hover {
+            transform: scale(1.05);
+            background-color: #444;
+        }
+
+        .skill h3 {
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            color: #61dafb;
+        }
+
+        .skill p {
+            font-size: 1.1em;
+            color: #bbb;
+        }
+
+        footer {
+            background-color: #1f1f1f;
+            padding: 30px;
+            margin-top: 40px;
+            color: #aaa;
+            font-size: 1.2em;
             text-align: center;
-            scroll-snap-align: start;
-            min-height: 100vh;
+            animation: fadeInUp 2s ease-out;
         }
 
-        .section-title {
-            font-size: 2rem;
+        footer a {
+            color: #61dafb;
+            text-decoration: none;
             font-weight: bold;
-            margin-bottom: 10px;
-            text-align: center;
-            position: relative;
         }
 
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background-color: #00d4ff;
+        footer a:hover {
+            text-decoration: underline;
         }
 
-        .hero {
-            font-size: 2rem;
-            font-weight: bold;
-            background: linear-gradient(90deg, #00d4ff, #ff00ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: glow 1.5s infinite alternate;
+        @media (max-width: 768px) {
+            .skills {
+                grid-template-columns: 1fr 1fr;
+            }
         }
 
-        @keyframes glow {
-            from {
-                opacity: 0.7;
+        @media (max-width: 480px) {
+            .skills {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
             }
 
-            to {
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideIn {
+            0% {
+                transform: translateX(-50%);
+                opacity: 0;
+            }
+
+            100% {
+                transform: translateX(0);
                 opacity: 1;
             }
         }
-
-        .contact a {
-            color: #00d4ff;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        .projects,
-        .tech-stack {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .tech-list {
-            display: flex;
-            gap: 20px;
-            font-size: 1.2rem;
-        }
-
-        .scroll-container {
-            height: 100vh;
-            overflow-y: scroll;
-            scroll-snap-type: y mandatory;
-        }
-
-        .github-profile {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-top: 40px;
-        }
-
-        .github-profile img {
-            border-radius: 50%;
-            width: 150px;
-            height: 150px;
-            margin-right: 20px;
-        }
-
-        .github-profile .info {
-            font-size: 1.2rem;
-            color: #fff;
-        }
-
-        .github-profile .repositories {
-            margin-top: 20px;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .github-profile .repositories a {
-            color: #00d4ff;
-            text-decoration: none;
-            font-weight: bold;
-            margin: 5px 0;
-        }
-        .project {
-    background: #222;
-    color: white;
-    padding: 20px;
-    margin: 10px 0;
-    border-radius: 8px;
-}
-
-.project a {
-    color: #00ffcc;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-.project a:hover {
-    text-decoration: underline;
-}
-
     </style>
 </head>
 
 <body>
-    <div id="vanta-bg"></div>
-
-    <div class="scroll-container">
-        <nav>
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#tech-stack">Tech Stack</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-
-        <section id="home">
-            <h1 class="hero">A curious mind, always questioning, exploring, and pushing the boundaries of AI and beyond,
-                one discovery at a time.</h1>
-        </section>
-
-        <section id="about">
-            <h2 class="section-title">About Me</h2>
-            <p>"I’m Prayatna. I’m always questioning, exploring, and challenging the norms around me. I don’t fit into
-                the boxes others try to put me in—whether it’s school or society. People might not always get me, and
-                that’s fine. I’m here to do things my way, learn my own lessons, and keep pushing toward what feels
-                right for me."
-            </p>
-        </section>
-
-        <section id="projects" class="projects">
-            <h2 class="section-title">Projects</h2>
-            <div class="project">
-    <h2>Number Guessing Game</h2>
-    <p>A simple C program where you guess a number between 1 and 100.</p>
-    <a href="https://github.com/PrayatnaSapkota/Number-Guess-GAME" target="_blank">View on GitHub</a>
-</div>
-        <pre>This is just a simple game I'll delete  this after my big project publish !
-                    !!!I'm working on exciting thing...SEE YOU S00N!!!</pre>
-        </section>
-
-        <section id="tech-stack" class="tech-stack">
-            <h2 class="section-title">Tech Stack</h2>
-            <div class="tech-list">
-                <span>HTML</span>
-                <span>Little-bit CSS</span>
-                <span>Learning Python & C</span>
+    <header>
+        <h1>Prayatna</h1>
+        <p>Machine Learning Enthusiast | Solo Developer | Curious Mind</p>
+    </header>
+    <section>
+        <h2>About Me</h2>
+        <p>Hi! I'm Prayatna, a 17-year-old from Nepal. I'm a Computer Science student with a passion for exploring
+            Machine Learning and Python. I love to ask questions, challenge norms, and live life with curiosity. I'm
+            working towards creating solutions that can change how we interact with technology.</p>
+    </section>
+    <section>
+        <h2>Skills & Tech Stack</h2>
+        <div class="skills">
+            <div class="skill">
+                <h3>Python</h3>
+                <p>Currently learning Python for Machine Learning, Data Science, and AI.</p>
             </div>
-        </section>
-
-        <section id="contact" class="contact">
-            <h2 class="section-title">Contact</h2>
-            <p>Reach me on Signal: <a
-                    href="https://signal.me/#eu/DQWrcF0nHfsvhdsGXE6NeDuujot4HZirRwiapg7iBilF1pa9IhpLjKKEA15nIHA4"
-                    target="_blank">Prayatna.911</a></p>
-            <a href="https://github.com/PrayatnaSapkota">GITHUB⬇️</a>
-        </section>
-
-
-        <section id="github-profile" class="github-profile">
-            <div id="github-info">
-                <img src="" id="github-avatar" alt="GitHub Profile Picture">
-                <div class="info">
-                    <h3 id="github-name">GitHub Name</h3>
-                    <p id="github-bio">GitHub Bio</p>
-                    <p><strong>Followers:</strong> <span id="github-followers">0</span></p>
-                    <p><strong>Following:</strong> <span id="github-following">0</span></p>
-                </div>
+            <div class="skill">
+                <h3>Machine Learning</h3>
+                <p>Exploring ML concepts, frameworks like TensorFlow, PyTorch, and diving into real-world projects.</p>
             </div>
-            <div class="repositories">
-                <h4> My Latest Repositories</h4>
-                <div id="repositories-list"></div>
-            </div>
-        </section>
-    </div>
-
-    <script>
-
-        VANTA.NET({
-            el: "#vanta-bg",
-            color: 0x00d4ff,
-            backgroundColor: 0x111,
-            maxDistance: 20,
-            spacing: 15
-        });
-
-
-        const username = "PrayatnaSapkota";
-
-        fetch(`https://api.github.com/users/${username}`)
-            .then(response => response.json())
-            .then(data => {
-
-                document.getElementById('github-avatar').src = data.avatar_url;
-                document.getElementById('github-name').textContent = data.name || "Not Provided";
-                document.getElementById('github-bio').textContent = data.bio || "No Bio Available";
-                document.getElementById('github-followers').textContent = data.followers;
-                document.getElementById('github-following').textContent = data.following;
-
-
-                fetch(`https://api.github.com/users/${username}/repos?sort=updated`)
-                    .then(response => response.json())
-                    .then(repos => {
-                        const repoList = repos.slice(0, 1); // Get 5 latest repositories
-                        const repoContainer = document.getElementById('repositories-list');
-                        repoList.forEach(repo => {
-                            const repoLink = document.createElement('a');
-                            repoLink.href = repo.html_url;
-                            repoLink.textContent = repo.name;
-                            repoContainer.appendChild(repoLink);
-                        });
-                    });
-            });
-    </script>
+        </div>
+    </section>
+    <section>
+        <h2>My Journey</h2>
+        <p>I'm on a mission to learn, grow, and implement what I study into real projects. From Python to Machine
+            Learning, I'm pushing boundaries and excited about the possibilities in AI. Each day is a new challenge, and
+            I embrace every moment of it.</p>
+    </section>
+    <footer>
+        <p>Contact Me: <a href="mailto:mail@prayatnasapkota.com.np">mail@prayatnasapkota.com.np</a></p>
+        <p>Or reach me via <a
+                href="https://signal.me/#eu/DQWrcF0nHfsvhdsGXE6NeDuujot4HZirRwiapg7iBilF1pa9IhpLjKKEA15nIHA4"
+                target="_blank">Signal</a>.</p>
+    </footer>
 </body>
 
 </html>
