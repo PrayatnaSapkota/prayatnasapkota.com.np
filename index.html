@@ -1,226 +1,330 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Prayatna's Cosmic Portfolio</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prayatna Sapkota - Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    /* ALL YOUR EXISTING CSS REMAINS SAME */
+    :root {
+      --dark-bg: #0a0a0a;
+      --text: #ffffff;
+      --accent: #6a00ff;
+      --section-bg: #111111;
+    }
 
-        body {
-            font-family: 'Orbitron', 'Inter', sans-serif;
-            background: #000000; 
-            color: #fff;
-            text-align: center;
-            overflow-x: hidden;
-            position: relative;
-        }
+    * {
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
 
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--dark-bg);
+      color: var(--text);
+      line-height: 1.6;
+      margin: 0;
+      overflow-x: hidden;
+    }
+
+    header {
+      background: var(--section-bg);
+      padding: 1rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid rgba(106, 0, 255, 0.3);
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      color: var(--text);
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      transition: all 0.3s ease;
+    }
+
+    nav a:hover {
+      background: rgba(106, 0, 255, 0.2);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    section {
+      background: var(--section-bg);
+      margin: 2rem 0;
+      padding: 2rem;
+      border-radius: 12px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeIn 0.6s ease forwards;
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .about-me {
+      text-align: center;
+      padding: 4rem 0;
+      position: relative;
+    }
+
+    .about-me h1 {
+      font-size: 3rem;
+      margin: 0 0 1rem;
+      background: linear-gradient(45deg, var(--accent), #9d50bb);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin: 3rem 0;
+    }
+
+    .card {
+      background: var(--section-bg);
+      padding: 2rem;
+      border-radius: 12px;
+      border: 1px solid rgba(106, 0, 255, 0.3);
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .contact-links {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+
+    .contact-link {
+      padding: 12px 24px;
+      border: 2px solid var(--accent);
+      border-radius: 30px;
+      text-decoration: none;
+      color: var(--text);
+      transition: all 0.3s ease;
+    }
+
+    .contact-link:hover {
+      background: rgba(106, 0, 255, 0.1);
+    }
+
+    .nasa-section {
+      text-align: center;
+      margin: 4rem 0;
+    }
+
+    .nasa-image {
+      max-width: 100%;
+      height: auto;
+      border-radius: 12px;
+      border: 2px solid var(--accent);
+      cursor: pointer;
+    }
+
+    .update-card {
+      background: var(--section-bg);
+      padding: 1.5rem;
+      border-radius: 12px;
+      border: 1px solid rgba(106, 0, 255, 0.3);
+      margin: 1rem 0;
+      opacity: 0;
+      animation: fadeIn 0.6s ease forwards;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 1rem;
+      }
       
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(circle at 20% 80%, rgba(75, 0, 130, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(0, 100, 150, 0.1) 0%, transparent 50%);
-            z-index: -1;
-            animation: cosmicGlow 20s infinite alternate;
-        }
-
-        header {
-            background: linear-gradient(45deg, #000000 0%, #0a0a2a 100%);
-            padding: 100px 20px 70px;
-            position: relative;
-            overflow: hidden;
-        }
-
-       
-        .star {
-            position: absolute;
-            background: #fff;
-            border-radius: 50%;
-            animation: twinkle 1.5s infinite;
-        }
-
-        header h1 {
-            font-size: clamp(2.5rem, 8vw, 4rem); /* Responsive font size */
-            text-shadow: 0 0 15px #6a00ff;
-            background: linear-gradient(45deg, #9d50bb, #6a00ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 15px;
-        }
-
-        header p {
-            font-size: clamp(1.2rem, 4vw, 1.5rem);
-            color: #a3a3a3;
-            text-shadow: 0 0 10px rgba(106, 0, 255, 0.3);
-        }
-
-        section {
-            padding: 60px 20px;
-            margin: 40px auto;
-            max-width: 1200px;
-            position: relative;
-            backdrop-filter: blur(10px);
-            background: rgba(15, 15, 15, 0.9); /* Darker sections */
-            border-radius: 15px;
-            border: 1px solid rgba(106, 0, 255, 0.2);
-        }
-
-        .skills {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            margin-top: 40px;
-            padding: 0 15px;
-        }
-
-        .skill {
-            background: rgba(25, 25, 25, 0.95);
-            padding: 25px;
-            border-radius: 15px;
-            border: 1px solid #6a00ff33;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .skill:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 0 30px #6a00ff33;
-        }
-
-        footer {
-            background: linear-gradient(45deg, #000000 0%, #0a0a2a 100%);
-            padding: 50px 20px;
-            margin-top: 100px;
-        }
-
-        .contact-links {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            flex-wrap: wrap;
-            margin-top: 25px;
-        }
-
-        .contact-links a {
-            color: #fff;
-            text-decoration: none;
-            padding: 12px 25px;
-            border: 1px solid #6a00ff;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-        }
-
-        .contact-links a:hover {
-            background: #6a00ff33;
-            transform: scale(1.05);
-        }
-
-        @media (max-width: 768px) {
-            section {
-                margin: 30px 15px;
-                padding: 40px 15px;
-            }
-
-            .skills {
-                grid-template-columns: 1fr;
-            }
-
-            .contact-links {
-                flex-direction: column;
-                gap: 15px;
-            }
-        }
-
-       
-        @keyframes cosmicGlow {
-            0% { opacity: 0.3; }
-            100% { opacity: 0.7; }
-        }
-
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.3; transform: scale(0.5); }
-            50% { opacity: 1; transform: scale(1.2); }
-        }
-    </style>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+      .about-me h1 {
+        font-size: 2rem;
+      }
+      
+      nav {
+        gap: 1rem;
+      }
+    }
+  </style>
 </head>
-
 <body>
-   
-    <div id="starfield"></div>
+  <header>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#updates">Updates</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
 
-    <header>
-        <h1>Prayatna Sapkota</h1>
-        <p>Machine Learning Enthusiast | Solo Developer | Curious Mind</p>
-    </header>
-
-    <section id="about">
-        <h2>About Me</h2>
-        <p>🚀 17-year-old AI engineer-in-the-making from Nepal with a passion for space exploration and cutting-edge technology.</p>
-        <p>🌌 Driven by the mission to develop artificial intelligence solutions that can revolutionize industries, including space exploration, autonomous systems, and deep learning.</p>
-        <p>🔭 Currently working with Python, neural networks, and machine learning to lay the groundwork for future contributions to space tech and AI research.</p>
-        <p>🌠 Aiming to work on AI projects that support space exploration efforts and help humanity venture further into the cosmos.</p>
-    </section>
-    
-
-    <section>
-        <h2>Tech Nebula</h2>
-        <div class="skills">
-            <div class="skill">
-                <h3>Python</h3>
-                <p>Building a foundation in Python to fuel my journey into machi learning and data science</p>
-            </div>
-            <div class="skill">
-                <h3>Machine Learning</h3>
-                <p>Exploring neural networks and their potential to map the unknown frontiers of AI
-
-                </p>
-            </div>
-        </div>
+  <main class="container">
+    <!-- ALL YOUR EXISTING SECTIONS REMAIN SAME -->
+    <section id="about" class="about-me">
+      <h1>Prayatna Sapkota</h1>
+      <p>17-year-old AI Enthusiast from Nepal</p>
+      <div style="margin-top: 1.5rem;">
+        🚀 Building foundations in machine learning<br>
+        🌌 Passionate about space technology<br>
+        🔭 Currently learning Python & C
+      </div>
     </section>
 
-    <footer>
-        <h3>Contact Me:</h3>
-        <div class="contact-links">
-            <a href="mailto:mail@prayatnasapkota.com.np">
-                📧  Mail
-            </a>
-            <a href="https://signal.me/#eu/DQWrcF0nHfsvhdsGXE6NeDuujot4HZirRwiapg7iBilF1pa9IhpLjKKEA15nIHA4" target="_blank">
-                📡 Signal
-            </a>
-            <a href="https://github.com/PrayatnaSapkota" target="_blank">
-                💻 GitHub
-            </a>
+    <section id="skills">
+      <h2>Technical Skills</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>Programming</h3>
+          <p>Python (learning)<br>
+          C (learning)<br>
+          HTML/CSS (Basic)</p>
         </div>
-    </footer>
+        <div class="card">
+          <h3>Education</h3>
+          <p>● CTEVT Mobile Repair Technician Level-1 (Passed)<br>
+            ● SEE Completed (2024)<br>
+            ● Grade 11 (Ongoing)</p>
+        </div>
+        <div class="card">
+          <h3>Tech Stack</h3>
+          <p>● iPhone SE 3<br>
+            ● Laptop- i3 5005u 8GB RAM 256SSD + 500HDD<br>
+            ● Apple Watch Series 7 <br>
+            ● VS Code + GitHub<br></p>
+        </div>
+      </div>
+    </section>
 
-    <script>
-      
-        function createStarfield() {
-            const starfield = document.getElementById('starfield');
-            for (let i = 0; i < 100; i++) {
-                const star = document.createElement('div');
-                star.className = 'star';
-                star.style.width = Math.random() * 3 + 'px';
-                star.style.height = star.style.width;
-                star.style.left = Math.random() * 100 + '%';
-                star.style.top = Math.random() * 100 + '%';
-                star.style.animationDelay = Math.random() * 2 + 's';
-                starfield.appendChild(star);
-            }
+    <section id="projects">
+      <h2>Projects</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>AI Research</h3>
+          <p>Coming Soon</p>
+          <small>S00N   </small>
+        </div>
+      </div>
+    </section>
+
+    <section id="updates">
+      <h2>Latest Updates</h2>
+      <div id="updates-container">
+        <div class="update-card" style="animation-delay: 0.2s">
+          <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+            <span style="font-size: 2rem">🧠</span>
+            <div>
+              <h3>Started ML Journey</h3>
+              <small>2024</small>
+            </div>
+          </div>
+          <p>Began studying fundamentals</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2>Get in Touch</h2>
+      <div class="contact-links">
+        <a href="mailto:mail@prayatnasapkota.com.np" class="contact-link">
+          📧 Email
+        </a>
+        <a href="https://signal.me/#eu/DQWrcF0nHfsvhdsGXE6NeDuujot4HZirRwiapg7iBilF1pa9IhpLjKKEA15nIHA4" 
+           class="contact-link" 
+           target="_blank">
+          📡 Signal
+        </a>
+        <a href="https://github.com/PrayatnaSapkota" 
+           class="contact-link" 
+           target="_blank">
+          💻 GitHub
+        </a>
+      </div>
+    </section>
+
+    <!-- MODIFIED NASA SECTION -->
+    <section class="nasa-section">
+      <a href="https://www.nasa.gov/news/" target="_blank" style="text-decoration: none; color: inherit;">
+        <h2>Latest Space News!!</h2>
+        <div id="nasa-content">
+          <img class="nasa-image" id="nasa-img" alt="NASA Astronomy Picture">
+          <p id="nasa-desc">Loading cosmic update...</p>
+        </div>
+      </a>
+    </section>
+  </main>
+
+  <script>
+    // MODIFIED NASA API HANDLING
+    async function loadNASAData() {
+      try {
+        const response = await fetch('https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY');
+        const data = await response.json();
+        
+        // Always try to show image
+        if (data.url) {
+          document.getElementById('nasa-img').src = data.url;
+          document.getElementById('nasa-img').alt = data.title || 'NASA Image';
         }
-        createStarfield();
-    </script>
+        if (data.explanation) {
+          document.getElementById('nasa-desc').textContent = data.explanation;
+        }
+      } catch (error) {
+        // Show direct news link on error
+        document.getElementById('nasa-content').innerHTML = `
+          <h2>NASA News</h2>
+          <p>Explore latest space news:<br>
+            <a href="https://www.nasa.gov/news/" 
+               style="color: #6a00ff; text-decoration: underline;"
+               target="_blank">
+              Click here for NASA News
+            </a>
+          </p>
+        `;
+      }
+    }
+
+    // Initialize
+    window.addEventListener('load', () => {
+      loadNASAData();
+      
+      // Animate sections on scroll
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if(entry.isIntersecting) {
+            entry.target.style.opacity = 1;
+            entry.target.style.transform = 'translateY(0)';
+          }
+        });
+      }, { threshold: 0.1 });
+
+      document.querySelectorAll('section').forEach((section) => {
+        observer.observe(section);
+      });
+    });
+  </script>
 </body>
 </html>
