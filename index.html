@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Under Development</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #121212;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            animation: fadeIn 2s ease-out;
+        }
+
+        .container {
+            text-align: center;
+            max-width: 800px;
+            position: relative;
+            z-index: 1;
+        }
+
+        h1 {
+            font-size: 3em;
+            color: #ff5722;
+            margin-bottom: 20px;
+            animation: fadeIn 3s ease-out;
+        }
+
+        p {
+            font-size: 1.5em;
+            margin-top: 10px;
+            color: #b0b0b0;
+            animation: fadeIn 3s ease-out;
+        }
+
+        .button {
+            margin-top: 30px;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .button:hover {
+            background-color: #0056b3;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0.2;
+            z-index: -1;
+            animation: fadeInBackground 5s ease-in-out infinite;
+        }
+
+        @keyframes fadeInBackground {
+            0% {
+                opacity: 0.2;
+            }
+            50% {
+                opacity: 0.6;
+            }
+            100% {
+                opacity: 0.2;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Site Under Development</h1>
+        <p>
+            Hello! I’ve removed all content from my website as I am currently re-developing it to make it better.
+            Please check back later for an improved experience. Thanks for your patience!
+        </p>
+        <p>If you need to contact me, email me at <a href="mailto:mail@prayatnasapkota.com.np" style="color: #ff5722; text-decoration: none;">mail@prayatnasapkota.com.np</a></p>
+        <button class="button" onclick="window.location.reload();">Refresh</button>
+    </div>
+
+    <script>
+        // Fetching random space images from NASA API to use as the background
+        const nasaApiUrl = "https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY";
+
+        fetch(nasaApiUrl)
+            .then(response => response.json())
+            .then(data => {
+                const backgroundImage = data.url;
+                const backgroundElement = document.querySelector('.background');
+                backgroundElement.style.backgroundImage = `url(${backgroundImage})`;
+            })
+            .catch(error => {
+                console.error('Error fetching the space image:', error);
+            });
+    </script>
+
+    <div class="background"></div>
+</body>
+</html>
