@@ -1,0 +1,89 @@
+Here’s the final version with everything added, including the **Why Zone (Blog)** section!
+
+---
+
+🚀 **My Portfolio Website – Features & Setup**
+
+I’m building my personal portfolio website to showcase my work, ideas, and curiosity-driven journey in tech, AI, and space.
+
+---
+
+1. 🔹 **About Me**  
+Hi, I’m Prayatna Sapkota, a passionate computer science student and aspiring Machine Learning engineer from Nepal. I’m deeply curious about AI, cosmology, and space, and I love using tech to explore the universe.  
+
+I enjoy coding, problem-solving, and building things that make sense (and ask questions). I’m currently learning Python and C, and I have a basic but enough understanding of HTML & CSS to build my own world on the web.
+
+🛣️ **My Journey & Goals**
+- 📚 Currently studying: Physics, Computer Science, Chemistry, Math, English, and Nepali (Grade 11).
+- 🚀 Dream: To become a Machine Learning Engineer and contribute to AI-driven space research.
+- 💡 Interests: AI, Space, Cosmology, Physics, Problem-Solving.
+- 🛠 Skills: Python (learning), C (learning), HTML & CSS (basic).
+- 🌍 Future Plans: Travel the world, explore the unknown, and maybe die in space someday!
+
+---
+
+2. 🛰️ **Projects & Missions**
+- **Mission Alpha** – AI model to classify space objects (planets, stars, galaxies).
+- **Mission Beta (AstroVision)** – AI-based astronomy assistant.
+- **Mission Gamma** – Space weather prediction AI.
+- ⚠️ Some secret projects like "XIMI" are still classified...
+
+---
+
+3. 🪐 **NASA Astronomy Picture of the Day (APOD)**  
+I’m a space lover, so I’ve integrated NASA’s APOD into my site. It fetches the latest cosmic photo + explanation using NASA’s API.  
+🔗 Get your free API key here: [https://api.nasa.gov](https://api.nasa.gov)
+
+---
+
+4. 💬 **Contact & Socials**
+- 📞 **Signal**: [Chat with Me](https://signal.me/#eu/DQWrcF0nHfsvhdsGXE6NeDuujot4HZirRwiapg7iBilF1pa9IhpLjKKEA15nIHA4)
+- ✉️ **Gmail**: mail@prayatnasapkota.com.np
+- 🔗 **GitHub**: [github.com/PrayatnaSapkota](https://github.com/PrayatnaSapkota)
+
+---
+
+5. 🌐 **Hosting & Domain**  
+(You already know! Using GitHub Pages + Cloudflare for domain + CDN magic)
+
+---
+
+6. 🛠️ **Skills & Tools**
+- 💻 **Languages**: Python (learning), C (learning), HTML & CSS (basic but comfy)
+- 🧰 **Tools**: VS Code, GitHub Desktop, Fedora Linux
+- 🧠 **Soft Skills**: Curiosity, creativity, asking “why?” way too often (and proud of it)
+
+---
+
+7. 🤔 **Why Zone (Blog)**  
+I always ask “Why?”, and now it’s time to write those thoughts out loud. This blog section will explore:
+   - **Why I think curiosity > knowledge**  
+     Curiosity is the driving force behind learning. Knowledge is a collection of facts, but curiosity is the spark that makes us search for answers. While knowledge can be limited to what’s already discovered, curiosity is endless and leads to new questions, deeper understanding, and greater discoveries. It's the key to innovation.
+   
+   - **Why I don’t follow religious rules**  
+     I believe that rules should be based on reason, evidence, and personal reflection rather than blind tradition. For me, following religious rules often feels like being restricted by something that doesn’t have practical evidence to back it up. I prefer exploring the world through logic, science, and personal values instead of adhering to outdated customs that don't resonate with my perspective on life.
+   
+   - **Why we fear things we don’t understand (like insects or death)**  
+     Fear is a natural instinct, but it often arises from the unknown. Insects and death are two things that many people fear because they are perceived as unpredictable, uncontrollable, and mysterious. We fear what we don't understand because it challenges our sense of safety and comfort. Understanding them can often reduce this fear—whether it's learning about the role of insects in ecosystems or contemplating the inevitability of death and how it shapes the way we live.
+   
+   - **Why questioning makes life better**  
+     Life becomes richer and more fulfilling when we question everything. It pushes us to think critically, challenge assumptions, and seek truth. Without questioning, we stagnate in ignorance, living on autopilot. Asking "why" leads to personal growth, deeper insights, and a sense of empowerment. It encourages us to embrace uncertainty and explore new possibilities.
+
+---
+
+8. 🏆 **Achievements & Recognition**  
+Till now, I haven’t won awards or big competitions.  
+But hey —  
+Being born and growing into someone who questions everything? That’s a pretty badass achievement itself.
+
+---
+
+9. 🎥 **Fun Zone / Extras**  
+I love sci-fi movies. They fuel my dreamer brain. Some favorites:  
+- Lost in Space  
+- Another Life  
+- Interstellar (of course!)
+
+---
+
+This is all set for you to copy and paste! Let me know if you need anything else!
