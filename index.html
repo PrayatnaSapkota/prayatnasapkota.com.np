@@ -6,7 +6,6 @@
   <title>Prayatna Sapkota | Portfolio</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    /* Base Styles */
     :root {
       --primary: #8b5cf6;
       --primary-light: #a78bfa;
@@ -37,7 +36,6 @@
       padding: 0 1.5rem;
     }
     
-    /* Stars Background */
     .stars {
       position: fixed;
       top: 0;
@@ -62,7 +60,6 @@
       50% { opacity: 1; }
     }
     
-    /* Header */
     header {
       position: sticky;
       top: 0;
@@ -135,7 +132,6 @@
       bottom: -1px;
     }
     
-    /* Hero Section */
     .hero {
       min-height: calc(100vh - 70px);
       display: flex;
@@ -218,7 +214,6 @@
       opacity: 0.6;
     }
     
-    /* Sections */
     section {
       padding: 6rem 0;
       border-bottom: 1px solid var(--border);
@@ -246,7 +241,6 @@
       transform: translateX(-50%);
     }
     
-    /* About */
     .about-content {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -287,7 +281,6 @@
       color: var(--text-muted);
     }
     
-    /* Skills */
     .skills-container {
       display: flex;
       flex-wrap: wrap;
@@ -333,7 +326,6 @@
       font-size: 0.875rem;
     }
     
-    /* Projects */
     .projects-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -414,7 +406,6 @@
       color: var(--primary);
     }
     
-    /* NASA APOD */
     .nasa-container {
       max-width: 800px;
       margin: 0 auto;
@@ -454,7 +445,6 @@
       color: var(--text-muted);
     }
     
-    /* WhyZone Blog */
     .blog-container {
       max-width: 800px;
       margin: 0 auto;
@@ -555,7 +545,6 @@
       color: var(--text-muted);
     }
     
-    /* Achievements */
     .achievements-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -600,87 +589,25 @@
       font-size: 0.875rem;
     }
     
-    /* Fun Zone */
-    .fun-container {
+    .contact-container {
       max-width: 600px;
       margin: 0 auto;
       text-align: center;
     }
     
-    .fun-container p {
-      color: var(--text-muted);
-      margin-bottom: 2rem;
-    }
-    
-    .games-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1.5rem;
-    }
-    
-    .game-card {
-      background-color: var(--background-light);
-      border-radius: 8px;
-      padding: 1.5rem;
-      border: 1px solid var(--border);
-      transition: all 0.3s;
-      cursor: pointer;
-    }
-    
-    .game-card:hover {
-      transform: translateY(-5px);
-      border-color: var(--primary);
-      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-    }
-    
-    .game-icon {
-      font-size: 2rem;
-      color: var(--primary);
-      margin-bottom: 1rem;
-    }
-    
-    .game-card h3 {
-      margin-bottom: 0.5rem;
-    }
-    
-    .game-card p {
-      color: var(--text-muted);
-      font-size: 0.875rem;
-      margin-bottom: 0;
-    }
-    
-    /* Footer */
-    footer {
-      padding: 4rem 0;
-    }
-    
-    .footer-content {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    
-    .footer-logo {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      color: var(--primary);
-      font-weight: 600;
-      font-size: 1.25rem;
-      text-decoration: none;
-    }
-    
     .social-links {
       display: flex;
-      gap: 1rem;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-top: 2rem;
     }
     
     .social-link {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 40px;
-      height: 40px;
+      width: 50px;
+      height: 50px;
       border-radius: 50%;
       background-color: var(--background-light);
       color: var(--text);
@@ -694,13 +621,32 @@
       transform: translateY(-3px);
     }
     
+    footer {
+      padding: 4rem 0;
+    }
+    
+    .footer-content {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--primary);
+      font-weight: 600;
+      font-size: 1.25rem;
+      text-decoration: none;
+    }
+    
     .copyright {
       text-align: center;
       margin-top: 2rem;
       color: var(--text-muted);
     }
     
-    /* Responsive */
     @media (max-width: 992px) {
       .about-content {
         grid-template-columns: 1fr;
@@ -740,18 +686,12 @@
         flex-direction: column;
         gap: 2rem;
       }
-      
-      .games-grid {
-        grid-template-columns: 1fr;
-      }
     }
   </style>
 </head>
 <body>
-  <!-- Stars Background -->
   <div class="stars" id="stars"></div>
 
-  <!-- Header -->
   <header>
     <div class="container">
       <div class="header-inner">
@@ -767,7 +707,7 @@
             <li><a href="#nasa">NASA APOD</a></li>
             <li><a href="#blog">Blog</a></li>
             <li><a href="#achievements">Achievements</a></li>
-            <!-- <li><a href="#fun">Fun Zone</a></li> -->
+            <li><a href="#contact">Contact</a></li>
           </ul>
         </nav>
       </div>
@@ -775,7 +715,6 @@
     <div class="progress-bar" style="--scroll: 0%"></div>
   </header>
 
-  <!-- Hero Section -->
   <section class="hero">
     <div class="container">
       <div class="hero-content">
@@ -811,19 +750,17 @@
     </svg>
   </section>
 
-  <!-- About Section -->
   <section id="about" class="about">
     <div class="container">
       <div class="section-title">
         <h2>About Me</h2>
-      <!--
       </div>
       <div class="about-content">
         <div class="about-image">
           <div style="width: 100%; height: 300px; background: linear-gradient(45deg, #1e293b, #0f172a); display: flex; align-items: center; justify-content: center; color: var(--primary); font-size: 2rem;">
             <i class="fas fa-user-astronaut" style="font-size: 5rem;"></i>
           </div>
-        </div> -->
+        </div>
         <div class="about-text">
           <h3>Exploring The Possibilities</h3>
           <p>Hello! I'm Prayatna Sapkota, a passionate developer with a strong interest in space, technology, and innovation. My journey in tech began when I was fascinated by how software could change the way we interact with the world.</p>
@@ -834,7 +771,6 @@
     </div>
   </section>
 
-  <!-- Skills Section -->
   <section id="skills" class="skills">
     <div class="container">
       <div class="section-title">
@@ -866,191 +802,150 @@
     </div>
   </section>
 
- <!-- Projects Section -->
-<section id="projects" class="projects">
-  <div class="container">
-    <div class="section-title">
-      <h2>My Projects</h2>
-    </div>
-    <div class="projects-grid">
-      
-      <!-- Mission Alpha -->
-      <div class="project-card">
-        <div class="project-image">
-          <div style="width: 100%; height: 180px; background: linear-gradient(135deg, #1e293b, #0f172a); display: flex; align-items: center; justify-content: center; color: var(--primary);">
-            <i class="fas fa-robot" style="font-size: 3rem;"></i>
-          </div>
-        </div>
-        <div class="project-content">
-          <div class="project-tags">
-            <span class="project-tag">Python</span>
-            <span class="project-tag" style="background-color: rgba(253, 186, 116, 0.2); color: #fdba74;">Planned</span>
-          </div>
-          <h3>Mission Alpha (Planned)</h3>
-          <p>Train a basic AI model to classify space objects like planets, stars, or galaxies using Python, TensorFlow/Keras, and OpenCV.</p>
-          <div class="project-links">
-            <a href="#" class="project-link"><i class="fas fa-clock"></i></a>
-          </div>
-        </div>
+  <section id="projects" class="projects">
+    <div class="container">
+      <div class="section-title">
+        <h2>My Projects</h2>
       </div>
-
-      <!-- Mission Beta -->
-      <div class="project-card">
-        <div class="project-image">
-          <div style="width: 100%; height: 180px; background: linear-gradient(135deg, #1e293b, #0f172a); display: flex; align-items: center; justify-content: center; color: var(--primary);">
-            <i class="fas fa-brain" style="font-size: 3rem;"></i>
-          </div>
-        </div>
-        <div class="project-content">
-          <div class="project-tags">
-            <span class="project-tag">Python</span>
-            <span class="project-tag" style="background-color: rgba(253, 186, 116, 0.2); color: #fdba74;">Planned</span>
-          </div>
-          <h3>Mission Beta (Planned)</h3>
-          <p>Build an AI-based astronomy assistant that can analyze and classify space images using advanced deep learning techniques.</p>
-          <div class="project-links">
-            <a href="#" class="project-link"><i class="fas fa-clock"></i></a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Mission Gamma -->
-      <div class="project-card">
-        <div class="project-image">
-          <div style="width: 100%; height: 180px; background: linear-gradient(135deg, #1e293b, #0f172a); display: flex; align-items: center; justify-content: center; color: var(--primary);">
-            <i class="fas fa-sun" style="font-size: 3rem;"></i>
-          </div>
-        </div>
-        <div class="project-content">
-          <div class="project-tags">
-            <span class="project-tag">Python</span>
-            <span class="project-tag" style="background-color: rgba(253, 186, 116, 0.2); color: #fdba74;">Planned</span>
-          </div>
-          <h3>Mission Gamma (Planned)</h3>
-          <p>Use AI to predict solar storms and space weather events using NASA datasets and build a web-based interface for visualization.</p>
-          <div class="project-links">
-            <a href="#" class="project-link"><i class="fas fa-clock"></i></a>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- NASA APOD Section -->
-<section id="nasa" class="nasa">
-  <div class="container">
-    <div class="section-title">
-      <h2>NASA Astronomy Picture of the Day</h2>
-      <h4>I am Tryig to Fix :)</h4>
-    </div>
-    <div class="nasa-container">
-      <div class="nasa-image">
-        <div id="nasa-image-container" style="width: 100%; height: 400px; background: linear-gradient(135deg, #1e293b, #0f172a); display: flex; flex-direction: column; align-items: center; justify-content: center; color: var(--primary);">
-          <!-- The image will be inserted here by JavaScript -->
-          <i class="fas fa-satellite" style="font-size: 5rem; margin-bottom: 20px;"></i>
-          <p style="text-align: center; max-width: 80%; font-size: 0.9rem; opacity: 0.7;">Loading image from NASA's Astronomy Picture of the Day...</p>
-        </div>
-      </div>
-      <div class="nasa-content">
-        <h3 class="nasa-title">NASA Astronomy Picture of the Day</h3>
-        <p class="nasa-text">Every day, NASA features a different image of our fascinating universe, along with a brief explanation written by a professional astronomer. Below is the Astronomy Picture of the Day.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<script>
-  // Replace with your NASA API key
-  const apiKey = 'YOUR_NASA_API_KEY'; // Replace this with your actual API key
-  const apiUrl = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}`;
-
-  // Fetch data from NASA APOD API
-  fetch(apiUrl)
-    .then(response => response.json())
-    .then(data => {
-      // Get the image URL and description
-      const imageUrl = data.url;
-      const imageTitle = data.title;
-      const imageExplanation = data.explanation;
-
-      // Set the image and description in the HTML
-      const imageContainer = document.getElementById('nasa-image-container');
-      imageContainer.innerHTML = `<img src="${imageUrl}" alt="${imageTitle}" style="width: 100%; height: 100%; object-fit: cover;">`;
-
-      // Set the title and description below the image
-      document.getElementById('nasa-title').innerText = imageTitle;
-      document.getElementById('nasa-description').innerText = imageExplanation;
-    })
-    .catch(error => {
-      console.error('Error fetching data from NASA API:', error);
-      document.querySelector('.nasa-content').innerHTML = '<p>Error loading NASA image. Please try again later.</p>';
-    });
-</script>
-
-
-  <!-- WhyZone Blog Section -->
-<section id="blog" class="blog">
-  <div class="container">
-    <div class="section-title">
-      <h2>Why Zone Blog</h2>
-    </div>
-    <div class="blog-container">
-      <div class="blog-list">
-        <div class="blog-card">
-          <div class="blog-content">
-            <div class="blog-title">
-              <i class="fas fa-brain"></i>
-              <h3>Why I think curiosity > knowledge</h3>
+      <div class="projects-grid">
+        <div class="project-card">
+          <div class="project-image">
+            <div style="width: 100%; height: 180px; background: linear-gradient(135deg, #1e293b, #0f172a); display: flex; align-items: center; justify-content: center; color: var(--primary);">
+              <i class="fas fa-robot" style="font-size: 3rem;"></i>
             </div>
-            <p class="blog-snippet">Curiosity drives us to ask questions, explore, and learn more than we already know. It's more important than just having knowledge.</p>
-            <button class="read-more" onclick="toggleBlog(this)">
-              Read More <i class="fas fa-arrow-right"></i>
-            </button>
-            <div class="blog-content-full">
-              <p>While knowledge is important, curiosity is more valuable. Curiosity pushes us to question, explore, and discover new things. It’s what helps us grow and find answers to bigger questions. Knowledge is useful, but without curiosity, we would stop learning and discovering more about the world.</p>
+          </div>
+          <div class="project-content">
+            <div class="project-tags">
+              <span class="project-tag">Python</span>
+              <span class="project-tag" style="background-color: rgba(253, 186, 116, 0.2); color: #fdba74;">Planned</span>
+            </div>
+            <h3>Mission Alpha (Planned)</h3>
+            <p>Train a basic AI model to classify space objects like planets, stars, or galaxies using Python, TensorFlow/Keras, and OpenCV.</p>
+            <div class="project-links">
+              <a href="#" class="project-link"><i class="fas fa-clock"></i></a>
             </div>
           </div>
         </div>
-        <div class="blog-card">
-          <div class="blog-content">
-            <div class="blog-title">
-              <i class="fas fa-meteor"></i>
-              <h3>Why I don't believe in religious things</h3>
+        <div class="project-card">
+          <div class="project-image">
+            <div style="width: 100%; height: 180px; background: linear-gradient(135deg, #1e293b, #0f172a); display: flex; align-items: center; justify-content: center; color: var(--primary);">
+              <i class="fas fa-brain" style="font-size: 3rem;"></i>
             </div>
-            <p class="blog-snippet">I prefer understanding the world through science and asking questions rather than following things based on faith and beliefs without evidence.</p>
-            <button class="read-more" onclick="toggleBlog(this)">
-              Read More <i class="fas fa-arrow-right"></i>
-            </button>
-            <div class="blog-content-full">
-              <p>For me, religion often focuses on things we can’t prove or understand through evidence. I believe in exploring the world with science, asking questions, and finding answers we can prove. I think relying on faith without proof stops us from growing and learning. Understanding the world through facts and evidence is what I value the most.</p>
+          </div>
+          <div class="project-content">
+            <div class="project-tags">
+              <span class="project-tag">Python</span>
+              <span class="project-tag" style="background-color: rgba(253, 186, 116, 0.2); color: #fdba74;">Planned</span>
+            </div>
+            <h3>Mission Beta (Planned)</h3>
+            <p>Build an AI-based astronomy assistant that can analyze and classify space images using advanced deep learning techniques.</p>
+            <div class="project-links">
+              <a href="#" class="project-link"><i class="fas fa-clock"></i></a>
             </div>
           </div>
         </div>
-        <div class="blog-card">
-          <div class="blog-content">
-            <div class="blog-title">
-              <i class="fas fa-rocket"></i>
-              <h3>Why I think Astrology is fake</h3>
+        <div class="project-card">
+          <div class="project-image">
+            <div style="width: 100%; height: 180px; background: linear-gradient(135deg, #1e293b, #0f172a); display: flex; align-items: center; justify-content: center; color: var(--primary);">
+              <i class="fas fa-sun" style="font-size: 3rem;"></i>
             </div>
-            <p class="blog-snippet">Astrology suggests that celestial bodies affect our lives in a way that doesn't stand up to scientific scrutiny.</p>
-            <button class="read-more" onclick="toggleBlog(this)">
-              Read More <i class="fas fa-arrow-right"></i>
-            </button>
-            <div class="blog-content-full">
-              <p>Astrology claims that the positions of stars and planets at the time of our birth determine our personality traits and future. However, there’s no scientific evidence to support this idea. The forces of gravity and other influences that astrology suggests have no measurable effect on human behavior or life outcomes. Furthermore, astrologers have failed to demonstrate any repeatable, verifiable connection between astrological signs and personality traits or events in people’s lives.</p>
-              <p>In essence, astrology operates on vague generalities and broad statements that could apply to anyone, which is why people often feel like astrology predictions fit them. The lack of consistency in predictions and the inability to scientifically test astrology make it more of a pseudoscience than a legitimate field of study. So, while astrology can be fun or entertaining, I think it's best to treat it with skepticism and rely on more evidence-based practices to understand our world and ourselves.</p>
+          </div>
+          <div class="project-content">
+            <div class="project-tags">
+              <span class="project-tag">Python</span>
+              <span class="project-tag" style="background-color: rgba(253, 186, 116, 0.2); color: #fdba74;">Planned</span>
+            </div>
+            <h3>Mission Gamma (Planned)</h3>
+            <p>Use AI to predict solar storms and space weather events using NASA datasets and build a web-based interface for visualization.</p>
+            <div class="project-links">
+              <a href="#" class="project-link"><i class="fas fa-clock"></i></a>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
+  <section id="nasa" class="nasa">
+    <div class="container">
+      <div class="section-title">
+        <h2>NASA Astronomy Picture of the Day</h2>
+      </div>
+      <div class="nasa-container">
+        <div class="nasa-image">
+          <div id="nasa-image-container" style="width: 100%; height: 400px; background: linear-gradient(135deg, #1e293b, #0f172a); display: flex; flex-direction: column; align-items: center; justify-content: center; color: var(--primary);">
+            <i class="fas fa-satellite" style="font-size: 5rem; margin-bottom: 20px;"></i>
+            <p style="text-align: center; max-width: 80%; font-size: 0.9rem; opacity: 0.7;">Loading NASA's Astronomy Picture of the Day...</p>
+          </div>
+        </div>
+        <div class="nasa-content">
+          <p class="nasa-date" id="nasa-date"></p>
+          <h3 class="nasa-title" id="nasa-title">Loading...</h3>
+          <p class="nasa-text" id="nasa-description">Fetching the latest cosmic wonder...</p>
+          <p class="nasa-copyright" id="nasa-copyright" style="font-size: 0.875rem; color: var(--text-muted);"></p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <!-- Achievements Section -->
+  <section id="blog" class="blog">
+    <div class="container">
+      <div class="section-title">
+        <h2>Why Zone Blog</h2>
+      </div>
+      <div class="blog-container">
+        <div class="blog-list">
+          <div class="blog-card">
+            <div class="blog-content">
+              <div class="blog-title">
+                <i class="fas fa-brain"></i>
+                <h3>Why I think curiosity > knowledge</h3>
+              </div>
+              <p class="blog-snippet">Curiosity drives us to ask questions, explore, and learn more than we already know. It's more important than just having knowledge.</p>
+              <button class="read-more" onclick="toggleBlog(this)">
+                Read More <i class="fas fa-arrow-right"></i>
+              </button>
+              <div class="blog-content-full">
+                <p>While knowledge is important, curiosity is more valuable. Curiosity pushes us to question, explore, and discover new things. It’s what helps us grow and find answers to bigger questions. Knowledge is useful, but without curiosity, we would stop learning and discovering more about the world.</p>
+              </div>
+            </div>
+          </div>
+          <div class="blog-card">
+            <div class="blog-content">
+              <div class="blog-title">
+                <i class="fas fa-meteor"></i>
+                <h3>Why I don't believe in religious things</h3>
+              </div>
+              <p class="blog-snippet">I prefer understanding the world through science and asking questions rather than following things based on faith and beliefs without evidence.</p>
+              <button class="read-more" onclick="toggleBlog(this)">
+                Read More <i class="fas fa-arrow-right"></i>
+              </button>
+              <div class="blog-content-full">
+                <p>For me, religion often focuses on things we can’t prove or understand through evidence. I believe in exploring the world with science, asking questions, and finding answers we can prove. I think relying on faith without proof stops us from growing and learning. Understanding the world through facts and evidence is what I value the most.</p>
+              </div>
+            </div>
+          </div>
+          <div class="blog-card">
+            <div class="blog-content">
+              <div class="blog-title">
+                <i class="fas fa-rocket"></i>
+                <h3>Why I think Astrology is fake</h3>
+              </div>
+              <p class="blog-snippet">Astrology suggests that celestial bodies affect our lives in a way that doesn't stand up to scientific scrutiny.</p>
+              <button class="read-more" onclick="toggleBlog(this)">
+                Read More <i class="fas fa-arrow-right"></i>
+              </button>
+              <div class="blog-content-full">
+                <p>Astrology claims that the positions of stars and planets at the time of our birth determine our personality traits and future. However, there’s no scientific evidence to support this idea. The forces of gravity and other influences that astrology suggests have no measurable effect on human behavior or life outcomes. Furthermore, astrologers have failed to demonstrate any repeatable, verifiable connection between astrological signs and personality traits or events in people’s lives.</p>
+                <p>In essence, astrology operates on vague generalities and broad statements that could apply to anyone, which is why people often feel like astrology predictions fit them. The lack of consistency in predictions and the inability to scientifically test astrology make it more of a pseudoscience than a legitimate field of study. So, while astrology can be fun or entertaining, I think it's best to treat it with skepticism and rely on more evidence-based practices to understand our world and ourselves.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section id="achievements" class="achievements">
     <div class="container">
       <div class="section-title">
@@ -1068,35 +963,22 @@
     </div>
   </section>
 
-  <!-- Fun Zone Section
-  <section id="fun" class="fun">
+  <section id="contact" class="contact">
     <div class="container">
       <div class="section-title">
-        <h2>Fun Zone</h2>
+        <h2>Contact Me</h2>
       </div>
-      <div class="fun-container">
-        <p>Take a break and have some fun with these space-themed mini-games!</p>
-        <div class="games-grid">
-          <div class="game-card" onclick="alert('Game functionality would be implemented here!')">
-            <div class="game-icon">
-              <i class="fas fa-meteor"></i>
-            </div>
-            <h3>Asteroid Dodger</h3>
-            <p>Navigate your spacecraft through a dangerous asteroid field.</p>
-          </div>
-          <div class="game-card" onclick="alert('Game functionality would be implemented here!')">
-            <div class="game-icon">
-              <i class="fas fa-rocket"></i>
-            </div>
-            <h3>Planet Jumper</h3>
-            <p>Hop between planets and collect cosmic energy to power your ship.</p>
-          </div>
+      <div class="contact-container">
+        <p style="color: var(--text-muted); margin-bottom: 1rem;">Reach out to me through any of these platforms:</p>
+        <div class="social-links">
+          <a href="https://github.com/prayatnasapkota" class="social-link" target="_blank"><i class="fab fa-github"></i></a>
+          <a href="mailto:prayatnasapkota19@gmail.com" class="social-link" target="_blank"><i class="fas fa-envelope"></i></a>
+          <a href="https://signal.me/#eu/6Jh11jZbAh1GD/VzpwV2GJoEqRCvjXZ7TmI6hXfQF1QUt8S8/V+PJsOuR9TKBQ==" class="social-link" target="_blank"><i class="fab fa-signal"></i></a>
         </div>
       </div>
     </div>
-  </section> -->
+  </section>
 
-  <!-- Footer -->
   <footer>
     <div class="container">
       <div class="footer-content">
@@ -1104,20 +986,14 @@
           <i class="fas fa-rocket"></i>
           <span>Prayatna Sapkota</span>
         </a>
-        <div class="social-links">
-          <a href="https://github.com/prayatnasapkota" class="social-link" target="_blank"><i class="fab fa-github"></i></a>
-          <a href="mailto:prayatnasapkota19@gmail.com" class="social-link" target="_blank"><i class="fas fa-envelope"></i></a>
-          <a href="https://signal.me/#eu/6Jh11jZbAh1GD/VzpwV2GJoEqRCvjXZ7TmI6hXfQF1QUt8S8/V+PJsOuR9TKBQ==" class="social-link" target="_blank"><i class="fab fa-signal"></i></a>
-        </div>
       </div>
       <div class="copyright">
-        <p>&copy; 2025 Prayatna Sapkota. All rights reserved.</p>
+        <p>© 2025 Prayatna Sapkota. All rights reserved.</p>
       </div>
     </div>
   </footer>
 
   <script>
-    // Create stars in the background
     function createStars() {
       const stars = document.getElementById('stars');
       const count = 200;
@@ -1143,7 +1019,6 @@
       }
     }
     
-    // Handle scroll progress bar
     function updateScrollProgress() {
       const windowHeight = window.innerHeight;
       const documentHeight = document.body.scrollHeight - windowHeight;
@@ -1153,7 +1028,6 @@
       document.querySelector('.progress-bar').style.setProperty('--scroll', scrollPercentage + '%');
     }
     
-    // Toggle blog content
     function toggleBlog(button) {
       const blogContentFull = button.nextElementSibling;
       const isExpanded = blogContentFull.classList.contains('expanded');
@@ -1167,11 +1041,9 @@
       }
     }
     
-    // Initialize
     document.addEventListener('DOMContentLoaded', () => {
       createStars();
       
-      // Smooth scrolling for navigation
       document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
           e.preventDefault();
@@ -1186,8 +1058,43 @@
       });
     });
     
-    // Update scroll progress
     window.addEventListener('scroll', updateScrollProgress);
+
+    const apiKey = 'FSkMFNhspZZaaG76Zro1z7XgEVXaJeKkS512wdh2';
+    const apiUrl = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}&thumbs=true`;
+
+    fetch(apiUrl)
+      .then(response => {
+        if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+        return response.json();
+      })
+      .then(data => {
+        const imageContainer = document.getElementById('nasa-image-container');
+        const titleElement = document.getElementById('nasa-title');
+        const descElement = document.getElementById('nasa-description');
+        const dateElement = document.getElementById('nasa-date');
+        const copyrightElement = document.getElementById('nasa-copyright');
+
+        if (data.media_type === 'video' && data.thumbnail_url) {
+          imageContainer.innerHTML = `<a href="${data.url}" target="_blank"><img src="${data.thumbnail_url}" alt="${data.title}" style="width: 100%; height: 100%; object-fit: cover;"></a>`;
+        } else if (data.media_type === 'image') {
+          imageContainer.innerHTML = `<img src="${data.url}" alt="${data.title}" style="width: 100%; height: 100%; object-fit: cover;">`;
+        } else {
+          imageContainer.innerHTML = '<p>Sorry, today’s APOD isn’t displayable here!</p>';
+        }
+
+        titleElement.textContent = data.title;
+        descElement.textContent = data.explanation;
+        dateElement.textContent = data.date;
+        copyrightElement.textContent = data.copyright ? `© ${data.copyright}` : 'Public Domain';
+      })
+      .catch(error => {
+        console.error('Error fetching NASA APOD:', error);
+        document.getElementById('nasa-image-container').innerHTML = '<p>Failed to load APOD. Cosmic interference detected!</p>';
+        document.getElementById('nasa-title').textContent = 'Connection Lost';
+        document.getElementById('nasa-description').textContent = 'Unable to fetch today\'s picture. Please try again later.';
+        document.getElementById('nasa-copyright').textContent = '';
+      });
   </script>
 </body>
 </html>
