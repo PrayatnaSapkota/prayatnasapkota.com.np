@@ -1,230 +1,176 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mission LastLife - Prayatna</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        :root {
-            --primary: #8b5cf6;
-            --text: #1f2937;
-            --text-muted: #6b7280;
-            --background: #ffffff;
-            --border: #e5e7eb;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mission LastLife - Prayatna</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  <style>
+    :root {
+      --primary: #8b5cf6;
+      --text: #1f2937;
+      --text-muted: #6b7280;
+      --background: #ffffff;
+      --border: #e5e7eb;
+    }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
 
-        body {
-            background: #0f172a;
-            color: #fff;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem;
-            text-align: center;
-        }
+    body {
+      background: #0f172a;
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      text-align: center;
+    }
 
-        .mission-container {
-            max-width: 800px;
-            width: 100%;
-            padding: 2rem;
-            background: rgba(15, 23, 42, 0.8);
-            border-radius: 20px;
-            border: 2px solid var(--primary);
-            box-shadow: 0 0 30px rgba(139, 92, 246, 0.3);
-        }
+    .mission-container {
+      max-width: 800px;
+      width: 100%;
+      padding: 2rem;
+      background: rgba(15, 23, 42, 0.8);
+      border-radius: 20px;
+      border: 2px solid var(--primary);
+      box-shadow: 0 0 30px rgba(139, 92, 246, 0.3);
+    }
 
-        .countdown {
-            font-size: 4rem;
-            font-weight: bold;
-            color: #ef4444;
-            margin: 2rem 0;
-            text-shadow: 0 0 10px rgba(239, 68, 68, 0.5);
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
+    .warning {
+      background: rgba(239, 68, 68, 0.1);
+      padding: 1.5rem;
+      border-radius: 12px;
+      margin: 2rem 0;
+      border: 2px solid #ef4444;
+    }
 
-        .countdown-item {
-            background: rgba(239, 68, 68, 0.1);
-            padding: 1rem;
-            border-radius: 12px;
-            min-width: 120px;
-            border: 2px solid #ef4444;
-        }
+    .warning p {
+      color: #ef4444;
+      font-weight: bold;
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+    }
 
-        .countdown-label {
-            font-size: 0.9rem;
-            color: #ef4444;
-            margin-top: 0.5rem;
-        }
+    .tags {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin: 1rem 0;
+    }
 
-        .warning {
-            background: rgba(239, 68, 68, 0.1);
-            padding: 1.5rem;
-            border-radius: 12px;
-            margin: 2rem 0;
-            border: 2px solid #ef4444;
-        }
+    .tag {
+      background: rgba(239, 68, 68, 0.2);
+      padding: 0.5rem 1rem;
+      border-radius: 9999px;
+      font-size: 0.9rem;
+    }
 
-        .warning p {
-            color: #ef4444;
-            font-weight: bold;
-            font-size: 1.3rem;
-            margin-bottom: 1rem;
-        }
+    .exam-schedule {
+      background: rgba(139, 92, 246, 0.1);
+      padding: 1.5rem;
+      border-radius: 12px;
+      border: 2px solid var(--primary);
+      margin-top: 2rem;
+    }
 
-        .tags {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            flex-wrap: wrap;
-            margin: 1rem 0;
-        }
+    .exam-schedule h3 {
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
 
-        .tag {
-            background: rgba(239, 68, 68, 0.2);
-            padding: 0.5rem 1rem;
-            border-radius: 9999px;
-            font-size: 0.9rem;
-        }
+    .exam-item {
+      margin: 0.5rem 0;
+      font-size: 1.1rem;
+      color: #fff;
+    }
 
-        .enter-button {
-            background: var(--primary);
-            color: white;
-            padding: 1rem 2rem;
-            border-radius: 9999px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 1.2rem;
-            margin-top: 2rem;
-            display: inline-block;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-        }
+    .status {
+      color: #22c55e;
+      font-weight: bold;
+    }
 
-        .enter-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(139, 92, 246, 0.4);
-        }
+    .pending {
+      color: #facc15;
+    }
 
-        .feynman-quotes {
-            background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(139, 92, 246, 0.1));
-            padding: 2rem;
-            border-radius: 12px;
-            margin: 2rem 0;
-            border: 2px solid var(--primary);
-        }
+    .feynman-quotes {
+      background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(139, 92, 246, 0.1));
+      padding: 2rem;
+      border-radius: 12px;
+      margin: 2rem 0;
+      border: 2px solid var(--primary);
+    }
 
-        .quote {
-            color: var(--text-muted);
-            font-style: italic;
-            margin: 1rem 0;
-        }
+    .quote {
+      color: var(--text-muted);
+      font-style: italic;
+      margin: 1rem 0;
+    }
 
-        @media (max-width: 768px) {
-            .countdown {
-                font-size: 3rem;
-            }
-            
-            .mission-container {
-                padding: 1rem;
-            }
-        }
-    </style>
+    .enter-button {
+      background: var(--primary);
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 9999px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1.2rem;
+      margin-top: 2rem;
+      display: inline-block;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+    }
+
+    .enter-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(139, 92, 246, 0.4);
+    }
+  </style>
 </head>
 <body>
-    <div class="mission-container">
-        <h1 style="font-size: 2.5rem; color: var(--primary); margin-bottom: 1rem;">Mission LastLife</h1>
-        
-        <div class="countdown" id="countdown">
-            <div class="countdown-item">
-                <div id="days">00</div>
-                <div class="countdown-label">Days</div>
-            </div>
-            <div class="countdown-item">
-                <div id="hours">00</div>
-                <div class="countdown-label">Hours</div>
-            </div>
-            <div class="countdown-item">
-                <div id="minutes">00</div>
-                <div class="countdown-label">Minutes</div>
-            </div>
-            <div class="countdown-item">
-                <div id="seconds">00</div>
-                <div class="countdown-label">Seconds</div>
-            </div>
-        </div>
+  <div class="mission-container">
+    <h1 style="font-size: 2.5rem; color: var(--primary); margin-bottom: 1rem;">Mission LastLife</h1>
 
-        <div class="warning">
-            <p>⚠️ THIS MISSION IS MY LIFE'S BIGGEST! ⚠️</p>
-            <p style="font-size: 1.1rem;">If I fail, I lose everything! This is not just an exam, this is my future!</p>
-            <div class="tags">
-                <span class="tag">No Second Chances</span>
-                <span class="tag">Do or Die</span>
-                <span class="tag">No Excuses</span>
-            </div>
-        </div>
-
-        <div class="feynman-quotes">
-            <h4 style="color: var(--primary); font-size: 1.5rem; margin-bottom: 1rem;">Richard Feynman's Wisdom</h4>
-            <p style="color: var(--text-muted); font-style: italic; margin-bottom: 1rem;">"My idol and inspiration in science and life"</p>
-            <div class="quote">"The first principle is that you must not fool yourself — and you are the easiest person to fool."</div>
-            <div class="quote">"Study hard what interests you the most in the most undisciplined, irreverent and original manner possible."</div>
-            <div class="quote">"I learned very early the difference between knowing the name of something and knowing something."</div>
-        </div>
-
-        <a href="loloo.html" class="enter-button">
-            Continue to Explore My World →
-        </a>
+    <div class="warning">
+      <p>⚠️ THE MISSION HAS BEGUN! ⚠️</p>
+      <p style="font-size: 1.1rem;">Exams are live. No turning back now — only forward, only fight!</p>
+      <div class="tags">
+        <span class="tag">Do or Die</span>
+        <span class="tag">No Excuses</span>
+        <span class="tag">Focus Mode ON</span>
+      </div>
     </div>
 
-    <script>
-        // Set the date we're counting down to Exam
-        const countDownDate = new Date('2025-05-16T00:00:00').getTime();
-        let countdownInterval;
+    <div class="exam-schedule">
+      <h3>📅 Exam Progress Tracker</h3>
+      <div class="exam-item">18 May – Mathematics: <span class="status">Too Hard 😓 May be I will pass</span></div>
+      <div class="exam-item">19 May – English: <span class="pending">Pending</span></div>
+      <div class="exam-item">20 May – Nepali: <span class="pending">Pending</span></div>
+      <div class="exam-item">23 May – Physics: <span class="pending">Pending</span></div>
+      <div class="exam-item">25 May – Chemistry: <span class="pending">Pending</span></div>
+      <div class="exam-item">27 May – Computer: <span class="pending">Pending</span></div>
+    </div>
 
-        // Update the countdown every 1 second
-        function updateCountdown() {
-            const now = new Date().getTime();
-            const distance = countDownDate - now;
+    <div class="feynman-quotes">
+      <h4 style="color: var(--primary); font-size: 1.5rem; margin-bottom: 1rem;">Richard Feynman's Wisdom</h4>
+      <p style="color: var(--text-muted); font-style: italic; margin-bottom: 1rem;">"My idol and inspiration in science and life"</p>
+      <div class="quote">"The first principle is that you must not fool yourself — and you are the easiest person to fool."</div>
+      <div class="quote">"Study hard what interests you the most in the most undisciplined, irreverent and original manner possible."</div>
+      <div class="quote">"I learned very early the difference between knowing the name of something and knowing something."</div>
+    </div>
 
-            // Time calculations
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-            // Display the result
-            document.getElementById("days").textContent = String(days).padStart(2, '0');
-            document.getElementById("hours").textContent = String(hours).padStart(2, '0');
-            document.getElementById("minutes").textContent = String(minutes).padStart(2, '0');
-            document.getElementById("seconds").textContent = String(seconds).padStart(2, '0');
-
-            // If the countdown is finished, display expired message
-            if (distance < 0) {
-                clearInterval(countdownInterval);
-                document.getElementById("days").textContent = "00";
-                document.getElementById("hours").textContent = "00";
-                document.getElementById("minutes").textContent = "00";
-                document.getElementById("seconds").textContent = "00";
-            }
-        }
-
-        // Run the countdown immediately and then every second
-        updateCountdown();
-        countdownInterval = setInterval(updateCountdown, 1000);
-    </script>
+    <a href="loloo.html" class="enter-button">
+      Continue to Explore My World →
+    </a>
+  </div>
 </body>
-</html> 
+</html>
