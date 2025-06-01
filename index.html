@@ -1,0 +1,1317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prayatna Sapkota - Titan Explorer | Cosmic Developer</title>
+    <meta name="description" content="Prayatna Sapkota - A passionate developer and space enthusiast building innovative solutions. Explore my projects, including COOP Browser, and discover daily NASA astronomy pictures.">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-dark: #0a0a0f;
+            --secondary-dark: #141429;
+            --accent-cyan: #00f5ff;
+            --accent-purple: #8b5cf6;
+            --accent-gold: #ffd700;
+            --neon-blue: #00ffff;
+            --deep-space: #000011;
+            --cosmic-purple: #6366f1;
+            --stellar-white: #ffffff;
+            --plasma-pink: #ff006e;
+            --titan-orange: #ff8c42;
+            --titan-amber: #ffb347;
+            --methane-blue: #4a90e2;
+            --saturn-gold: #ffa500;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: 
+                radial-gradient(ellipse at 70% 20%, rgba(255, 140, 66, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 20% 80%, rgba(255, 179, 71, 0.1) 0%, transparent 40%),
+                radial-gradient(ellipse at center, var(--secondary-dark) 0%, var(--primary-dark) 50%, var(--deep-space) 100%);
+            color: var(--stellar-white);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+            cursor: crosshair;
+        }
+
+        /* Cosmic Cursor Trail */
+        .cursor-trail {
+            position: fixed;
+            width: 6px;
+            height: 6px;
+            background: var(--accent-cyan);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            animation: pulse 1s infinite;
+        }
+
+        /* Holographic Background Effects */
+        .hologram-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(0, 245, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(255, 215, 0, 0.05) 0%, transparent 50%);
+            animation: hologram-shift 8s ease-in-out infinite;
+        }
+
+        @keyframes hologram-shift {
+            0%, 100% { transform: translateX(0px) translateY(0px); }
+            25% { transform: translateX(10px) translateY(-10px); }
+            50% { transform: translateX(-5px) translateY(10px); }
+            75% { transform: translateX(-10px) translateY(-5px); }
+        }
+
+        /* Particle System */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: var(--neon-blue);
+            border-radius: 50%;
+            animation: float-particle 20s linear infinite;
+        }
+
+        @keyframes float-particle {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-10vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Navigation - Futuristic Glass */
+        .nav {
+            position: fixed;
+            top: 1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            backdrop-filter: blur(20px);
+            background: rgba(20, 20, 41, 0.8);
+            border: 1px solid rgba(0, 245, 255, 0.3);
+            border-radius: 50px;
+            padding: 0.5rem 2rem;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--stellar-white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-cyan);
+            background: rgba(0, 245, 255, 0.1);
+            transform: scale(1.05);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple));
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section - Matrix Style */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+            padding: 2rem;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .glitch-text {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(3rem, 8vw, 8rem);
+            font-weight: 900;
+            background: linear-gradient(45deg, var(--accent-cyan), var(--titan-orange), var(--saturn-gold), var(--accent-purple));
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: titan-gradient 4s ease-in-out infinite, glitch 3s infinite;
+            text-shadow: 
+                0 0 10px var(--titan-orange),
+                0 0 20px var(--saturn-gold),
+                0 0 40px var(--methane-blue);
+            margin-bottom: 1rem;
+        }
+
+        @keyframes titan-gradient {
+            0%, 100% { background-position: 0% 50%; }
+            25% { background-position: 100% 0%; }
+            50% { background-position: 100% 100%; }
+            75% { background-position: 0% 100%; }
+        }
+
+        @keyframes gradient-shift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes glitch {
+            0%, 90%, 100% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+        }
+
+        .subtitle {
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            animation: typewriter 3s steps(40) 1s forwards;
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 2px solid var(--accent-cyan);
+            width: 0;
+        }
+
+        @keyframes typewriter {
+            to { width: 100%; }
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 3rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease 2s forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Quantum Buttons */
+        .quantum-btn {
+            position: relative;
+            display: inline-block;
+            padding: 1rem 2rem;
+            margin: 0.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            color: var(--stellar-white);
+            background: transparent;
+            border: 2px solid var(--accent-cyan);
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .quantum-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, var(--accent-cyan), transparent);
+            transition: left 0.5s;
+            z-index: -1;
+        }
+
+        .quantum-btn:hover::before {
+            left: 100%;
+        }
+
+        .quantum-btn:hover {
+            color: var(--primary-dark);
+            background: var(--accent-cyan);
+            box-shadow: 0 0 30px var(--accent-cyan);
+            transform: translateY(-2px);
+        }
+
+        /* Sections */
+        .section {
+            padding: 6rem 2rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            text-align: center;
+            margin-bottom: 3rem;
+            background: linear-gradient(45deg, var(--accent-cyan), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple));
+            border-radius: 2px;
+        }
+
+        /* Holographic Cards */
+        .holo-card {
+            background: rgba(20, 20, 41, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 245, 255, 0.2);
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 1rem 0;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .holo-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 245, 255, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .holo-card:hover::before {
+            left: 100%;
+        }
+
+        .holo-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-cyan);
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.4),
+                0 0 20px rgba(0, 245, 255, 0.3);
+        }
+
+        /* Grid Layouts */
+        .grid {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .grid-2 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+        .grid-3 { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+
+        /* Skills with Progress Bars */
+        .skill-item {
+            margin-bottom: 2rem;
+        }
+
+        .skill-name {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .skill-bar {
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .skill-progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple));
+            border-radius: 4px;
+            position: relative;
+            animation: skill-load 2s ease-in-out;
+        }
+
+        @keyframes skill-load {
+            from { width: 0; }
+        }
+
+        .skill-progress::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: skill-shine 2s ease-in-out infinite;
+        }
+
+        @keyframes skill-shine {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        /* Project Cards Enhanced */
+        .project-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, var(--accent-cyan), var(--accent-purple));
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            animation: rotate-icon 3s ease-in-out infinite;
+        }
+
+        @keyframes rotate-icon {
+            0%, 100% { transform: rotateY(0deg); }
+            50% { transform: rotateY(180deg); }
+        }
+
+        .project-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-cyan);
+        }
+
+        /* NASA APOD Section */
+        .nasa-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .nasa-image {
+            width: 100%;
+            border-radius: 20px;
+            margin-bottom: 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .nasa-image:hover {
+            transform: scale(1.02);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.7);
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, var(--accent-cyan), var(--accent-purple));
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 4rem;
+            width: calc(50% - 2rem);
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+            text-align: right;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: calc(50% + 2rem);
+            text-align: left;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            top: 0;
+            width: 20px;
+            height: 20px;
+            background: var(--accent-cyan);
+            border-radius: 50%;
+            box-shadow: 0 0 20px var(--accent-cyan);
+        }
+
+        .timeline-item:nth-child(odd) .timeline-dot {
+            right: -2rem;
+        }
+
+        .timeline-item:nth-child(even) .timeline-dot {
+            left: -2rem;
+        }
+
+        /* Contact Section */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .contact-item {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(20, 20, 41, 0.6);
+            border-radius: 20px;
+            border: 1px solid rgba(0, 245, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-cyan);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .contact-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1rem;
+            background: linear-gradient(45deg, var(--accent-cyan), var(--accent-purple));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Loading Animation */
+        .loading {
+            text-align: center;
+            padding: 3rem;
+        }
+
+        .quantum-loader {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 2rem;
+            position: relative;
+        }
+
+        .quantum-loader::before,
+        .quantum-loader::after {
+            content: '';
+            position: absolute;
+            border: 3px solid transparent;
+            border-top: 3px solid var(--accent-cyan);
+            border-radius: 50%;
+            animation: quantum-spin 1s linear infinite;
+        }
+
+        .quantum-loader::before {
+            width: 60px;
+            height: 60px;
+        }
+
+        .quantum-loader::after {
+            width: 40px;
+            height: 40px;
+            top: 10px;
+            left: 10px;
+            border-top-color: var(--accent-purple);
+            animation-direction: reverse;
+        }
+
+        @keyframes quantum-spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .section {
+                padding: 4rem 1rem;
+            }
+
+            .timeline::before {
+                left: 1rem;
+            }
+
+            .timeline-item {
+                width: calc(100% - 3rem);
+                left: 2rem !important;
+                text-align: left !important;
+            }
+
+            .timeline-dot {
+                left: -1.5rem !important;
+            }
+
+            .grid-2,
+            .grid-3 {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav {
+                top: 0.5rem;
+                padding: 0.3rem 1rem;
+            }
+
+            .nav-links {
+                gap: 0.5rem;
+            }
+
+            .nav-links a {
+                padding: 0.3rem 0.5rem;
+                font-size: 0.8rem;
+            }
+
+            .quantum-btn {
+                padding: 0.8rem 1.5rem;
+                font-size: 1rem;
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+
+        /* Pulse Animation */
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 0.7; }
+        }
+
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.1);
+            z-index: 1001;
+        }
+
+        .scroll-progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-purple));
+            width: 0%;
+            transition: width 0.1s ease;
+        }
+    </style>
+</head>
+<body>
+    <!-- Scroll Progress Indicator -->
+    <div class="scroll-indicator">
+        <div class="scroll-progress" id="scrollProgress"></div>
+    </div>
+
+    <!-- Holographic Background -->
+    <div class="hologram-bg"></div>
+
+    <!-- Particles -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#nasa">NASA</a></li>
+            <li><a href="#journey">Journey</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+ <!-- Hero Section -->
+<section id="home" class="hero">
+    <div class="hero-content">
+        <h1 class="glitch-text">PRAYATNA SAPKOTA</h1>
+        <div class="subtitle">🧠 ML-OBSESSED • SOLO DEV • COSMIC DREAMER</div>
+        <p class="hero-description">
+            Building COOP — a privacy-first browser powered by raw logic, caffeine, and curiosity.  
+            On a mission to master Machine Learning, explore the world, and maybe — just maybe — touch Titan.  
+            I build weapons of thought.
+        </p>
+        <div>
+            <a href="#projects" class="quantum-btn">
+                <i class="fas fa-rocket"></i> SEE CURRENT MISSION
+            </a>
+            <a href="#contact" class="quantum-btn">
+                <i class="fas fa-terminal"></i> TRANSMIT MESSAGE
+            </a>
+        </div>
+    </div>
+</section>
+<!-- About Section -->
+<section id="about" class="section">
+    <div class="container">
+        <h2 class="section-title">WHO I AM</h2>
+        <div class="grid grid-2">
+            <div class="holo-card">
+                <h3 style="color: var(--accent-cyan); font-size: 1.5rem; margin-bottom: 1rem;">
+                    <i class="fas fa-user-astronaut"></i> PRAYATNA — CODED FOR EXPLORATION
+                </h3>
+                <p style="line-height: 1.6; margin-bottom: 1rem;">
+                    I’m Prayatna Sapkota — a solo dev, ML enthusiast, and explorer from Banepa, Nepal.  
+                    I build software the hard way: no shortcuts, no stolen code, no half-baked clones.  
+                    Currently diving deep into <strong>Python + C + Machine Learning</strong> while crafting my own browser — <strong>COOP</strong>.
+                </p>
+                <p style="line-height: 1.6; margin-bottom: 1rem;">
+                    But code is just the start. My long game? Becoming a Machine Learning engineer, traveling the world, and launching space-inspired tech.  
+                    Every byte I write is part of a much bigger journey — toward intelligence, freedom, and pushing human limits.
+                </p>
+                <div style="background: rgba(255, 140, 66, 0.15); border-left: 4px solid var(--titan-orange); padding: 1rem; border-radius: 10px;">
+                    <div style="color: var(--titan-orange); font-weight: 600; margin-bottom: 0.5rem;">
+                        🪐 TITAN — THE NORTH STAR
+                    </div>
+                    <div style="opacity: 0.9;">
+                        Titan represents what the Earth isn't — uncolonized, unspoiled, unexplored.  
+                        When I dream, I see code running on Titan. Not because I want to escape Earth — but because I want to rebuild it smarter.
+                    </div>
+                </div>
+            </div>
+            <div class="holo-card">
+                <h3 style="color: var(--accent-purple); font-size: 1.5rem; margin-bottom: 1rem;">
+                    <i class="fas fa-brain"></i> THE MISSION
+                </h3>
+                <p style="line-height: 1.6; margin-bottom: 1rem; color: var(--accent-gold); font-weight: 600;">
+                    My mission is simple: Learn, Build, Explore.
+                </p>
+                <p style="line-height: 1.6; margin-bottom: 2rem;">
+                    🚧 Phase 1: Master core dev skills — Python, C, HTML, AI/ML fundamentals.  
+                    🚀 Phase 2: Launch COOP — a browser for thinkers, not trackers.  
+                    🌍 Phase 3: Travel the world, create AI-powered tools, and start projects that challenge normalcy.  
+                    🪐 Final Phase? Something wild with space, intelligence, or both. Titan’s the symbol — not the limit.
+                </p>
+                <div style="display: flex; flex-wrap: wrap; gap: 1rem;">
+                    <span style="padding: 0.5rem 1rem; background: rgba(0, 245, 255, 0.2); border-radius: 25px; font-size: 0.9rem;">🧠 ML in Progress</span>
+                    <span style="padding: 0.5rem 1rem; background: rgba(255, 0, 100, 0.2); border-radius: 25px; font-size: 0.9rem;">🌍 Travel-Driven Future</span>
+                    <span style="padding: 0.5rem 1rem; background: rgba(139, 92, 246, 0.2); border-radius: 25px; font-size: 0.9rem;">💻 Hardcore Solo Dev</span>
+                    <span style="padding: 0.5rem 1rem; background: rgba(255, 215, 0, 0.2); border-radius: 25px; font-size: 0.9rem;">🪐 Symbol: Titan</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+ <!-- Skills Section -->
+<section id="skills" class="section">
+    <div class="container">
+        <h2 class="section-title">TECH ARSENAL</h2>
+        <div class="grid grid-2">
+            <div class="holo-card">
+                <h3 style="color: var(--accent-cyan); font-size: 1.5rem; margin-bottom: 2rem;">
+                    <i class="fas fa-code"></i> Programming Languages
+                </h3>
+                <div class="skill-item">
+                    <div class="skill-name">
+                        <span><i class="fab fa-python"></i> Python</span>
+                        <span>Learning (Core Focus)</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 65%;"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">
+                        <span><i class="fas fa-terminal"></i> C Programming</span>
+                        <span>Basic / Improving</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 50%;"></div>
+                    </div>
+                </div>
+                <div class="skill-item">
+                    <div class="skill-name">
+                        <span><i class="fab fa-html5"></i> HTML</span>
+                        <span>Basic</span>
+                    </div>
+                    <div class="skill-bar">
+                        <div class="skill-progress" style="width: 40%;"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="holo-card">
+                <h3 style="color: var(--accent-purple); font-size: 1.5rem; margin-bottom: 2rem;">
+                    <i class="fas fa-tools"></i> Tools & Technologies
+                </h3>
+                <div class="grid grid-3" style="gap: 1rem;">
+                    <div style="text-align: center; padding: 1rem; background: rgba(0, 245, 255, 0.1); border-radius: 10px;">
+                        <i class="fas fa-globe" style="font-size: 2rem; color: var(--accent-cyan); margin-bottom: 0.5rem;"></i>
+                        <div>Web Basics</div>
+                    </div>
+                    <div style="text-align: center; padding: 1rem; background: rgba(139, 92, 246, 0.1); border-radius: 10px;">
+                        <i class="fab fa-git-alt" style="font-size: 2rem; color: var(--accent-purple); margin-bottom: 0.5rem;"></i>
+                        <div>Git + GitHub</div>
+                    </div>
+                    <div style="text-align: center; padding: 1rem; background: rgba(255, 215, 0, 0.1); border-radius: 10px;">
+                        <i class="fas fa-terminal" style="font-size: 2rem; color: var(--accent-gold); margin-bottom: 0.5rem;"></i>
+                        <div>Linux (Fedora)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+  <!-- Projects Section -->
+<section id="projects" class="section">
+    <div class="container">
+        <h2 class="section-title">PROJECT PORTFOLIO</h2>
+        <div class="holo-card project-card">
+            <div class="project-header">
+                <div class="project-icon">
+                    <i class="fas fa-globe"></i>
+                </div>
+                <div>
+                    <h3 class="project-title">COOP BROWSER</h3>
+                    <p style="color: var(--accent-gold); font-weight: 600;">Cognitive Operator — A Solo Mission</p>
+                </div>
+            </div>
+            <p style="font-size: 1.1rem; line-height: 1.6; margin-bottom: 1rem;">
+                COOP is my current obsession: a custom browser built from scratch using Python and QtWebEngine.
+                It's designed for privacy, stability, and long conversations in ChatGPT chats. Still in active development.
+                Made solo — expect bugs, but feel free to report them.
+            </p>
+            <div style="background: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245, 158, 11, 0.3); border-radius: 10px; padding: 1rem; margin-bottom: 1rem;">
+                <div style="color: var(--accent-gold); font-weight: 600; margin-bottom: 0.5rem;">
+                    💡 Core Identity: Cognitive Operator
+                </div>
+                <div style="opacity: 0.9;">
+                    This browser is about giving control back to the user — no telemetry, no tracking, no bloated nonsense.
+                    It's built with a mindset of curiosity, freedom, and solo resilience. Just me vs. the stack.
+                </div>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                <span style="padding: 0.3rem 0.8rem; background: rgba(0, 245, 255, 0.2); border-radius: 15px; font-size: 0.8rem;">Python</span>
+                <span style="padding: 0.3rem 0.8rem; background: rgba(139, 92, 246, 0.2); border-radius: 15px; font-size: 0.8rem;">QtWebEngine</span>
+                <span style="padding: 0.3rem 0.8rem; background: rgba(255, 215, 0, 0.2); border-radius: 15px; font-size: 0.8rem;">Solo Dev</span>
+                <span style="padding: 0.3rem 0.8rem; background: rgba(255, 0, 110, 0.2); border-radius: 15px; font-size: 0.8rem;">Privacy-Focused</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+    <!-- NASA APOD Section -->
+    <section id="nasa" class="section">
+        <div class="container">
+            <h2 class="section-title">NASA COSMIC DISCOVERY</h2>
+            <p style="text-align: center; font-size: 1.2rem; margin-bottom: 3rem; opacity: 0.8;">
+                Daily astronomical wonder from NASA's Astronomy Picture of the Day
+            </p>
+            <div class="nasa-container">
+                <div class="holo-card">
+                    <div id="nasaContent">
+                        <div class="loading">
+                            <div class="quantum-loader"></div>
+                            <p style="font-size: 1.1rem;">Connecting to NASA servers...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!-- Journey Section -->
+<section id="journey" class="section">
+    <div class="container">
+        <h2 class="section-title">DEVELOPMENT TIMELINE</h2>
+        <div class="timeline">
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="holo-card">
+                    <h3 style="color: var(--accent-cyan); margin-bottom: 1rem;">2025 – Present</h3>
+                    <h4 style="color: var(--accent-gold); margin-bottom: 0.5rem;">COOP Browser: All Systems Online</h4>
+                    <p>
+                        I'm building COOP — a privacy-focused browser with AI potential, powered by Python and QtWebEngine. It's my current obsession.
+                        No distractions, no multitasking. One mission at a time. Full solo dev. This is where I prove myself.
+                    </p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="holo-card">
+                    <h3 style="color: var(--accent-purple); margin-bottom: 1rem;">Early 2025</h3>
+                    <h4 style="color: var(--accent-gold); margin-bottom: 0.5rem;">Mission Reset: Cancelled Future Projects</h4>
+                    <p>
+                        I dropped all other “future” plans — the random AI, space, or coding ideas — not because they were bad, but because I needed razor focus.
+                        Those crazy missions aren’t dead. They’re just docked in orbit. After COOP, I’ll re-launch into new insane stuff again. Just... not now.
+                    </p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="holo-card">
+                    <h3 style="color: var(--accent-cyan); margin-bottom: 1rem;">2024</h3>
+                    <h4 style="color: var(--accent-gold); margin-bottom: 0.5rem;">Browser Technology = My Thing</h4>
+                    <p>
+                        Started studying how browsers work from inside out. Hated the lag and bloat of existing ones. Wanted control — speed, privacy, freedom.
+                        That led to the idea of COOP Browser. No team. No company. Just me, a keyboard, and some caffeine.
+                    </p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="holo-card">
+                    <h3 style="color: var(--accent-purple); margin-bottom: 1rem;">2023</h3>
+                    <h4 style="color: var(--accent-gold); margin-bottom: 0.5rem;">C, HTML & Core Skills</h4>
+                    <p>
+                        Learned the fundamentals — C for logic, HTML for structure, and the mindset of breaking things down. 
+                        Not flashy, but essential. No shortcuts, no copy-paste life. Every concept questioned and understood.
+                    </p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="holo-card">
+                    <h3 style="color: var(--accent-cyan); margin-bottom: 1rem;">2022</h3>
+                    <h4 style="color: var(--accent-gold); margin-bottom: 0.5rem;">It All Began With Curiosity</h4>
+                    <p>
+                        Wasn't about code yet. Was about questions — about the universe, physics, meaning, and systems. 
+                        Discovered Feynman. Started breaking superstitions. Got hooked on logic, chaos, and the stars. From there, the code followed.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+   <!-- Tech Interests Section -->
+<section id="interests" class="section">
+    <div class="container">
+        <h2 class="section-title">COSMIC INTERESTS</h2>
+        <div class="grid grid-3">
+            <div class="holo-card" style="text-align: center;">
+                <div class="contact-icon" style="background: linear-gradient(45deg, var(--accent-cyan), var(--neon-blue));">
+                    <i class="fas fa-rocket"></i>
+                </div>
+                <h3 style="color: var(--accent-cyan); margin-bottom: 1rem;">Space & Cosmology</h3>
+                <p>Obsessed with the mysteries of the universe — black holes, time, stars, and what lies beyond. Someday, Titan or bust.</p>
+            </div>
+            <div class="holo-card" style="text-align: center;">
+                <div class="contact-icon" style="background: linear-gradient(45deg, var(--accent-purple), var(--cosmic-purple));">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <h3 style="color: var(--accent-purple); margin-bottom: 1rem;">Artificial Intelligence</h3>
+                <p>Curious about how machine learning can extend human reasoning. Deep interest in building ethical, powerful AI tools — especially for browsers.</p>
+            </div>
+            <div class="holo-card" style="text-align: center;">
+                <div class="contact-icon" style="background: linear-gradient(45deg, var(--accent-gold), var(--plasma-pink));">
+                    <i class="fas fa-code"></i>
+                </div>
+                <h3 style="color: var(--accent-gold); margin-bottom: 1rem;">Low-Level Programming</h3>
+                <p>Diving into C and Python to gain full control over systems and build things from scratch — like my own browser (COOP).</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+   <!-- Achievements Section -->
+<section id="achievements" class="section">
+    <div class="container">
+        <h2 class="section-title">MISSION ACHIEVEMENTS</h2>
+        <div class="grid grid-2">
+            <div class="holo-card">
+                <h3 style="color: var(--accent-cyan); margin-bottom: 1rem;">
+                    <i class="fas fa-trophy"></i> Development Milestones
+                </h3>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                        <i class="fas fa-star" style="color: var(--accent-gold);"></i> 
+                        Building COOP Browser from scratch using Python and QtWebEngine
+                    </li>
+                    <li style="padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                        <i class="fas fa-star" style="color: var(--accent-gold);"></i> 
+                        Learning Python and C as core programming foundations
+                    </li>
+                    <li style="padding: 0.5rem 0;">
+                        <i class="fas fa-star" style="color: var(--accent-gold);"></i> 
+                        Gaining experience with HTML for web UI integration
+                    </li>
+                </ul>
+            </div>
+            <div class="holo-card">
+                <h3 style="color: var(--accent-purple); margin-bottom: 1rem;">
+                    <i class="fas fa-rocket"></i> Current Focus
+                </h3>
+                <ul style="list-style: none; padding: 0;">
+                    <li style="padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                        <i class="fas fa-arrow-right" style="color: var(--accent-cyan);"></i> 
+                        Finish core Python and C programming skills
+                    </li>
+                    <li style="padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                        <i class="fas fa-arrow-right" style="color: var(--accent-cyan);"></i> 
+                        Complete COOP Browser beta release with privacy-first architecture
+                    </li>
+                    <li style="padding: 0.5rem 0;">
+                        <i class="fas fa-arrow-right" style="color: var(--accent-cyan);"></i> 
+                        Enhance browser stability, performance, and AI integrations
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+    <!-- Contact Section -->
+<section id="contact" class="section">
+    <div class="container">
+        <h2 class="section-title">INITIATE CONTACT</h2>
+        <p style="text-align: center; font-size: 1.2rem; margin-bottom: 3rem; opacity: 0.8;">
+            Ready to embark on a cosmic coding journey? Let’s connect across the digital universe.
+        </p>
+        <div class="contact-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
+            
+            <!-- Discord -->
+            <div class="contact-item" style="text-align: center;">
+                <div class="contact-icon" style="font-size: 2.5rem; color: var(--accent-cyan); margin-bottom: 1rem;">
+                    <i class="fab fa-discord" aria-hidden="true"></i>
+                </div>
+                <h3 style="color: var(--accent-cyan); margin-bottom: 0.5rem;">Discord</h3>
+                <p style="margin-bottom: 1rem;">Join the community</p>
+                <a href="https://discord.gg/vhjN5Fehwb" target="_blank" rel="noopener noreferrer" class="quantum-btn" style="font-size: 0.9rem; padding: 0.5rem 1rem;">
+                    Join Discord
+                </a>
+            </div>
+
+            <!-- Signal -->
+            <div class="contact-item" style="text-align: center;">
+                <div class="contact-icon" style="font-size: 2.5rem; color: var(--accent-blue); margin-bottom: 1rem;">
+                    <i class="fas fa-signal" aria-hidden="true"></i>
+                </div>
+                <h3 style="color: var(--accent-blue); margin-bottom: 0.5rem;">Signal</h3>
+                <p style="margin-bottom: 1rem;">Secure 1:1 Ping</p>
+                <a href="https://signal.me/#eu/DQWrcF0nHfsvhdsGXE6NeDuujot4HZirRwiapg7iBilF1pa9IhpLjKKEA15nIHA4" target="_blank" rel="noopener noreferrer" class="quantum-btn" style="font-size: 0.9rem; padding: 0.5rem 1rem;">
+                    Message on Signal
+                </a>
+            </div>
+
+            <!-- Email -->
+            <div class="contact-item" style="text-align: center;">
+                <div class="contact-icon" style="font-size: 2.5rem; color: var(--accent-purple); margin-bottom: 1rem;">
+                    <i class="fas fa-envelope" aria-hidden="true"></i>
+                </div>
+                <h3 style="color: var(--accent-purple); margin-bottom: 0.5rem;">Email</h3>
+                <p style="margin-bottom: 1rem;">Send a transmission</p>
+                <div style="font-family: 'Orbitron', monospace; color: var(--accent-gold); font-size: 1rem;">
+                   <h6>mail@prayatnasapkota.com.np</h6>
+                </div>
+            </div>
+
+            <!-- GitHub -->
+            <div class="contact-item" style="text-align: center;">
+                <div class="contact-icon" style="font-size: 2.5rem; color: var(--accent-gold); margin-bottom: 1rem;">
+                    <i class="fab fa-github" aria-hidden="true"></i>
+                </div>
+                <h3 style="color: var(--accent-gold); margin-bottom: 0.5rem;">GitHub</h3>
+                <p style="margin-bottom: 1rem;">Explore the codebase</p>
+                <a href="https://github.com/PrayatnaSapkota" target="_blank" rel="noopener noreferrer" style="font-family: 'Orbitron', monospace; color: var(--accent-cyan); font-size: 1rem;">
+                    @PrayatnaSapkota
+                </a>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+    <!-- Footer -->
+    <footer style="background: rgba(10, 10, 15, 0.9); padding: 2rem; text-align: center; border-top: 1px solid rgba(0, 245, 255, 0.2);">
+        <p style="color: var(--accent-cyan); margin-bottom: 1rem;">
+            "The cosmos is within us. We are made of star-stuff." - Carl Sagan
+        </p>
+        <p style="opacity: 0.6;">
+            © 2025 Prayatna Sapkota • Solo Developer • Built with 🚀 and curiosity
+        </p>
+    </footer>
+
+    <script>
+        // Particle System
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Cursor Trail Effect
+        function createCursorTrail() {
+            const trail = [];
+            const trailLength = 10;
+
+            document.addEventListener('mousemove', (e) => {
+                trail.push({ x: e.clientX, y: e.clientY });
+                if (trail.length > trailLength) {
+                    trail.shift();
+                }
+
+                // Remove existing trail elements
+                document.querySelectorAll('.cursor-trail').forEach(el => el.remove());
+
+                // Create new trail
+                trail.forEach((point, index) => {
+                    const trailElement = document.createElement('div');
+                    trailElement.className = 'cursor-trail';
+                    trailElement.style.left = point.x + 'px';
+                    trailElement.style.top = point.y + 'px';
+                    trailElement.style.opacity = index / trailLength;
+                    trailElement.style.transform = `scale(${index / trailLength})`;
+                    document.body.appendChild(trailElement);
+
+                    setTimeout(() => trailElement.remove(), 1000);
+                });
+            });
+        }
+
+        // Scroll Progress
+        function updateScrollProgress() {
+            const scrolled = window.pageYOffset;
+            const maxScroll = document.body.scrollHeight - window.innerHeight;
+            const progress = (scrolled / maxScroll) * 100;
+            document.getElementById('scrollProgress').style.width = progress + '%';
+        }
+
+        // Smooth Scrolling for Navigation
+        function setupSmoothScroll() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        }
+
+        async function loadNASAAPOD() {
+    const nasaContent = document.getElementById('nasaContent');
+    const apiKey = 'KCLUEMeYcFV7wE5LVRBrMxPPDdUk1pbl5kk1MOsl';
+
+    try {
+        const response = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${apiKey}`);
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        nasaContent.innerHTML = `
+            <div style="text-align: center;">
+                <h3 style="color: var(--accent-cyan); font-size: 1.8rem; margin-bottom: 1rem; font-family: 'Orbitron', monospace;">
+                    ${data.title}
+                </h3>
+                <p style="color: var(--accent-gold); margin-bottom: 2rem; font-size: 1.1rem;">
+                    <i class="fas fa-calendar"></i> ${new Date(data.date).toLocaleDateString('en-US', { 
+                        weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' 
+                    })}
+                </p>
+                ${data.media_type === 'image' ? 
+                    `<img src="${data.url}" alt="${data.title}" class="nasa-image" style="max-width: 100%; border-radius: 15px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);">` :
+                    `<iframe src="${data.url}" width="100%" height="400" style="border-radius: 15px; border: none;"></iframe>`
+                }
+                <div style="background: rgba(0, 245, 255, 0.1); border-radius: 15px; padding: 2rem; margin-top: 2rem; text-align: left;">
+                    <h4 style="color: var(--accent-cyan); margin-bottom: 1rem; font-size: 1.2rem;">
+                        <i class="fas fa-info-circle"></i> Cosmic Explanation
+                    </h4>
+                    <p style="line-height: 1.6; font-size: 1.1rem;">${data.explanation}</p>
+                    ${data.copyright ?
+                        `<p style="margin-top: 1rem; opacity: 0.7; font-style: italic;">
+                            <i class="fas fa-camera"></i> Image Credit: ${data.copyright}
+                        </p>` : ''
+                    }
+                </div>
+            </div>
+        `;
+    } catch (error) {
+        console.error('NASA APOD Error:', error);
+        nasaContent.innerHTML = `
+            <div class="error" style="text-align: center; padding: 3rem;">
+                <i class="fas fa-satellite-dish" style="font-size: 3rem; color: #ef4444; margin-bottom: 1rem;"></i>
+                <h3 style="color: #ef4444; margin-bottom: 1rem;">Connection Lost</h3>
+                <p style="color: #ef4444;">Unable to establish connection with NASA servers. Please check your cosmic coordinates and try again later.</p>
+            </div>
+        `;
+    }
+}
+
+        // Intersection Observer for animations
+        function setupAnimations() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.holo-card').forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(50px)';
+                card.style.transition = 'all 0.6s ease';
+                observer.observe(card);
+            });
+        }
+
+        // Initialize everything
+        document.addEventListener('DOMContentLoaded', function() {
+            createParticles();
+            createCursorTrail();
+            setupSmoothScroll();
+            setupAnimations();
+            loadNASAAPOD();
+            
+            window.addEventListener('scroll', updateScrollProgress);
+            
+            // Add typing effect to subtitle
+            const subtitle = document.querySelector('.subtitle');
+            if (subtitle) {
+                setTimeout(() => {
+                    subtitle.style.borderRight = 'none';
+                }, 4000);
+            }
+        });
+
+        // Easter egg: Konami code
+        let konamiCode = [];
+        const konami = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65];
+        
+        document.addEventListener('keydown', (e) => {
+            konamiCode.push(e.keyCode);
+            if (konamiCode.length > konami.length) {
+                konamiCode.shift();
+            }
+            
+            if (konamiCode.length === konami.length && 
+                konamiCode.every((code, index) => code === konami[index])) {
+                document.body.style.animation = 'hologram-shift 0.5s infinite';
+                setTimeout(() => {
+                    document.body.style.animation = '';
+                }, 3000);
+            }
+        });
+    </script>
+</body>
+</html>
