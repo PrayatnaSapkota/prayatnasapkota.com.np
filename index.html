@@ -680,6 +680,76 @@
   }
 
 
+/* ---- glassy style (MUSIC) ---- */
+ .glass-banner{
+      position:fixed;
+      left:50%;
+      bottom:-100px;
+      transform:translateX(-50%);
+      display:flex;
+      align-items:center;
+      gap:12px;
+      padding:12px 16px;
+      border-radius:14px;
+      background:rgba(255,255,255,0.05);
+      backdrop-filter:blur(10px) saturate(150%);
+      -webkit-backdrop-filter:blur(10px) saturate(150%);
+      border:1px solid rgba(255,255,255,0.12);
+      color:#eaf2ff;
+      box-shadow:0 6px 22px rgba(0,0,0,0.28);
+      font-weight:600;
+      font-size:14px;
+      opacity:0;
+      animation:fadeInBounce 0.8s forwards;
+      z-index:1200;
+    }
+
+    @keyframes fadeInBounce{
+      0% {opacity:0; bottom:-100px;}
+      60% {opacity:1; bottom:25px;}
+      100% {bottom:20px;}
+    }
+
+    .banner-actions{display:flex; gap:8px;}
+    .btn{
+      padding:6px 10px;
+      border:none;
+      border-radius:10px;
+      cursor:pointer;
+      font-weight:700;
+      font-size:13px;
+      box-shadow:0 4px 10px rgba(0,0,0,0.15);
+      transition: transform .2s;
+    }
+    .btn:hover{transform:scale(1.05);}
+    .btn-yes{background:linear-gradient(180deg,rgba(80,214,145,0.95),rgba(46,170,99,0.95)); color:#04260a;}
+    .btn-no{background:linear-gradient(180deg,rgba(255,120,120,0.95),rgba(235,70,70,0.95)); color:#fff;}
+
+    /* Floating pill */
+    .player-pill{
+      position:fixed;
+      right:-200px;
+      bottom:18px;
+      display:flex;
+      gap:8px;
+      align-items:center;
+      padding:8px 14px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,0.1);
+      background:rgba(255,255,255,0.03);
+      backdrop-filter:blur(8px) saturate(120%);
+      -webkit-backdrop-filter:blur(8px) saturate(120%);
+      box-shadow:0 10px 30px rgba(3,8,18,0.4);
+      color:#eaf2ff;
+      font-weight:700;
+      cursor:pointer;
+      font-size:13px;
+      transition: all .5s cubic-bezier(.2,.9,.3,1);
+      z-index:1200;
+    }
+    .player-pill.show{right:18px;}
+    #pill-icon{font-size:16px;}
+
 
     </style>
 </head>
@@ -687,9 +757,24 @@
 
 
       <!-- Background music -->
-  <audio id="bg-music" autoplay>
+   <audio id="bg-music" loop preload="auto">
     <source src="music.mp3" type="audio/mp3">
   </audio>
+
+  <!-- Glassy notification banner -->
+  <div id="music-banner" class="glass-banner">
+    <div class="banner-text">Wanna play some puru-puru on the website? (Beta testing!)</div>
+    <div class="banner-actions">
+      <button id="yes-btn" class="btn btn-yes">Yes</button>
+      <button id="no-btn" class="btn btn-no">No</button>
+    </div>
+  </div>
+
+  <!-- Floating player pill -->
+  <button id="player-pill" class="player-pill" style="display:none;">
+    <span id="pill-icon">⏸</span>
+    <span id="pill-text">Pause Music</span>
+  </button>
 
 
     <!-- Scroll Progress Indicator -->
@@ -1220,20 +1305,75 @@ By mid-2026, I’ll begin a new chapter: Starting to traveling the world, explor
 
 
 // MUSIC SECTION!!
-   const music = document.getElementById("bg-music");
-  music.volume = 0.2;
+const music = document.getElementById("bg-music");
+const banner = document.getElementById("music-banner");
+const yesBtn = document.getElementById("yes-btn");
+const noBtn = document.getElementById("no-btn");
+const playerPill = document.getElementById("player-pill");
+const pillIcon = document.getElementById("pill-icon");
+const pillText = document.getElementById("pill-text");
 
-  function startMusic() {
-    music.play().catch(err => console.log("Still blocked:", err));
-    // remove listeners after it starts
-    document.removeEventListener("click", startMusic);
-    document.removeEventListener("scroll", startMusic);
-    document.removeEventListener("mousemove", startMusic);
+music.volume = 0.2;
+let isPlaying = false;
+
+// --- Make banner visible properly with animation ---
+banner.style.opacity = 0;
+banner.style.transform = "translateX(-50%) translateY(100px)";
+banner.style.transition = "opacity 0.8s, transform 0.8s";
+setTimeout(() => {
+  banner.style.opacity = 1;
+  banner.style.transform = "translateX(-50%) translateY(0)";
+}, 100);
+
+// YES button — direct user gesture
+yesBtn.addEventListener("click", () => {
+  music.play(); // direct gesture
+  isPlaying = true;
+
+  // hide banner smoothly
+  banner.style.transition = "opacity 0.4s, transform 0.4s";
+  banner.style.opacity = 0;
+  banner.style.transform = "translateX(-50%) translateY(50px)";
+  setTimeout(() => banner.style.display = "none", 400);
+
+  // show player pill with slide
+  playerPill.style.display = "flex";
+  setTimeout(() => playerPill.classList.add("show"), 100);
+  updatePill(true);
+});
+
+// NO button — also hide smoothly
+noBtn.addEventListener("click", () => {
+  banner.style.transition = "opacity 0.4s, transform 0.4s";
+  banner.style.opacity = 0;
+  banner.style.transform = "translateX(-50%) translateY(50px)";
+  setTimeout(() => banner.style.display = "none", 400);
+});
+
+// Player pill toggle
+playerPill.addEventListener("click", () => {
+  if (isPlaying) {
+    music.pause();
+    isPlaying = false;
+    updatePill(false);
+  } else {
+    music.play().then(() => {
+      isPlaying = true;
+      updatePill(true);
+    }).catch(err => { console.log("play blocked:", err); });
   }
+});
 
-  document.addEventListener("click", startMusic);
-  document.addEventListener("scroll", startMusic);
-  document.addEventListener("mousemove", startMusic);
+function updatePill(playing) {
+  if (playing) {
+    pillIcon.textContent = "⏸";
+    pillText.textContent = "Pause Music";
+  } else {
+    pillIcon.textContent = "▶️";
+    pillText.textContent = "Play Music";
+  }
+}
+
     </script>
 </body>
 </html>
