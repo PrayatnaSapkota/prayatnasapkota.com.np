@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Prayatna’s Journal — Blog</title>
+  <meta name="description" content="Prayatna’s Journal — Living, learning & thinking." />
+  <style>
+    /* ---------- BASE ---------- */
+    :root{
+      --bg:#0b0b0b;
+      --card:#141414;
+      --muted:#9a9a9a;
+      --accent:#ffcd42;
+      --accent-dark:#e4b834;
+      --glass: rgba(255,255,255,0.03);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;
+      background:var(--bg);
+      color:#eaeaea;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.5;
+      scroll-behavior:smooth;
+    }
+    a{color:inherit;text-decoration:none}
+
+    /* ---------- TOP BAR ( This hides on scroll) ---------- */
+    .topbar {
+      position:fixed;
+      left:0;right:0;top:0;
+      background:linear-gradient(180deg, rgba(10,10,10,0.98), rgba(10,10,10,0.85));
+      backdrop-filter: blur(6px);
+      z-index:1000;
+      border-bottom:1px solid rgba(255,255,255,0.03);
+      transform: translateY(0);
+      transition: transform .28s cubic-bezier(.2,.9,.2,1), box-shadow .2s;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+    }
+    .topbar.hidden { transform: translateY(-110%); box-shadow: none; }
+
+    .topbar-inner{
+      max-width:1000px;
+      margin:0 auto;
+      display:flex;
+      align-items:center;
+      gap:12px;
+      padding:10px 18px;
+    }
+    .brand {
+      display:flex;
+      gap:12px;
+      align-items:center;
+      flex:1;
+      min-width:0;
+    }
+    .logo {
+      width:44px;height:44px;border-radius:8px;
+      background:var(--glass);
+      display:flex;align-items:center;justify-content:center;
+      border:1px solid rgba(255,255,255,0.03);
+      font-weight:700;color:var(--accent);
+      font-size:18px;
+    }
+    .brand h1{
+      margin:0;font-size:16px;color:var(--accent);font-weight:700;
+      white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+    }
+    .brand p{margin:0;font-size:12px;color:var(--muted)}
+
+    /* controls */
+    .controls{display:flex;gap:8px;align-items:center}
+    .btn{
+      background:#151515;border:1px solid rgba(255,255,255,0.03);
+      color:#eee;padding:8px 12px;border-radius:8px;font-weight:600;cursor:pointer;
+    }
+    .btn.accent{background:var(--accent);color:#111}
+    .icon-btn{display:inline-flex;align-items:center;justify-content:center;padding:8px;border-radius:8px;background:#121212;border:1px solid rgba(255,255,255,0.02);cursor:pointer}
+    .search-wrap{display:flex;align-items:center;background:#0f0f0f;border-radius:9px;padding:6px 8px;border:1px solid rgba(255,255,255,0.03)}
+    .search-input{
+      width:220px;max-width:40vw;background:transparent;border:0;color:#ddd;outline:none;padding:6px;font-size:14px;
+    }
+    .search-input.hidden{width:0;padding:0;border:0;opacity:0;transition:all .18s}
+
+    /* ---------- LAYOUT ---------- */
+    main{max-width:1000px;margin:110px auto 80px;padding:18px}
+    .grid{display:flex;flex-direction:column;gap:18px}
+
+    /* ---------- POST CARD ---------- */
+    .post{
+      background:var(--card);
+      border:1px solid rgba(255,255,255,0.03);
+      padding:18px;border-radius:12px;box-shadow:0 6px 14px rgba(0,0,0,0.45);
+      transition:transform .18s, box-shadow .18s, opacity .18s;
+      opacity:1;
+    }
+    .post:hover{ transform: translateY(-6px); box-shadow:0 12px 24px rgba(0,0,0,0.55) }
+    .meta{display:flex;gap:10px;align-items:center;justify-content:space-between}
+    .meta-left{display:flex;gap:12px;align-items:center;min-width:0}
+    .title{font-size:18px;color:var(--accent);margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .date{font-size:13px;color:var(--muted)}
+    .pinned-badge{background:linear-gradient(90deg,var(--accent),var(--accent-dark));color:#111;padding:6px 8px;border-radius:999px;font-weight:700;font-size:12px}
+
+    .post-content{margin-top:12px;color:#ddd;font-size:15px}
+    .post img,.post video{width:100%;border-radius:8px;margin-top:12px;display:block}
+    .post video{background:#000}
+
+    /* read more block */
+    .extra { max-height: 0; overflow:hidden; transition: max-height .28s ease; color:#ddd; margin-top:8px; }
+    .extra.open { max-height: 2000px; } /* large enough */
+
+    /* post actions */
+      
+.actions{
+  display:flex;
+  gap:8px;
+  align-items:center;
+  margin-top:12px;
+}
+.action{
+  background:#ffb300b4;
+  border:1px solid rgba(255, 255, 255, 0.03);
+  padding:8px 10px;
+  border-radius:8px;
+  cursor:pointer;
+  font-weight:600;
+  color:#eee; /* text color now light gray, visible */
+  transition: background .2s, color .2s;
+}
+.action:hover{
+  background:var(--accent); /* yellow highlight */
+  color:#111; /* black text on yellow */
+}
+.action.secondary{
+  background:transparent;
+  border:1px dashed rgba(255,255,255,0.03);
+  color:var(--muted); /* gray text for secondary button */
+}
+.action.secondary:hover{
+  background:rgba(255,205,66,0.12);
+  color:var(--accent);
+}
+
+    /* permalink anchor for each post */
+    .post-anchor{opacity:0;position:absolute}
+
+    /* ---------- FILTER BAR ---------- */
+    .filterbar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:6px}
+    .filterbtn{background:transparent;border:1px solid rgba(255,255,255,0.03);color:var(--muted);padding:8px 12px;border-radius:999px;cursor:pointer}
+    .filterbtn.active{background:rgba(255,205,66,0.12);color:var(--accent);border-color:rgba(255,205,66,0.18)}
+
+    /* no results */
+    .noresults{padding:28px;border-radius:10px;background:rgba(255,255,255,0.02);text-align:center;color:var(--muted)}
+
+    /* ---------- SCROLL TOP ---------- */
+    #toTop{position:fixed;right:18px;bottom:18px;background:var(--accent);color:#111;border-radius:999px;padding:10px 12px;font-weight:800;border:none;cursor:pointer;display:none}
+
+    /* ---------- RESPONSIVE ---------- */
+    @media (max-width:820px){
+      .search-input{width:140px}
+      .brand p{display:none}
+      .logo{width:40px;height:40px}
+      main{margin-top:100px}
+    }
+    @media (max-width:520px){
+      .topbar-inner{padding:10px}
+      .search-input{width:110px}
+      .controls{gap:6px}
+    }
+   
+/* ---------- MOBILE OPTIMIZATION ---------- */
+@media (max-width:820px){
+  /* shrink search input */
+  .search-input{width:140px}
+  /* hide description for space */
+  .brand p{display:none}
+  .logo{width:40px;height:40px}
+  main{margin-top:100px;padding:12px}
+  .post{padding:14px}
+  .post-content{font-size:14px}
+  .title{font-size:16px}
+  .post img, .post video{width:100%;max-width:100%}
+  .actions{flex-wrap:wrap;gap:6px}
+  .filterbar{gap:4px;justify-content:flex-start;overflow-x:auto;padding-bottom:4px}
+  .filterbtn{padding:6px 10px;font-size:13px}
+
+  /* FIX overlapping blog name */
+  .brand {
+    min-width: 0;          /* allow shrinking inside flex */
+    flex: 1 1 auto;        /* shrink if needed */
+  }
+  .brand h1 {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; /* cut long name with ... */
+  }
+}
+
+/* extra small phones */
+@media (max-width:520px){
+  .topbar-inner{padding:8px}
+  .search-input{width:100px;font-size:13px}
+  .btn{padding:6px 10px;font-size:13px}
+  .icon-btn{padding:6px}
+  .post{padding:12px;border-radius:10px}
+  .title{font-size:15px}
+  .post-content{font-size:13px}
+  main{margin-top:90px;padding:10px}
+  .actions{flex-direction:column;align-items:flex-start}
+
+  /* wrap blog name under logo on very small screens */
+  .brand {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .brand h1 {
+    white-space: normal;
+  }
+}
+
+
+  </style>
+</head>
+<body>
+  <!-- TOP BAR -->
+  <div class="topbar" id="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <div class="logo">PJ</div>
+        <div>
+          <h1 id="blogName">Prayatna’s Journal</h1>
+          <p>Living, learning & thinking</p>
+        </div>
+      </div>
+
+      <div class="controls">
+        <a class="btn" href="index.html" title="Back to Home">← Home</a>
+
+        <div class="search-wrap" id="searchWrap">
+          <svg style="width:16px;height:16px;margin-right:6px;opacity:.9" viewBox="0 0 24 24"><path fill="#dcdcdc" d="M9.5 3A6.5 6.5 0 1 0 16 9.5A6.5 6.5 0 0 0 9.5 3M20 20l-4.35-4.35" /></svg>
+          <input id="searchInput" class="search-input" placeholder="Search posts (title or text)" aria-label="Search posts">
+        </div>
+
+        <button id="searchToggle" class="icon-btn" title="Toggle search">🔎</button>
+        <div style="width:6px"></div>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <!-- filters -->
+    <div class="filterbar" id="filterBar">
+      <button class="filterbtn active" data-filter="all">All</button>
+      <button class="filterbtn" data-filter="pinned">Pinned</button>
+      <button class="filterbtn" data-filter="photos">Photos</button>
+      <button class="filterbtn" data-filter="videos">Videos</button>
+      <button class="filterbtn" data-filter="text">Text</button>
+    </div>
+
+    <div class="grid" id="posts">
+
+      <!-- ========== POST 1 ========== -->
+      <article class="post" data-id="post-1" data-has-image="true" data-has-video="false" data-date="2025-10-25">
+  <a class="post-anchor" id="post-1"></a>
+  <div class="meta">
+    <div class="meta-left">
+      <div>
+        <h2 class="title">The Beginning of My Digital Journal</h2>
+        <div class="date"></div>
+      </div>
+    </div>
+    <div><span class="pinned-badge" style="display:none">PINNED</span></div>
+  </div>
+
+  <div class="post-content">
+    <p>I finally decided to start this — my little corner of the internet. No social media, no followers, no notifications. Just me and my thoughts.</p>
+    <img src="/Post Images/Setuppic  for Post 1.jpeg" alt="First post image" style="width:60%;max-width:400px;display:block;margin:12px auto;border-radius:8px;">
+    <div class="extra" aria-hidden="true">
+      <p>I want this place to be calm. A spot where I can write about what I notice, what I learn, and what I wonder. Physics, code, random experiments, tiny ideas — all of it. Sometimes I’ll post pictures, sometimes just words. Maybe even sketches of things I imagine.</p>
+      <p>Curiosity has always been my habit. I ask “why” too much. And here, I can follow those questions wherever they lead without worrying about anyone else.</p>
+      <p>This journal isn’t about perfection or being impressive. It’s just me thinking out loud. Some days will be messy, some days short, some days full of discoveries. But every post will be real.</p>
+      <p>So, here it begins. My digital journal. My calm in the noise. My place to explore, write, and just… exist a little differently.</p>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button class="action" data-action="toggle-read">Read More</button>
+    <button class="action" data-action="pin">Pin</button>
+    <button class="action secondary" data-action="share">Copy Link</button>
+  </div>
+</article>
+
+
+    
+
+      <!-- ========== POST TEMPLATE (copy when adding) ========== -->
+      <!--
+      <article class="post" data-id="post-3" data-has-image="true" data-has-video="false" data-date="2025-10-20">
+        <a class="post-anchor" id="post-3"></a>
+        <div class="meta">
+          <div class="meta-left">
+            <div>
+              <h2 class="title">Title Here</h2>
+              <div class="date"></div>
+            </div>
+          </div>
+          <div><span class="pinned-badge" style="display:none">PINNED</span></div>
+        </div>
+
+        <div class="post-content">
+          <p>Short summary here...</p>
+          <img src="assets/blog/yourimage.jpg" alt="">
+          <div class="extra" aria-hidden="true">
+            <p>Longer content here...</p>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button class="action" data-action="toggle-read">Read More</button>
+          <button class="action" data-action="pin">Pin</button>
+          <button class="action secondary" data-action="share">Copy Link</button>
+        </div>
+      </article>
+      -->
+
+    </div>
+
+    <div id="noResults" class="noresults" style="display:none">No matching posts found.</div>
+  </main>
+
+  <button id="toTop" title="Back to top">↑</button>
+
+  <script>
+    /*******************************
+     * Blog JS: search, pin, filters,
+     * hide topbar on scroll, read-more, share, auto-date
+     ********************************/
+
+    // DOM
+    const topbar = document.getElementById('topbar');
+    const searchToggle = document.getElementById('searchToggle');
+    const searchInput = document.getElementById('searchInput');
+    const searchWrap = document.getElementById('searchWrap');
+    const postsWrap = document.getElementById('posts');
+    const posts = () => Array.from(document.querySelectorAll('.post'));
+    const filterBar = document.getElementById('filterBar');
+    const filterButtons = Array.from(document.querySelectorAll('.filterbtn'));
+    const noResults = document.getElementById('noResults');
+    const toTop = document.getElementById('toTop');
+
+    // helpers
+    const qs = sel => document.querySelector(sel);
+    const escapeRegExp = s => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+    // 1) topbar hide/show on scroll (like Twitter/YT)
+    let lastY = window.scrollY;
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          const y = window.scrollY;
+          if (y > lastY && y > 80) topbar.classList.add('hidden');
+          else topbar.classList.remove('hidden');
+          lastY = y;
+          // toTop button
+          toTop.style.display = y > 300 ? 'block' : 'none';
+          ticking = false;
+        });
+        ticking = true;
+      }
+    });
+
+    // toTop action
+    toTop.addEventListener('click', () => window.scrollTo({top:0,behavior:'smooth'}));
+
+    // 2) search toggle (small icon to show/hide input)
+    let searchOpen = true;
+    searchToggle.addEventListener('click', () => {
+      searchOpen = !searchOpen;
+      if (searchOpen) {
+        searchInput.classList.remove('hidden');
+        searchInput.focus();
+      } else {
+        searchInput.classList.add('hidden');
+        searchInput.value = '';
+        applyFiltersAndSearch();
+      }
+    });
+
+    // 3) read more toggles & pin/share actions
+    function setupPostActions() {
+      posts().forEach(post => {
+        const btnRead = post.querySelector('[data-action="toggle-read"]');
+        const btnPin = post.querySelector('[data-action="pin"]');
+        const btnShare = post.querySelector('[data-action="share"]');
+        const extra = post.querySelector('.extra');
+        const badge = post.querySelector('.pinned-badge');
+
+        // read more
+        if (btnRead && extra) {
+          btnRead.addEventListener('click', () => {
+            const open = extra.classList.toggle('open');
+            btnRead.textContent = open ? 'Read Less' : 'Read More';
+          });
+        } else if (btnRead) {
+          btnRead.style.display = 'none';
+        }
+
+        // pin (persist in localStorage)
+        const id = post.dataset.id;
+        const pinned = isPinned(id);
+        updatePinUI(post, pinned);
+
+        btnPin && btnPin.addEventListener('click', () => {
+          const now = isPinned(id);
+          setPinned(id, !now);
+          updatePinUI(post, !now);
+          reorderPinned();
+          applyFiltersAndSearch();
+        });
+
+        // share (copy link)
+        btnShare && btnShare.addEventListener('click', async () => {
+          const url = location.href.split('#')[0] + '#' + id;
+          try {
+            await navigator.clipboard.writeText(url);
+            btnShare.textContent = 'Link Copied';
+            setTimeout(()=> btnShare.textContent = 'Copy Link', 1100);
+          } catch (e) {
+            console.warn('clipboard failed', e);
+            prompt('Copy link manually', url);
+          }
+        });
+      });
+    }
+
+    // localStorage helpers for pinned
+    const PIN_KEY = 'prayatna_orbit_pinned_v1';
+    function pinnedMap() {
+      try {
+        return JSON.parse(localStorage.getItem(PIN_KEY) || '{}');
+      } catch { return {} }
+    }
+    function isPinned(id){ return !!pinnedMap()[id] }
+    function setPinned(id, val){
+      const m = pinnedMap(); if (val) m[id] = true; else delete m[id];
+      localStorage.setItem(PIN_KEY, JSON.stringify(m));
+    }
+    function updatePinUI(post, pinned){
+      const badge = post.querySelector('.pinned-badge');
+      const btnPin = post.querySelector('[data-action="pin"]');
+      if (pinned) { badge.style.display='inline-block'; btnPin.textContent='Unpin' }
+      else { badge.style.display='none'; btnPin.textContent='Pin' }
+    }
+
+    // move pinned posts to top (preserve order otherwise)
+    function reorderPinned(){
+      const list = postsWrap;
+      const all = posts();
+      // detach all
+      all.forEach(p => list.removeChild(p));
+      // append pinned first
+      const pinned = all.filter(p => isPinned(p.dataset.id));
+      const normal = all.filter(p => !isPinned(p.dataset.id));
+      pinned.forEach(p => list.appendChild(p));
+      normal.forEach(p => list.appendChild(p));
+    }
+
+    // 4) search & filter system
+    function applyFiltersAndSearch(){
+      const q = (searchInput.value || '').toLowerCase().trim();
+      const activeFilter = filterButtons.find(b => b.classList.contains('active'))?.dataset.filter || 'all';
+      let matchCount = 0;
+      posts().forEach(post => {
+        // auto-date fill
+        const dateEl = post.querySelector('.date');
+        if (dateEl && !dateEl.textContent.trim()){
+          const raw = post.dataset.date || '';
+          if (raw) dateEl.textContent = new Date(raw).toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+          else dateEl.textContent = new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+        }
+
+        // filter logic
+        const hasImg = post.dataset.hasImage === 'true';
+        const hasVideo = post.dataset.hasVideo === 'true';
+        let passFilter = false;
+        if (activeFilter === 'all') passFilter = true;
+        else if (activeFilter === 'pinned') passFilter = isPinned(post.dataset.id);
+        else if (activeFilter === 'photos') passFilter = hasImg;
+        else if (activeFilter === 'videos') passFilter = hasVideo;
+        else if (activeFilter === 'text') passFilter = !hasImg && !hasVideo;
+
+        // search logic
+        let passSearch = true;
+        // reset highlights to plain text first
+        post.querySelectorAll('.title, .post-content p').forEach(el => {
+          el.innerHTML = el.textContent;
+        });
+
+        if (q) {
+          const txt = (post.querySelector('.title').textContent + ' ' + post.textContent).toLowerCase();
+          passSearch = txt.includes(q);
+          if (passSearch){
+            // highlight matches in title and paragraphs
+            const re = new RegExp('(' + escapeRegExp(q) + ')', 'gi');
+            post.querySelectorAll('.title, .post-content p').forEach(el => {
+              el.innerHTML = el.textContent.replace(re, '<span style="background:var(--accent);color:#111;padding:0 3px;border-radius:3px">$1</span>');
+            });
+          }
+        }
+
+        const show = passFilter && passSearch;
+        post.style.display = show ? 'block' : 'none';
+        if (show) matchCount++;
+      });
+
+      noResults.style.display = matchCount === 0 ? 'block' : 'none';
+    }
+
+    // filter button clicks
+    filterButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        applyFiltersAndSearch();
+      });
+    });
+
+    // search input event
+    searchInput.addEventListener('input', () => applyFiltersAndSearch());
+    // key "/" to focus search quickly
+    window.addEventListener('keydown', e => {
+      if (e.key === '/') { e.preventDefault(); searchInput.focus(); }
+    });
+
+    // 5) init: reorder pinned, setup actions and run once search/filter
+    function init(){
+      reorderPinned();
+      setupPostActions();
+      applyFiltersAndSearch();
+
+      // if URL has hash to a post, scroll to it
+      const h = location.hash.replace('#','');
+      if (h) {
+        const el = document.getElementById(h);
+        if (el) el.scrollIntoView({behavior:'smooth', block:'center'});
+      }
+    }
+
+    // run on DOM ready
+    document.addEventListener('DOMContentLoaded', init);
+  </script>
+</body>
+</html>
