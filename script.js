@@ -10,6 +10,7 @@ function mobileMenu() {
 
 // Close navbar when link is clicked
 const navLink = document.querySelectorAll(".nav-link");
+
 navLink.forEach((n) => n.addEventListener("click", closeMenu));
 
 function closeMenu() {
@@ -17,34 +18,43 @@ function closeMenu() {
   navMenu.classList.remove("active");
 }
 
-// ======== DARK MODE TOGGLE (Dark = default) ========
-const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
+// Event Listeners: Handling toggle event
+const toggleSwitch = document.querySelector(
+  '.theme-switch input[type="checkbox"]'
+);
 
-// Switch theme handler
 function switchTheme(e) {
   if (e.target.checked) {
-    // Checked → light mode
-    document.documentElement.setAttribute("data-theme", "light");
-    localStorage.setItem("theme", "light");
-  } else {
-    // Unchecked → dark mode
     document.documentElement.setAttribute("data-theme", "dark");
-    localStorage.setItem("theme", "dark");
+  } else {
+    document.documentElement.setAttribute("data-theme", "light");
   }
 }
 
-// Listen for toggle
 toggleSwitch.addEventListener("change", switchTheme, false);
 
-// Apply saved theme OR default to dark
-const currentTheme = localStorage.getItem("theme");
+//  Store color theme for future visits
 
-if (currentTheme === "light") {
-  document.documentElement.setAttribute("data-theme", "light");
-  toggleSwitch.checked = true; // move toggle to light
-} else {
-  // Default: dark mode
-  document.documentElement.setAttribute("data-theme", "dark");
-  toggleSwitch.checked = false; // dark = default position
-  localStorage.setItem("theme", "dark");
+function switchTheme(e) {
+  if (e.target.checked) {
+    document.documentElement.setAttribute("data-theme", "dark");
+    localStorage.setItem("theme", "dark"); //add this
+  } else {
+    document.documentElement.setAttribute("data-theme", "light");
+    localStorage.setItem("theme", "light"); //add this
+  }
+}
+
+// Save user preference on load
+
+const currentTheme = localStorage.getItem("theme")
+  ? localStorage.getItem("theme")
+  : null;
+
+if (currentTheme) {
+  document.documentElement.setAttribute("data-theme", currentTheme);
+
+  if (currentTheme === "dark") {
+    toggleSwitch.checked = true;
+  }
 }
