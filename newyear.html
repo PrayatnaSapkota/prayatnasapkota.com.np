@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Us — 2026</title>
+<style>
+/* RESET */
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',system-ui,sans-serif;}
+html,body{width:100%;height:100%;overflow:hidden;background:#05070b;color:#eee;}
+
+/* STARFIELD CANVAS */
+canvas{position:fixed;inset:0;z-index:0;}
+
+/* MAIN CONTAINER */
+.container {
+  position: fixed;
+  top: 0; left:0;
+  width:100%; height:100%;
+  display:flex;
+  align-items:center;        /* vertical center */
+  justify-content:center;    /* horizontal center */
+  z-index:2;
+}
+
+/* CARD */
+.card {
+  max-width: 800px;
+  padding: 60px 40px;
+  background: rgba(10,14,20,0.65);
+  backdrop-filter: blur(16px);
+  border:1px solid rgba(255,255,255,0.1);
+  box-shadow:0 0 140px rgba(0,0,0,0.7);
+  text-align: center;
+  transform: scale(0.9);
+  opacity: 0;
+  transition: all 0.8s ease;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* CARD VISIBLE */
+.card.show{opacity:1; transform: scale(1);}
+
+/* TITLES */
+h1{font-size:2.6rem;margin-bottom:20px;}
+h2{font-size:2rem;margin-bottom:15px;}
+p{font-size:1.2rem;line-height:1.8;opacity:0.9;white-space:pre-line;}
+
+/* NEXT BUTTON */
+button{
+  margin-top:30px;padding:12px 30px;font-size:1rem;border:1px solid rgba(255,255,255,0.4);
+  background:transparent;color:#eee;cursor:pointer;transition:0.3s ease;
+}
+button:hover{background:#eee;color:#05070b;box-shadow:0 0 20px rgba(255,255,255,0.5);}
+
+/* SIGNATURE */
+.signature{margin-top:40px;opacity:0.6;}
+
+/* PARTICLE */
+.particle{position:absolute;width:4px;height:4px;background:white;border-radius:50%;pointer-events:none;opacity:0.8;}
+</style>
+</head>
+<body>
+
+<canvas id="stars"></canvas>
+<audio id="music" src="music.mp3" autoplay loop></audio>
+
+<div class="container">
+  <div class="card" id="card"></div>
+</div>
+
+<script>
+// ---------- STARFIELD ----------
+const canvas=document.getElementById('stars');
+const ctx=canvas.getContext('2d');
+let w,h,stars;
+function resize(){w=canvas.width=window.innerWidth;h=canvas.height=window.innerHeight;
+stars=Array.from({length:250},()=>({x:Math.random()*w,y:Math.random()*h,z:Math.random()*w}));}
+resize();window.addEventListener('resize',resize);
+
+function animateStars(){ctx.fillStyle='black';ctx.fillRect(0,0,w,h);stars.forEach(s=>{
+s.z-=2;if(s.z<=0)s.z=w;const k=128/s.z;const px=s.x*k+w/2;const py=s.y*k+h/2;
+if(px>=0&&px<=w&&py>=0&&py<=h){const size=(1-s.z/w)*2;ctx.fillStyle='white';ctx.fillRect(px,py,size,size);}
+});requestAnimationFrame(animateStars);}
+animateStars();
+
+// ---------- SLIDES ----------
+const slides=[
+{title:"2026", text:"This isn’t a website. This is a moment. And if you’re reading this… it means we made it here together."},
+{title:"!Sandhya!", text:"I don’t believe in fate, signs, or magic. But then you happened and logic had to sit down and shut up."},
+{title:"The First Kiss", text:"You kissed me first. The eye contact before. The silence after. The universe paused like it knew something important just happened."},
+{title:"Your Smile", text:"Your smile doesn’t just look good, ig it changes the room. It makes bad days less serious and good days unforgettable."},
+{title:"Hugs & Chaos", text:"Your hugs feel like home without walls. Somehow, in the middle of exams, stress, and chaos you became my calm."},
+{title:"After Exams", text:"I think about the days after exams. Free time. Long talks. Random plans. And the quiet comfort of just being us."},
+{title:"Cosmic Truth", text:"The universe runs on constants. Speed of light. Gravity. And somehow… you."},
+{title:"2026", text:"I won’t promise perfection. But I promise honesty. Effort. Growth. And choosing you....again and again."},
+{title:"One Last Thing", text:"If this universe is infinite… I’m still glad I found you in it.", signature:true}
+];
+
+let current=0;
+const card=document.getElementById('card');
+
+function typeText(element,text,callback){
+  let i=0;
+  element.textContent='';
+  const interval=setInterval(()=>{
+    element.textContent+=text.charAt(i);
+    i++;
+    if(i>=text.length){clearInterval(interval);if(callback)callback();}
+  },30);
+}
+
+// Particle burst
+function spawnParticles(x,y){
+  for(let i=0;i<12;i++){
+    const p=document.createElement('div');
+    p.className='particle';
+    document.body.appendChild(p);
+    p.style.left=(x-2)+'px';
+    p.style.top=(y-2)+'px';
+    const angle=Math.random()*Math.PI*2;
+    const speed=Math.random()*50+20;
+    const dx=Math.cos(angle)*speed;
+    const dy=Math.sin(angle)*speed;
+    const duration=500+Math.random()*500;
+    p.animate([{transform:'translate(0,0)',opacity:1},{transform:`translate(${dx}px,${dy}px)`,opacity:0}],{duration:duration,easing:'ease-out'});
+    setTimeout(()=>p.remove(),duration);
+  }
+}
+
+// Glow pulse
+function pulseCard(){card.animate([{boxShadow:'0 0 140px rgba(0,0,0,0.7)'},{boxShadow:'0 0 280px rgba(255,255,255,0.2)'}],{duration:800,direction:'alternate',iterations:2});}
+
+// Shake for emotional slides
+function shakeCard(){card.animate([{transform:'translateX(0)'},{transform:'translateX(5px)'},{transform:'translateX(-5px)'},{transform:'translateX(0)'}],{duration:400,easing:'ease-in-out'});}
+
+// Show slide
+function showSlide(i){
+  card.classList.remove('show');
+  setTimeout(()=>{
+    card.innerHTML='';
+    const slide=slides[i];
+    const t=document.createElement('h1'); t.textContent=slide.title; card.appendChild(t);
+    const p=document.createElement('p'); card.appendChild(p);
+    card.classList.add('show');
+    pulseCard();
+    if(["The First Kiss","Your Smile","Hugs & Chaos"].includes(slide.title)) shakeCard();
+    typeText(p,slide.text);
+
+    if(slide.signature){
+      const s=document.createElement('div'); s.className='signature'; s.textContent='— Prayatna'; card.appendChild(s);
+    }
+
+    if(i<slides.length-1){
+      const btn=document.createElement('button'); btn.textContent='Next';
+      btn.onclick=(e)=>{
+        spawnParticles(e.clientX,e.clientY);
+        current++;
+        showSlide(current);
+      };
+      card.appendChild(btn);
+    }
+  },300);
+}
+
+// Start first slide
+showSlide(current);
+
+// Audio safety
+const music=document.getElementById('music');
+music.volume=0.6;
+music.play().catch(()=>{});
+</script>
+
+</body>
+</html>
