@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For You</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- GOOGLE FONT -->
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Share Tech Mono', monospace;
+}
+
+body {
+  background: black;
+  color: #e6f1ff;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+canvas {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+}
+
+section {
+  min-height: 100vh;
+  padding: 100px 10%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  letter-spacing: 2px;
+  color: #7adfff;
+}
+
+p {
+  max-width: 800px;
+  font-size: 1.2rem;
+  line-height: 1.8;
+  opacity: 0.9;
+}
+
+.small {
+  opacity: 0.6;
+  font-size: 0.9rem;
+  margin-top: 20px;
+}
+
+.divider {
+  height: 2px;
+  width: 120px;
+  background: #7adfff;
+  margin: 30px 0;
+}
+
+footer {
+  opacity: 0.5;
+  font-size: 0.8rem;
+  margin-top: 40px;
+  text-align: center;
+}
+
+button {
+  margin-top: 40px;
+  padding: 12px 28px;
+  background: #7adfff;
+  border: none;
+  border-radius: 25px;
+  color: black;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  transform: scale(1.05);
+  background: #ffffff;
+}
+
+.star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: #7adfff;
+  border-radius: 50%;
+  opacity: 0.8;
+  animation: twinkle 2s infinite alternate;
+}
+
+@keyframes twinkle {
+  from { opacity: 0.3; }
+  to { opacity: 1; }
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="stars"></canvas>
+
+<!-- SITE SECTIONS -->
+<section id="happy">
+  <h1>BEFORE</h1>
+  <div class="divider"></div>
+  <p>
+    I was alone, just chill, doing my own thing.  
+    Then you came. And boom...life suddenly felt different.  
+    Not lonely, not perfect, just alive.  
+    You chose me. And that’s awesome.  
+    After you turned 18, you got me. It’s me, family, and a few real friends. That’s enough.
+  </p>
+</section>
+
+<section id="signal">
+  <h1>THEN,YOU PICKED ME</h1>
+  <div class="divider"></div>
+  <p>
+    You came straight up and chose me.  
+    No games, no bullshit. That hit me like a meteor.  
+    Someone actually wanted me....just me, raw, unfiltered.  
+    That’s epic :)  
+  </p>
+</section>
+
+<section id="real-talk">
+  <h1>NOW,REAL TALK</h1>
+  <div class="divider"></div>
+  <p>
+    Babe, I gotta be real. Sometimes you give too much shit to everyone else.  
+    Everyone’s drama, Your own pasts,Your own problems...you carry it all.  
+    Stop. Fuck that Fucking noise. Focus on your own life, your own peace.  
+    After You turned 18, it’s me now. That’s enough. Leave the rest Shit behind.  
+  </p>
+  <p class="small">
+    "Fall in love with some activity, and do it! Nobody ever figures out what life is all about, and it doesn't matter. Explore the world"- Richard Feynman
+  </p>
+</section>
+
+<section id="about-me">
+  <h1>ABOUT ME</h1>
+  <div class="divider"></div>
+  <p>
+    I know I’m not perfect. I fuck up sometimes.  
+    I don’t always know how to express myself.  
+    But if someone chooses me, I give 100%.  
+    You chose me. I choose you. I’m yours now. Fucking simple.
+  </p>
+</section>
+
+<section id="feedback">
+  <h1>FEEDBACK CORNER</h1>
+  <div class="divider"></div>
+  <p>
+    Hit me with truth. Tell me what I should improve.  
+    Tell me what I do wrong sometimes.  
+    Tell me how I can be better for you.  
+    I can take it. I want it. I know I’m not perfect — that’s why I need it.
+  </p>
+  <button id="randomMessage">Surprise Me</button>
+  <p id="message" class="small"></p>
+</section>
+
+<section id="closing">
+  <h1>JUST US</h1>
+  <div class="divider"></div>
+  <p>
+    No fake promises. No dramatic lines.  
+    Just this shit: I’m here. I care. I notice. I’m serious about what we have.  
+    Lifes chaotic, people are dumb sometimes, but we got our own orbit now.  
+    We choose each other every day. And that’s fucking enough Babe!!
+  </p>
+</section>
+
+<section id="closing">
+  <h1>ONE THING I WANNA SAY </h1>
+  <div class="divider"></div>
+  <p>
+    I DON'T KNOW HOW TO EXPRESS MY FEELING BUT I LOVE YOU YAAR I AM YOURS!
+  </p>
+  <footer>— THATS IT, THANK YOU FOR READING </footer>
+</section>
+
+<script>
+// STARFIELD
+const canvas = document.getElementById("stars");
+const ctx = canvas.getContext("2d");
+let w, h;
+function resize() { w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight; }
+window.addEventListener("resize", resize);
+resize();
+
+const stars = Array.from({ length: 400 }, () => ({ x: Math.random()*w, y: Math.random()*h, z: Math.random()*w }));
+
+function animate() {
+  ctx.fillStyle = "black";
+  ctx.fillRect(0,0,w,h);
+  ctx.fillStyle = "#7adfff";
+  stars.forEach(s=>{
+    s.z -= 2; if(s.z<=0)s.z=w;
+    const x = (s.x-w/2)*(w/s.z)+w/2;
+    const y = (s.y-h/2)*(w/s.z)+h/2;
+    if(x>0 && x<w && y>0 && y<h){
+      const r=(1-s.z/w)*2;
+      ctx.beginPath();
+      ctx.arc(x,y,r,0,Math.PI*2);
+      ctx.fill();
+    }
+  });
+  requestAnimationFrame(animate);
+}
+animate();
+
+// SCROLL FADE-IN ANIMATION
+const sections = document.querySelectorAll("section");
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting) entry.target.classList.add("visible");
+  });
+},{threshold:0.2});
+sections.forEach(sec=>observer.observe(sec));
+
+// RANDOM MESSAGE (API STYLE)
+const messages = [
+  "You're amazing just by being you.",
+  "You’re a constant signal in my chaos.",
+  "Keep being awesome, don’t let anyone else fuck with your vibe."
+];
+document.getElementById("randomMessage").addEventListener("click", ()=>{
+  const msg = messages[Math.floor(Math.random()*messages.length)];
+  document.getElementById("message").textContent = msg;
+});
+</script>
+
+</body>
+</html>
