@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Parrot</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@200;300;400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            overflow: hidden;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0a0a0f;
+            color: #e8e8f0;
+        }
+
+        /* Star Background */
+        #starfield {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        /* Slide Container */
+        .slides-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Individual Slide */
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 60px 30px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: translateX(100px);
+        }
+
+        .slide.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(0);
+        }
+
+        .slide.prev {
+            transform: translateX(-100px);
+        }
+
+        /* Content */
+        .slide-content {
+            max-width: 750px;
+            text-align: center;
+        }
+
+        h1, h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 300;
+            letter-spacing: 0.02em;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #e8e8f0 0%, #a0a0b8 50%, #8ab4f8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        h2 {
+            font-size: clamp(2rem, 6vw, 3.5rem);
+            margin-bottom: 2rem;
+            color: #e8e8f0;
+        }
+
+        p {
+            font-size: clamp(1rem, 2.5vw, 1.25rem);
+            line-height: 1.9;
+            color: #a0a0b8;
+            font-weight: 300;
+            margin-bottom: 1.2rem;
+        }
+
+        .highlight {
+            color: #e8e8f0;
+            font-weight: 400;
+        }
+
+        /* Glass Card */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
+            padding: 45px 35px;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            margin-top: 20px;
+        }
+
+        /* Big Number Display */
+        .big-number {
+            font-size: 6rem;
+            font-family: 'Cormorant Garamond', serif;
+            color: #8ab4f8;
+            line-height: 1;
+            margin: 20px 0;
+        }
+
+        .number-label {
+            font-size: 1.2rem;
+            color: #a0a0b8;
+            margin-bottom: 20px;
+        }
+
+        /* Quote Box */
+        .quote-box {
+            background: rgba(138, 180, 248, 0.08);
+            border-left: 3px solid #8ab4f8;
+            padding: 25px 30px;
+            margin: 25px 0;
+            border-radius: 0 12px 12px 0;
+            text-align: left;
+        }
+
+        .quote-box p {
+            margin: 0;
+            font-style: italic;
+            color: #c5c5d8;
+            font-size: 1.1rem;
+        }
+
+        .quote-author {
+            text-align: right;
+            margin-top: 15px;
+            font-size: 0.95rem;
+            color: #8ab4f8;
+        }
+
+        /* Realization Box */
+        .realization-box {
+            background: rgba(255, 200, 100, 0.06);
+            border: 1px solid rgba(255, 200, 100, 0.2);
+            border-radius: 16px;
+            padding: 25px;
+            margin-top: 25px;
+        }
+
+        .realization-box p {
+            color: #e8dcc5;
+            margin: 0;
+        }
+
+        /* Love Section */
+        .love-box {
+            background: linear-gradient(135deg, rgba(138, 180, 248, 0.15), rgba(180, 138, 248, 0.08));
+            border-radius: 30px;
+            padding: 50px 40px;
+            border: 1px solid rgba(138, 180, 248, 0.2);
+        }
+
+        .love-box h2 {
+            font-size: clamp(3rem, 10vw, 5rem);
+            background: linear-gradient(135deg, #e8e8f0, #8ab4f8, #b48ef8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+
+        /* Navigation Buttons */
+        .nav-btn {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: #e8e8f0;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 100;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-btn:hover {
+            background: rgba(138, 180, 248, 0.2);
+            border-color: rgba(138, 180, 248, 0.4);
+            box-shadow: 0 0 20px rgba(138, 180, 248, 0.3);
+        }
+
+        .nav-btn.prev {
+            left: 30px;
+        }
+
+        .nav-btn.next {
+            right: 30px;
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        /* Slide Indicators */
+        .indicators {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 100;
+        }
+
+        .indicator {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .indicator.active {
+            background: #8ab4f8;
+            box-shadow: 0 0 10px rgba(138, 180, 248, 0.5);
+        }
+
+        /* Action Button */
+        .action-btn {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 16px 40px;
+            background: linear-gradient(135deg, rgba(138, 180, 248, 0.2), rgba(138, 180, 248, 0.05));
+            border: 1px solid rgba(138, 180, 248, 0.4);
+            border-radius: 50px;
+            color: #e8e8f0;
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            text-decoration: none;
+        }
+
+        .action-btn:hover {
+            border-color: rgba(138, 180, 248, 0.7);
+            box-shadow: 0 0 30px rgba(138, 180, 248, 0.3);
+            transform: translateY(-3px);
+        }
+
+        /* Easter Egg */
+        .easter-egg {
+            position: fixed;
+            bottom: 80px;
+            right: 30px;
+            width: 12px;
+            height: 12px;
+            background: radial-gradient(circle, #8ab4f8 0%, transparent 70%);
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 100;
+            animation: pulse 2s ease-in-out infinite;
+            opacity: 0.6;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.6; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        /* Popup */
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .popup-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.9);
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 40px 50px;
+            backdrop-filter: blur(25px);
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease;
+            text-align: center;
+        }
+
+        .popup.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .popup p {
+            font-size: 1.4rem;
+            color: #e8e8f0;
+            margin: 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+            .nav-btn.prev {
+                left: 15px;
+            }
+            .nav-btn.next {
+                right: 15px;
+            }
+            .glass-card {
+                padding: 30px 20px;
+            }
+            .big-number {
+                font-size: 4rem;
+            }
+            .slide {
+                padding: 40px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Star Background -->
+    <canvas id="starfield"></canvas>
+
+    <!-- Slides Container -->
+    <div class="slides-container">
+
+        <!-- SLIDE 1: Hero -->
+        <div class="slide active" data-slide="0">
+            <div class="slide-content">
+                <h1>Hey Parrot...</h1>
+                <p style="font-style: italic; font-size: 1.2rem;">I need to tell you something.<br>Not to convince you. Just... to be honest.</p>
+            </div>
+        </div>
+
+        <!-- SLIDE 2: The Sorry -->
+        <div class="slide" data-slide="1">
+            <div class="slide-content">
+                <h2>I said sorry...</h2>
+                <div class="glass-card">
+                    <p>Way too many times.</p>
+                    <div class="big-number">50-60</div>
+                    <p class="number-label">times</p>
+                    <p>You kept saying <span class="highlight">"it's okay"</span></p>
+                    <p>But I kept going.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 3: The Promise She Gave -->
+        <div class="slide" data-slide="2">
+            <div class="slide-content">
+                <h2>You told me something...</h2>
+                <div class="glass-card">
+                    <p>Remember when you said:</p>
+                    <div class="quote-box">
+                        <p>"If you don't like something and have to tell anything... just take a moment. Hold it. And when we meet, hug me and tell me. I'll understand."</p>
+                        <p class="quote-author">— Sanumaya</p>
+                    </div>
+                
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 4: What I Did -->
+        <div class="slide" data-slide="3">
+            <div class="slide-content">
+                <h2>And I...</h2>
+                <div class="glass-card">
+                    <p>Didn't do it.</p>
+                    <p style="font-size: 1.4rem; color: #e8e8f0; margin: 25px 0;">I was a <span class="highlight">dumbass</span>.</p>
+                    <p>You gave me the formula.</p>
+                    <p>I just had to <em>follow</em> it.</p>
+                    <div class="realization-box">
+                        <p>I said I understood... but I didn't act like it.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 5: The Realization -->
+        <div class="slide" data-slide="4">
+            <div class="slide-content">
+                <h2>Now I get it.</h2>
+                <div class="glass-card">
+                    <p>Saying sorry 50 times doesn't fix anything.</p>
+                    <p style="font-size: 1.3rem; color: #e8e8f0; margin: 20px 0;">That's worse than not saying anything at all.</p>
+                    <p>I was so busy <span class="highlight">proving</span> I cared...</p>
+                    <p><b>That I forgot to actually <em>show</em> it.</b>   </p>
+                </div>
+            </div>      
+        </div>
+
+        <!-- SLIDE 6: From Now On -->
+        <div class="slide" data-slide="5">
+            <div class="slide-content">
+                <h2>From now on...</h2>
+                <div class="glass-card">
+                    <p>I will give you what you wanted from me.</p>
+                    <p>I will wait for the current Time.</p>
+                    <p>When you want to talk, I'll be here.</p>
+                    <p>When you need me, When ever you want I'll Try to be there!!!</p>
+                    <div class="quote-box" style="margin-top: 30px;">
+                        <p>This time, I won't just say it. I'll do it.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 7: I Know -->
+        <div class="slide" data-slide="6">
+            <div class="slide-content">
+                <h2>I know...</h2>
+                <div class="glass-card">
+                    <p>Once someone decides to leave,</p>
+                    <p style="font-size: 1.2rem; color: #e8e8f0;">that's the first step.</p>
+                    <p style="margin-top: 25px;">BUT I know you might not leave Cause Your My Little Girl</p>
+                    <p style="font-size: 1.6rem; color: #8ab4f8; margin: 30px 0;">But no problem...</p>
+                    <p style="font-size: 1.4rem;">We can fix this.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 8: I Love You -->
+        <div class="slide" data-slide="7">
+            <div class="slide-content">
+                <div class="love-box">
+                    <h2>I Love You</h2>
+                    <p>That's the one thing I want you to know.</p>
+                    <p>Not to pressure you. Not to guilt you.</p>
+                    <p>Just... because it's true.</p>
+                    <p style="margin-top: 25px; font-style: italic;">Imp. Kura haru online ma yesari discuss garyo bhani jhan bigrido raixa so aaru kura Offline when we meet I will JUST HUG YOU AT first then we will talk</p>
+                </div>
+                <a href="https://prayatnasapkota.com.np/hehe.html" class="action-btn" target="_blank">When you're ready.. paila ko site hera if u want</a>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Navigation Buttons -->
+    <button class="nav-btn prev" id="prevBtn">&#10094;</button>
+    <button class="nav-btn next" id="nextBtn">&#10095;</button>
+
+    <!-- Slide Indicators -->
+    <div class="indicators" id="indicators"></div>
+
+    <!-- Easter Egg -->
+    <div class="easter-egg" id="easterEgg"></div>
+
+    <!-- Popup -->
+    <div class="popup-overlay" id="popupOverlay"></div>
+    <div class="popup" id="popup">
+        <p>You're still my favorite person 🙂</p>
+    </div>
+
+    <script>
+        /* ============================================
+           STARFIELD BACKGROUND
+           ============================================ */
+        const canvas = document.getElementById('starfield');
+        const ctx = canvas.getContext('2d');
+        let width, height, stars = [];
+
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+
+        class Star {
+            constructor() {
+                this.reset();
+            }
+            reset() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.z = Math.random() * 2 + 0.5;
+                this.size = Math.random() * 1.5 + 0.5;
+                this.opacity = Math.random() * 0.5 + 0.3;
+                this.twinkleSpeed = Math.random() * 0.02 + 0.01;
+                this.twinklePhase = Math.random() * Math.PI * 2;
+            }
+            update() {
+                this.y += this.z * 0.2;
+                if (this.y > height) {
+                    this.y = 0;
+                    this.x = Math.random() * width;
+                }
+                this.twinklePhase += this.twinkleSpeed;
+                this.currentOpacity = this.opacity + Math.sin(this.twinklePhase) * 0.2;
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(232, 232, 240, ${Math.max(0.1, this.currentOpacity)})`;
+                ctx.fill();
+                if (this.size > 1.2) {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size * 3, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(138, 180, 248, ${this.currentOpacity * 0.1})`;
+                    ctx.fill();
+                }
+            }
+        }
+
+        function initStars() {
+            stars = [];
+            const starCount = Math.min(150, Math.floor((width * height) / 8000));
+            for (let i = 0; i < starCount; i++) stars.push(new Star());
+        }
+
+        function animateStars() {
+            ctx.fillStyle = '#0a0a0f';
+            ctx.fillRect(0, 0, width, height);
+            const gradient = ctx.createRadialGradient(width/2, height/2, 0, width/2, height/2, width);
+            gradient.addColorStop(0, 'rgba(45, 27, 78, 0.1)');
+            gradient.addColorStop(1, 'transparent');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, width, height);
+            stars.forEach(star => { star.update(); star.draw(); });
+            requestAnimationFrame(animateStars);
+        }
+
+        resize();
+        initStars();
+        animateStars();
+        window.addEventListener('resize', () => { resize(); initStars(); });
+
+        /* ============================================
+           SLIDE NAVIGATION
+           ============================================ */
+        const slides = document.querySelectorAll('.slide');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const indicatorsContainer = document.getElementById('indicators');
+        let currentSlide = 0;
+        const totalSlides = slides.length;
+
+        // Create indicators
+        slides.forEach((_, index) => {
+            const indicator = document.createElement('div');
+            indicator.className = 'indicator' + (index === 0 ? ' active' : '');
+            indicator.addEventListener('click', () => goToSlide(index));
+            indicatorsContainer.appendChild(indicator);
+        });
+
+        const indicators = document.querySelectorAll('.indicator');
+
+        function updateSlides() {
+            slides.forEach((slide, index) => {
+                slide.classList.remove('active', 'prev');
+                if (index === currentSlide) {
+                    slide.classList.add('active');
+                } else if (index < currentSlide) {
+                    slide.classList.add('prev');
+                }
+            });
+
+            indicators.forEach((ind, index) => {
+                ind.classList.toggle('active', index === currentSlide);
+            });
+
+            prevBtn.disabled = currentSlide === 0;
+            nextBtn.disabled = currentSlide === totalSlides - 1;
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides - 1) {
+                currentSlide++;
+                updateSlides();
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                currentSlide--;
+                updateSlides();
+            }
+        }
+
+        function goToSlide(index) {
+            currentSlide = index;
+            updateSlides();
+        }
+
+        prevBtn.addEventListener('click', prevSlide);
+        nextBtn.addEventListener('click', nextSlide);
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') nextSlide();
+            if (e.key === 'ArrowLeft') prevSlide();
+        });
+
+        // Touch/swipe support
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            const diff = touchStartX - touchEndX;
+            if (Math.abs(diff) > 50) {
+                if (diff > 0) nextSlide();
+                else prevSlide();
+            }
+        });
+
+        /* ============================================
+           EASTER EGG
+           ============================================ */
+        const easterEgg = document.getElementById('easterEgg');
+        const popup = document.getElementById('popup');
+        const popupOverlay = document.getElementById('popupOverlay');
+
+        easterEgg.addEventListener('click', () => {
+            popup.classList.add('active');
+            popupOverlay.classList.add('active');
+        });
+
+        popupOverlay.addEventListener('click', () => {
+            popup.classList.remove('active');
+            popupOverlay.classList.remove('active');
+        });
+    </script>
+</body>
+</html>
