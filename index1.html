@@ -1,182 +1,625 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Prayatna Sapkota | Portfolio</title>
-  <meta name="description" content="Physics lover, code tinkerer, night-sky watcher.">
+  <title>Prayatna Sapkota</title>
+  <meta name="description" content="Physics, curiosity, rogue planets, code, and thoughts about the universe." />
 
-  <link rel="icon" type="IMG.jpg" sizes="32x32" href="assets/favicon/favicon-32x32.png" />
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" crossorigin="anonymous">
-  <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="utilities.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#06070a;
+      --card:#10131a;
+      --soft:#151922;
+      --border:rgba(255,255,255,.07);
+      --text:#f3f6ff;
+      --muted:#9aa4b5;
+      --accent:#d9d9d9;
+      --accent2:#8d8d8d;
+      --glow:0 0 30px rgba(255,255,255,.06);
+    }
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    html{
+      scroll-behavior:smooth;
+    }
+
+    body{
+      background:#050505;
+      color:var(--text);
+      font-family:'Inter',sans-serif;
+      overflow-x:hidden;
+    }
+
+    a{
+      text-decoration:none;
+      color:inherit;
+    }
+
+    .noise{
+      position:fixed;
+      inset:0;
+      background-image:url('https://grainy-gradients.vercel.app/noise.svg');
+      opacity:.04;
+      pointer-events:none;
+      z-index:-1;
+    }
+
+    nav{
+      position:fixed;
+      top:0;
+      width:100%;
+      z-index:999;
+      backdrop-filter:blur(16px);
+      background:rgba(6,7,10,.65);
+      border-bottom:1px solid var(--border);
+    }
+
+    .nav-inner{
+      max-width:1200px;
+      margin:auto;
+      padding:18px 24px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+    }
+
+    .logo{
+      font-size:1.1rem;
+      font-weight:800;
+      letter-spacing:.12em;
+    }
+
+    .logo span{
+      color:#b8b8b8;
+    }
+
+    .nav-links{
+      display:flex;
+      gap:14px;
+      align-items:center;
+    }
+
+    .nav-links a{
+      color:var(--muted);
+      transition:.25s;
+      font-size:.95rem;
+    }
+
+    .nav-links a:hover{
+      color:#050505;
+    }
+
+    .btn{
+      padding:12px 18px;
+      border-radius:14px;
+      border:1px solid var(--border);
+      background:var(--soft);
+      transition:.25s;
+      font-weight:600;
+      color:var(--text);
+    }
+
+    .btn:hover{
+      transform:translateY(-2px);
+      border-color:rgba(124,92,255,.4);
+      box-shadow:var(--glow);
+    }
+
+    .btn.primary{
+      background:#f1f1f1;
+      color:#10131a;
+      border:none;
+    }
+
+    .hero{
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:140px 24px 80px;
+    }
+
+    .hero-grid{
+      max-width:1200px;
+      width:100%;
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:50px;
+      align-items:center;
+    }
+
+    .tag{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:10px 14px;
+      border-radius:999px;
+      background:rgba(255,255,255,.03);
+      border:1px solid var(--border);
+      color:var(--muted);
+      margin-bottom:24px;
+      font-size:.92rem;
+    }
+
+    .hero h1{
+      font-size:5rem;
+      line-height:.95;
+      margin-bottom:20px;
+      letter-spacing:-3px;
+    }
+
+    .hero h1 span{
+      background:linear-gradient(135deg,#ffffff,#8f8f8f);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
+
+    .hero p{
+      max-width:650px;
+      font-size:1.08rem;
+      color:var(--muted);
+      line-height:1.8;
+      margin-bottom:34px;
+    }
+
+    .hero-actions{
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+
+    .profile-card{
+      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      border:1px solid var(--border);
+      border-radius:32px;
+      padding:26px;
+      position:relative;
+      overflow:hidden;
+      box-shadow:0 20px 60px rgba(0,0,0,.4);
+    }
+
+    .profile-card::before{
+      content:'';
+      position:absolute;
+      width:300px;
+      height:300px;
+      background:radial-gradient(circle, rgba(255,255,255,.05), transparent 70%);
+      top:-120px;
+      right:-120px;
+      opacity:.4;
+    }
+
+    .profile-card img{
+      width:100%;
+      border-radius:24px;
+      object-fit:cover;
+      border:1px solid rgba(255,255,255,.08);
+      margin-bottom:20px;
+    }
+
+    .mini-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+    }
+
+    .mini-box{
+      background:rgba(255,255,255,.03);
+      border:1px solid var(--border);
+      padding:16px;
+      border-radius:18px;
+    }
+
+    .mini-box small{
+      color:var(--muted);
+      display:block;
+      margin-bottom:8px;
+    }
+
+    .mini-box strong{
+      font-size:1rem;
+    }
+
+    section{
+      max-width:1200px;
+      margin:auto;
+      padding:90px 24px;
+    }
+
+    .section-title{
+      font-size:2.5rem;
+      margin-bottom:16px;
+      letter-spacing:-1px;
+    }
+
+    .section-sub{
+      color:var(--muted);
+      max-width:700px;
+      line-height:1.8;
+      margin-bottom:50px;
+    }
+
+    .cards{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+      gap:22px;
+    }
+
+    .card{
+      background:rgba(255,255,255,.03);
+      border:1px solid var(--border);
+      border-radius:24px;
+      padding:26px;
+      transition:.3s;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .card:hover{
+      transform:translateY(-6px);
+      border-color:rgba(124,92,255,.35);
+      box-shadow:var(--glow);
+    }
+
+    .card h3{
+      margin-bottom:14px;
+      font-size:1.2rem;
+    }
+
+    .card p{
+      color:var(--muted);
+      line-height:1.7;
+    }
+
+    .research{
+      background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));
+      border:1px solid rgba(255,255,255,.08);
+      padding:40px;
+      border-radius:30px;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .research::after{
+      content:'';
+      position:absolute;
+      inset:0;
+      background:radial-gradient(circle at top right, rgba(255,255,255,.08), transparent 30%);
+      pointer-events:none;
+    }
+
+    .research-tag{
+      color:var(--accent2);
+      font-size:.85rem;
+      letter-spacing:.18em;
+      margin-bottom:16px;
+      display:block;
+    }
+
+    .research h2{
+      font-size:2.3rem;
+      margin-bottom:18px;
+      max-width:800px;
+      line-height:1.2;
+    }
+
+    .research p{
+      color:#c7d0de;
+      line-height:1.8;
+      max-width:850px;
+      margin-bottom:26px;
+    }
+
+    .quote{
+      margin-top:20px;
+      padding-left:20px;
+      border-left:2px solid rgba(255,255,255,.12);
+      color:#b7c2d1;
+      font-style:italic;
+    }
+
+    .journal-preview{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+      gap:24px;
+    }
+
+    .journal-card{
+      background:rgba(255,255,255,.03);
+      border:1px solid var(--border);
+      border-radius:26px;
+      overflow:hidden;
+      transition:.3s;
+    }
+
+    .journal-card:hover{
+      transform:translateY(-5px);
+      box-shadow:var(--glow);
+    }
+
+    .journal-card img{
+      width:100%;
+      height:220px;
+      object-fit:cover;
+    }
+
+    .journal-content{
+      padding:22px;
+    }
+
+    .journal-content small{
+      color:var(--accent2);
+      text-transform:uppercase;
+      letter-spacing:.12em;
+    }
+
+    .journal-content h3{
+      margin:12px 0;
+      font-size:1.3rem;
+    }
+
+    .journal-content p{
+      color:var(--muted);
+      line-height:1.7;
+    }
+
+    .contact-box{
+      background:rgba(255,255,255,.03);
+      border:1px solid var(--border);
+      border-radius:30px;
+      padding:50px;
+      text-align:center;
+    }
+
+    .contact-box h2{
+      font-size:2.4rem;
+      margin-bottom:14px;
+    }
+
+    .contact-box p{
+      color:var(--muted);
+      max-width:700px;
+      margin:0 auto 28px;
+      line-height:1.8;
+    }
+
+    footer{
+      border-top:1px solid var(--border);
+      padding:30px 24px;
+      color:var(--muted);
+    }
+
+    .footer-inner{
+      max-width:1200px;
+      margin:auto;
+      display:flex;
+      justify-content:space-between;
+      flex-wrap:wrap;
+      gap:12px;
+    }
+
+    @media(max-width:980px){
+      .hero-grid{
+        grid-template-columns:1fr;
+      }
+
+      .hero h1{
+        font-size:3.6rem;
+      }
+    }
+
+    @media(max-width:640px){
+      .nav-links{
+        display:none;
+      }
+
+      .hero{
+        padding-top:120px;
+      }
+
+      .hero h1{
+        font-size:2.9rem;
+        letter-spacing:-2px;
+      }
+
+      .section-title{
+        font-size:2rem;
+      }
+
+      .research,
+      .contact-box{
+        padding:28px;
+      }
+    }
+    .blog-footer{
+  margin-top: 28px;
+  display: flex;
+  justify-content: center;
+  padding-top: 10px;
+}
+  </style>
 </head>
-
 <body>
-<header id="hero">
-  <nav class="navbar">
-    <div class="container">
-      <h1 id="logo">
-        <a href="#"><img src="Prayatna.png" alt="Logo" /></a>
+
+<div class="noise"></div>
+
+<nav>
+  <div class="nav-inner">
+    <div class="logo">PRAYATNA</div>
+
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#research">Research</a>
+      <a href="#journal">Journal</a>
+      <a href="#contact">Contact</a>
+      <a class="btn" href="project.html">Projects</a>
+      <a class="btn primary" href="journal.html">Journal →</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-grid">
+
+    <div>
+      <div class="tag">
+        Curious about physics, rogue planets, and Many More.
+      </div>
+
+      <h1>
+        Exploring the <span>universe</span><br>
+        one question at a time.
       </h1>
-      <ul class="nav-menu">
-        <li><a class="nav-link btn btn-secondary" href="#about">About</a></li>
-         <li><a class="nav-link btn btn-secondary" href="#contact">Contact</a></li>
-        <li><a class="nav-link btn btn-primary" href="guestbook.html">Guestbook</a></li>
-        <li><a class="nav-link btn btn-primary" href="blog.html" target="_blank">Blog <i class="fas fa-arrow-right"></i></a></li>
-        
-        <li class="theme-switch">
-          <input type="checkbox" id="switch" />
-          <label class="toggle-icons" for="switch">
-            <img class="moon" src="moon.svg" />
-            <img class="sun" src="sun.svg" />
-          </label>
-        </li>
-      </ul>
-      <div class="hamburger">
-        <span class="bar"></span>
-        <span class="bar"></span>
-        <span class="bar"></span>
+
+      <p>
+        I’m Prayatna Sapkota. I think about physics, space, technology, consciousness, uncertainty, and the weird reality of being alive in a universe that owes us absolutely no explanation.
+      </p>
+
+      <div class="hero-actions">
+        <a href="journal.html" class="btn primary">Read Journal</a>
+        <a href="#research" class="btn">See Research</a>
       </div>
     </div>
-  </nav>
 
-  <section class="header-container">
-    <img class="profile-image" src="IMG.jpg" alt="Prayatna" />
-    <h1>Hi, I'm Prayatna</h1>
-    <div class="content-text">
-      <h2>Living curiously.</h2>
-      <p>Learning from the universe, and from myself.</p>
+    <div class="profile-card">
+      <img src="IMG.jpg" alt="Prayatna">
+
+      <div class="mini-grid">
+        <div class="mini-box">
+          <small>Current Obsession</small>
+          <strong>Astronomy & Rogue Planets</strong>
+        </div>
+
+        <div class="mini-box">
+          <small>Mindset</small>
+          <strong>Question Everything</strong>
+        </div>
+
+        <div class="mini-box">
+          <small>Inspired By</small>
+          <strong>Richard P. Feynman </strong>
+        </div>
+
+        <div class="mini-box">
+          <small></small>
+          <strong>Still Learning</strong>
+        </div>
+      </div>
     </div>
-    <a href="https://signal.me/#eu/DQWrcF0nHfsvhdsGXE6NeDuujot4HZirRwiapg7iBilF1pa9IhpLjKKEA15nIHA4" class="btn btn-secondary" target="_blank">Connect on Signal</a>
-  </section>
-</header>
+  </div>
+</section>
 
+<section id="about">
+  <h2 class="section-title">Just a Boy trying to understand Universe.</h2>
 
-  <!-- ABOUT -->
-  <section id="about" class="container">
-    <div class="division"></div>
-    <div class="content-text">
-      <h2>Who am I?</h2>
+  <p class="section-sub">
+    I’m not trying to look philosophical online. I genuinely like asking difficult questions. About the universe. About intelligence. About whether humanity is actually progressing or just getting better at distraction.
+    <br><br>
+    Physics pulled me in because it doesn’t care about feelings, status, or beliefs. Reality is what it is.
+  </p>
+
+  <div class="cards">
+    <div class="card">
+      <h3>Physics</h3>
       <p>
-        I’m Prayatna, just a curious guy trying to figure out how everything in this universe works. I’ve always been fascinated by space and physics. I don’t really follow beliefs or superstitions coz I like to question things and understand them for myself. Most days, you’ll find me reading books or just staring at the night sky, wondering how far curiosity can actually take me. Maybe one day, I’ll find out. 
+        Cosmology, rogue planets, entropy, relativity, quantum weirdness. <i>The universe is already insane without adding mythology on top.</i>
       </p>
     </div>
-  </section>
 
+    
 
-<!-- WORLDVIEW -->
-<section id="worldview" class="container fade-in">
-  <div class="division"></div>
-  <div class="glass-card">
-    <h2>How I See the World</h2>
-    <p>I don’t believe in a personal god, and that’s fine. The universe itself is already amazing...no extra stories needed.</p>
-    <details>
-      <summary>Why I think this way 👇🏻 </summary>
-      <ul>
-        <li>Cosmology shows stars, galaxies, and the story of us—pure wonder, no miracles required.</li>
-        <li>Life has randomness and suffering; no need to blame it on some all-powerful being.</li>
-        <li>Russell’s teapot reminds me the proof is on the person making the claim, not me.</li>
-      </ul>
-      <blockquote>“Extraordinary claims require extraordinary evidence.” — Carl Sagan</blockquote>
-      <blockquote>“The first principle is that you must not fool yourself and you are the easiest person to fool.” — Richard Feynman</blockquote>
-      <p>In short, I explore, question, and learn. Curiosity is my guide, and the universe is my classroom.</p>
-    </details>
-  </div>
-</section>
-
-
-<!-- UNIVERSE API -->
-<section id="universe-api" class="container fade-in">
-  <div class="division"></div>
-  <h2>Real Universe — NASA Astronomy Picture of the Day</h2>
-  <p>Every day, NASA shares a real image from our universe...stars, galaxies, nebulae, and more. Mind-blowing and real.</p>
-  <div id="apod-container" style="text-align:center; margin-top:20px;">
-    <img id="apod-img" src="" alt="Universe from NASA APOD" style="max-width:100%; border-radius:12px;">
-    <p id="apod-title" style="font-weight:bold; margin-top:8px;"></p>
-    <p id="apod-desc"></p>
-    <p><small><i>"The universe is not only stranger than we imagine, it is stranger than we can imagine." – Richard P. Feynman</i></small></p>
-  </div>
-</section>
-
-<script>
-async function fetchAPOD() {
-  const API_KEY = "KCLUEMeYcFV7wE5LVRBrMxPPDdUk1pbl5kk1MOsl"; 
-  try {
-    const res = await fetch(`https://api.nasa.gov/planetary/apod?api_key=${API_KEY}`);
-    if (!res.ok) throw new Error("API error");
-    const data = await res.json();
-    document.getElementById("apod-img").src = data.url;
-    document.getElementById("apod-title").textContent = data.title;
-    document.getElementById("apod-desc").textContent = data.explanation;
-  } catch (err) {
-    document.getElementById("apod-container").innerHTML = "<p>Unable to load NASA image at the moment.</p>";
-    console.error(err);
-  }
-}
-
-fetchAPOD();
-</script>
-
-
-
-  <!-- RECENT BLOGS -->
-  <section id="recent-blogs" class="container">
-    <div class="division"></div>
-    <h2>Recent Blogs</h2>
-    <div class="blog-grid" id="recentBlogGrid"></div>
-    <a href="blog.html" class="btn btn-primary" target="_blank">See All Blogs</a>
-  </section>
-
-  
-  <!-- CONTACT -->
-<section id="contact" class="container">
-  <div class="division"></div>
-  <h2>Contact</h2>
-  <p>Have questions? Let’s connect!</p>
-  <div class="contact-buttons">
-    <a href="https://signal.me/#eu/DQWrcF0nHfsvhdsGXE6NeDuujot4HZirRwiapg7iBilF1pa9IhpLjKKEA15nIHA4" class="btn btn-primary contact-btn" target="_blank">
-      <img src="signal.png" alt="Signal" class="contact-icon"> Connect on Signal
-    </a>
-    <a href="mailto:mail@prayatnasapkota.com.np" class="btn btn-primary contact-btn" target="_blank">
-      <img src="email.png" alt="Email" class="contact-icon"> Send Email
-    </a>
-  </div>
-</section>
-
-<style>
-.contact-buttons {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-top: 16px;
-}
-
-.contact-btn {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 16px;
-  font-size: 15px;
-  text-decoration: none;
-}
-
-.contact-icon {
-  width: 24px;
-  height: 24px;
-  object-fit: contain;
-}
-</style>
-
-
-  <footer id="footer">
-    <div class="container">
-      <a href="mailto:mail@prayatnasapkota.com.np">Email-mail@prayatnasapkota.com.np</a>
-      <p>© 2025 Prayatna Sapkota. All rights reserved.</p>
+    <div class="card">
+      <h3>Thinking</h3>
+      <p>
+        Curiosity matters more than pretending to be smart. Most people defend beliefs. I’d rather investigate ideas.
+      </p>
     </div>
-  </footer>
+  </div>
+</section>
 
+<section id="research">
+  <div class="research">
+    <span class="research-tag">INDEPENDENT RESEARCH · 2026</span>
+
+    <h2>
+      A Conceptual Hypothesis for Microbial Survival on Rogue Planets
+    </h2>
+
+    <p>
+      I published a conceptual astrobiology hypothesis exploring whether dormant microorganisms could potentially survive interstellar travel aboard rogue planets and later reactivate under favorable conditions in another star system.
+    </p>
+
+    <p>
+      It’s not a claim of proof. It’s a structured framework combining microbial dormancy, planetary ejection, and long-duration interstellar drift.
+    </p>
+
+    <a href="https://zenodo.org/records/18859992" target="_blank" class="btn primary">
+      Read Research Paper
+    </a>
+
+    <div class="quote">
+    PRAYATNA SAPKOTA -INDEPENDENT RESEARCHER 
+    </div>
+  </div>
+</section>
+
+
+<!-- RECENT BLOGS -->
+<section id="recent-blogs" class="container">
+  <div class="division"></div>
+
+  <h2>Recent Blogs</h2>
+
+  <div class="blog-grid" id="recentBlogGrid"></div>
+
+  <div class="blog-footer">
+    <a href="blog.html" class="btn btn-primary" target="_blank">
+      See All Blogs →
+    </a>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="contact-box">
+    <h2>Contact</h2>
+
+    <p>
+      If you like physics, strange ideas, existential conversations, or just questioning reality in general. Feel free to reach out :)
+    </p>
+
+    <div class="hero-actions" style="justify-content:center;">
+      <a href="mailto:mail@prayatnasapkota.com.np" class="btn"> 
+        Send Email
+      </a>
+
+      <a href="https://signal.me/#eu/DQWrcF0nHfsvhdsGXE6NeDuujot4HZirRwiapg7iBilF1pa9IhpLjKKEA15nIHA4" target="_blank" class="btn primary">
+        Signal
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      © 2026 Prayatna Sapkota
+    </div>
+
+    <div>
+      prayatnasapkota.com.np
+    </div>
+  </div>
+</footer>
   <script src="script.js"></script>
   <script>
     async function loadRecentBlogs() {
@@ -205,5 +648,6 @@ fetchAPOD();
     }
     document.addEventListener('DOMContentLoaded', loadRecentBlogs);
   </script>
+
 </body>
 </html>
