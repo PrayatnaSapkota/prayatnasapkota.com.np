@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projects — Prayatna Sapkota</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#06070a;
+      --card:#10131a;
+      --soft:#151922;
+      --border:rgba(255,255,255,.07);
+      --text:#f3f6ff;
+      --muted:#9aa4b5;
+      --accent:#d9d9d9;
+      --accent2:#8d8d8d;
+      --glow:0 0 30px rgba(255,255,255,.06);
+    }
+
+    *{margin:0;padding:0;box-sizing:border-box;}
+
+    body{
+      font-family:'Inter',sans-serif;
+      background:#050505;
+      color:var(--text);
+      overflow-x:hidden;
+    }
+
+    a{color:inherit;text-decoration:none;}
+
+    nav{
+      position:fixed;
+      top:0;
+      width:100%;
+      z-index:999;
+      backdrop-filter:blur(16px);
+      background:rgba(6,7,10,.65);
+      border-bottom:1px solid var(--border);
+    }
+
+    .nav-inner{
+      max-width:1100px;
+      margin:auto;
+      padding:16px 22px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+    }
+
+    .logo{
+      font-weight:800;
+      letter-spacing:.12em;
+    }
+
+    .nav-links{
+      display:flex;
+      gap:14px;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+
+    .nav-links a{
+      color:var(--muted);
+      font-size:.95rem;
+      transition:.2s;
+    }
+
+    .nav-links a:hover{color:var(--text);}
+
+    .btn{
+      padding:10px 14px;
+      border-radius:12px;
+      border:1px solid var(--border);
+      background:var(--soft);
+      color:var(--text);
+      font-weight:600;
+    }
+
+    .btn.primary{
+      background:#f1f1f1;
+      color:#111;
+      border:none;
+    }
+
+    .hero{
+      max-width:1100px;
+      margin:120px auto 30px;
+      padding:0 22px;
+    }
+
+    .tag{
+      display:inline-block;
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      color:var(--muted);
+      font-size:.9rem;
+      margin-bottom:14px;
+    }
+
+    h1{
+      font-size:3rem;
+      line-height:1.1;
+      margin-bottom:14px;
+    }
+
+    p{
+      color:var(--muted);
+      line-height:1.8;
+      max-width:850px;
+    }
+
+    .container{
+      max-width:1100px;
+      margin:auto;
+      padding:40px 22px 80px;
+    }
+
+    .section-title{
+      font-size:1.6rem;
+      margin-bottom:16px;
+    }
+
+    .card{
+      background:rgba(255,255,255,.03);
+      border:1px solid var(--border);
+      border-radius:22px;
+      padding:22px;
+      margin-bottom:18px;
+      transition:.3s;
+    }
+
+    .card:hover{
+      transform:translateY(-4px);
+      box-shadow:var(--glow);
+    }
+
+    .card h2{
+      font-size:1.3rem;
+      margin-bottom:10px;
+    }
+
+    .meta{
+      font-size:.85rem;
+      color:var(--accent2);
+      margin-bottom:10px;
+    }
+
+    .card p{
+      color:var(--muted);
+      line-height:1.8;
+      margin-bottom:10px;
+    }
+
+    .divider{
+      height:1px;
+      background:var(--border);
+      margin:40px 0;
+    }
+
+    .note{
+      font-size:.85rem;
+      color:#777;
+      border-left:2px solid rgba(255,255,255,.15);
+      padding-left:10px;
+      margin-top:12px;
+    }
+
+    footer{
+      text-align:center;
+      padding:30px;
+      color:var(--muted);
+      border-top:1px solid var(--border);
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="logo">PRAYATNA</div>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="blog.html">Blog</a>
+      <a class="btn primary" href="project.html">Projects</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="tag">Projects · Research · Ideas</div>
+
+  <h1>Ideas I’m building, testing, or breaking</h1>
+
+  <p>
+    This is not a portfolio. It’s a structured record of thinking — hypotheses, experiments, and unfinished directions.
+    Some ideas survive long enough to become research. Most don’t.
+  </p>
+</section>
+
+<section class="container">
+
+  <div class="section-title">Active Work</div>
+
+  <div class="card">
+    <div class="meta">Astrobiology · 2026 · Conceptual Research</div>
+    <h2>A Conceptual Hypothesis for Microbial Survival on Rogue Planets</h2>
+
+    <p>
+      A structured hypothesis exploring whether dormant microorganisms could survive long-duration interstellar travel inside rogue planets and potentially reactivate in a new star system under favorable conditions.
+    </p>
+
+    <p>
+      It connects microbial dormancy, planetary ejection physics, and interstellar environmental constraints.
+    </p>
+
+    <p>
+      Not a claim. Not proof. A framework for questioning biological persistence beyond planetary systems.
+    </p>
+
+    <a class="btn primary" href="https://zenodo.org/records/18859992" target="_blank" style="display:inline-block;margin-top:10px;">
+      Read Full Paper
+    </a>
+
+    <div class="note">
+      Structure used: Title → Field → Date → Summary → Assumptions → Open Questions → External Links.
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="section-title">Work Philosophy</div>
+
+  <div class="card">
+    <h2>How I treat projects</h2>
+
+    <p>
+      A project is not something that must be finished. It is something that must clarify thinking.
+    </p>
+
+    <p>
+      If an idea survives long enough, it becomes structured. If it doesn’t, it still counts as progress.
+    </p>
+
+    <p>
+      The goal is not output. The goal is understanding.
+    </p>
+  </div>
+
+  <div class="card">
+    <h2>Future Directions</h2>
+
+    <p>
+      Upcoming work will follow the same structure so ideas remain traceable, comparable, and expandable over time.
+    </p>
+
+    <p>
+      This page will evolve into a system — not a gallery.
+    </p>
+  </div>
+
+</section>
+
+<footer>
+  © 2026 Prayatna Sapkota · 
+</footer>
+
+</body>
+</html>
