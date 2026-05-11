@@ -692,12 +692,17 @@ Thank you, Mr.Feynman.
 <button id="toTop">↑</button>
 
 <script>
-// ================= FIX: ALWAYS SHOW DATES =================
+
+/* =========================
+   FIX ALL DATES
+========================= */
 function formatDate(dateStr){
   if(!dateStr) return "";
   const d = new Date(dateStr);
+
   if(isNaN(d)) return "";
-  return d.toLocaleDateString('en-US', {
+
+  return d.toLocaleDateString('en-US',{
     year:'numeric',
     month:'long',
     day:'numeric'
@@ -711,19 +716,270 @@ function fixAllDates(){
 
     if(dateEl){
       const formatted = formatDate(raw);
-
-      // ALWAYS ensure something is shown
-      if(formatted){
-        dateEl.textContent = formatted;
-      } else {
-        dateEl.textContent = "Unknown date";
-      }
+      dateEl.textContent = formatted || "Unknown date";
     }
   });
 }
 
-// run on load
-document.addEventListener('DOMContentLoaded', fixAllDates);
+
+/* =========================
+   READ MORE BUTTON
+========================= */
+function setupReadMore(){
+
+  document.querySelectorAll('[data-action="toggle-read"]').forEach(btn=>{
+
+    btn.addEventListener('click',()=>{
+
+      const post = btn.closest('.post');
+      const extra = post.querySelector('.extra');
+
+      extra.classList.toggle('open');
+
+      if(extra.classList.contains('open')){
+        btn.textContent = "Show Less";
+      }else{
+        btn.textContent = "Read More";
+      }
+
+    });
+
+  });
+
+}
+
+
+/* =========================
+   PIN SYSTEM
+========================= */
+function setupPinButtons(){
+
+  document.querySelectorAll('[data-action="pin"]').forEach(btn=>{
+
+    btn.addEventListener('click',()=>{
+
+      const post = btn.closest('.post');
+      const badge = post.querySelector('.pinned-badge');
+      const container = document.getElementById('posts');
+
+      const isPinned = post.dataset.pinned === "true";
+
+      if(isPinned){
+
+        post.dataset.pinned = "false";
+        badge.style.display = "none";
+        btn.textContent = "Pin";
+
+      }else{
+
+        post.dataset.pinned = "true";
+        badge.style.display = "inline-block";
+        badge.style.background = "rgba(255,255,255,.08)";
+        badge.style.padding = "6px 10px";
+        badge.style.borderRadius = "999px";
+        badge.style.fontSize = "11px";
+        badge.style.color = "#fff";
+
+        btn.textContent = "Pinned";
+
+        // move to top
+        container.prepend(post);
+      }
+
+    });
+
+  });
+
+}
+
+
+/* =========================
+   COPY LINK
+========================= */
+function setupShareButtons(){
+
+  document.querySelectorAll('[data-action="share"]').forEach(btn=>{
+
+    btn.addEventListener('click',()=>{
+
+      const post = btn.closest('.post');
+      const id = post.dataset.id;
+
+      const url = `${window.location.origin}${window.location.pathname}#${id}`;
+
+      navigator.clipboard.writeText(url);
+
+      const original = btn.textContent;
+
+      btn.textContent = "Copied!";
+
+      setTimeout(()=>{
+        btn.textContent = original;
+      },2000);
+
+    });
+
+  });
+
+}
+
+
+/* =========================
+   SEARCH SYSTEM
+========================= */
+function setupSearch(){
+
+  const input = document.getElementById('searchInput');
+
+  input.addEventListener('input',()=>{
+
+    const value = input.value.toLowerCase();
+
+    document.querySelectorAll('.post').forEach(post=>{
+
+      const text = post.innerText.toLowerCase();
+
+      if(text.includes(value)){
+        post.style.display = "block";
+      }else{
+        post.style.display = "none";
+      }
+
+    });
+
+  });
+
+}
+
+
+/* =========================
+   FILTER SYSTEM
+========================= */
+function setupFilters(){
+
+  const buttons = document.querySelectorAll('.filterbtn');
+
+  buttons.forEach(button=>{
+
+    button.addEventListener('click',()=>{
+
+      buttons.forEach(b=>b.classList.remove('active'));
+      button.classList.add('active');
+
+      const filter = button.dataset.filter;
+
+      document.querySelectorAll('.post').forEach(post=>{
+
+        const hasImage = post.dataset.hasImage === "true";
+        const hasVideo = post.dataset.hasVideo === "true";
+        const pinned = post.dataset.pinned === "true";
+
+        let show = true;
+
+        if(filter === "photos"){
+          show = hasImage;
+        }
+
+        else if(filter === "videos"){
+          show = hasVideo;
+        }
+
+        else if(filter === "text"){
+          show = !hasImage && !hasVideo;
+        }
+
+        else if(filter === "pinned"){
+          show = pinned;
+        }
+
+        post.style.display = show ? "block" : "none";
+
+      });
+
+    });
+
+  });
+
+}
+
+
+/* =========================
+   AUTO HIDE TOPBAR
+========================= */
+function setupTopbar(){
+
+  let lastScroll = 0;
+  const topbar = document.getElementById('topbar');
+
+  window.addEventListener('scroll',()=>{
+
+    const current = window.pageYOffset;
+
+    if(current > lastScroll && current > 100){
+      topbar.classList.add('hidden');
+    }else{
+      topbar.classList.remove('hidden');
+    }
+
+    lastScroll = current;
+
+  });
+
+}
+
+
+/* =========================
+   TO TOP BUTTON
+========================= */
+function setupToTop(){
+
+  const btn = document.getElementById('toTop');
+
+  window.addEventListener('scroll',()=>{
+
+    if(window.scrollY > 400){
+      btn.style.display = "block";
+    }else{
+      btn.style.display = "none";
+    }
+
+  });
+
+  btn.addEventListener('click',()=>{
+
+    window.scrollTo({
+      top:0,
+      behavior:'smooth'
+    });
+
+  });
+
+}
+
+
+/* =========================
+   INIT EVERYTHING
+========================= */
+document.addEventListener('DOMContentLoaded',()=>{
+
+  fixAllDates();
+
+  setupReadMore();
+
+  setupPinButtons();
+
+  setupShareButtons();
+
+  setupSearch();
+
+  setupFilters();
+
+  setupTopbar();
+
+  setupToTop();
+
+});
+
 </script>
 
 </body>
