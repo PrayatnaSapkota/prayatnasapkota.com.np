@@ -8,274 +8,419 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
-    /* =========================
-       MATCH INDEX.HTML THEME
-    ========================= */
-    :root{
-      --bg:#050505;
-      --card:rgba(255,255,255,.03);
-      --muted:#9aa4b5;
-      --text:#f3f6ff;
-      --accent:#d9d9d9;
-      --accent2:#8d8d8d;
-      --border:rgba(255,255,255,.07);
-      --glow:0 0 30px rgba(255,255,255,.06);
-    }
+/* =========================
+   ROOT
+========================= */
+:root{
+  --bg:#050505;
+  --card:#0d0d11;
+  --muted:#9aa4b5;
+  --text:#f3f6ff;
+  --accent:#ffffff;
+  --line:rgba(255,255,255,.08);
+  --line2:rgba(255,255,255,.14);
+  --blue:#74b9ff;
+}
 
-    *{
-      margin:0;
-      padding:0;
-      box-sizing:border-box;
-    }
+/* =========================
+   RESET
+========================= */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
 
-    body{
-      font-family:'Inter',sans-serif;
-      background:var(--bg);
-      color:var(--text);
-      overflow-x:hidden;
-    }
+html{
+  scroll-behavior:smooth;
+}
 
-    a{
-      color:inherit;
-      text-decoration:none;
-    }
+body{
+  font-family:'Inter',sans-serif;
+  background:#050505;
+  color:var(--text);
+  overflow-x:hidden;
+  line-height:1.7;
+}
 
-    /* ================= TOPBAR ================= */
-    .topbar{
-      position:fixed;
-      top:0;
-      left:0;
-      right:0;
-      z-index:1000;
-      background:rgba(6,7,10,.65);
-      backdrop-filter:blur(16px);
-      border-bottom:1px solid var(--border);
-      transition:.3s;
-    }
+img{
+  max-width:100%;
+  display:block;
+}
 
-    .topbar.hidden{
-      transform:translateY(-110%);
-    }
+a{
+  text-decoration:none;
+  color:inherit;
+}
 
-    .topbar-inner{
-      max-width:1000px;
-      margin:auto;
-      padding:12px 18px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-    }
+/* =========================
+   TOPBAR
+========================= */
+.topbar{
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  z-index:9999;
 
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:12px;
-      min-width:0;
-    }
+  background:rgba(5,5,5,.75);
+  backdrop-filter:blur(16px);
 
-    .logo{
-      width:42px;
-      height:42px;
-      border-radius:10px;
-      background:rgba(255,255,255,.03);
-      border:1px solid var(--border);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-weight:700;
-      color:var(--accent);
-    }
+  border-bottom:1px solid var(--line);
 
-    .brand h1{
-      font-size:15px;
-      color:var(--accent);
-      white-space:nowrap;
-      overflow:hidden;
-      text-overflow:ellipsis;
-    }
+  transition:.3s ease;
+}
 
-    .brand p{
-      font-size:12px;
-      color:var(--muted);
-    }
+.topbar.hidden{
+  transform:translateY(-120%);
+}
 
-    /* ================= BUTTONS ================= */
-    .btn{
-      padding:8px 12px;
-      border-radius:10px;
-      background:rgba(255,255,255,.03);
-      border:1px solid var(--border);
-      color:var(--text);
-      font-weight:600;
-      cursor:pointer;
-      transition:.2s;
-    }
+.topbar-inner{
+  max-width:1050px;
+  margin:auto;
 
-    .btn:hover{
-      transform:translateY(-2px);
-      box-shadow:var(--glow);
-    }
+  padding:14px 18px;
 
-    .btn.primary{
-      background:var(--accent);
-      color:#111;
-      border:none;
-    }
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:16px;
+}
 
-    /* ================= SEARCH ================= */
-    .search-wrap{
-      display:flex;
-      align-items:center;
-      background:rgba(255,255,255,.02);
-      border:1px solid var(--border);
-      border-radius:10px;
-      padding:6px 10px;
-    }
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
 
-    .search-input{
-      background:transparent;
-      border:none;
-      outline:none;
-      color:var(--text);
-      width:200px;
-    }
+.logo{
+  width:44px;
+  height:44px;
 
-    /* ================= LAYOUT ================= */
-    main{
-      max-width:1000px;
-      margin:120px auto 80px;
-      padding:18px;
-    }
+  border-radius:12px;
 
-    /* ================= FILTERS ================= */
-    .filterbar{
-      display:flex;
-      gap:8px;
-      flex-wrap:wrap;
-      margin-bottom:20px;
-    }
+  display:flex;
+  align-items:center;
+  justify-content:center;
 
-    .filterbtn{
-      background:transparent;
-      border:1px solid var(--border);
-      color:var(--muted);
-      padding:6px 12px;
-      border-radius:999px;
-      cursor:pointer;
-    }
+  background:#111;
 
-    .filterbtn.active{
-      background:rgba(255,255,255,.05);
-      color:var(--accent);
-      border-color:rgba(255,255,255,.2);
-    }
+  border:1px solid var(--line);
 
-    /* ================= POSTS ================= */
-    .grid{
-      display:flex;
-      flex-direction:column;
-      gap:18px;
-    }
+  font-weight:800;
+}
 
-    .post{
-      background:var(--card);
-      border:1px solid var(--border);
-      border-radius:24px;
-      padding:18px;
-      box-shadow:0 20px 60px rgba(0,0,0,.4);
-      transition:.3s;
-    }
+.brand h1{
+  font-size:15px;
+}
 
-    .post:hover{
-      transform:translateY(-6px);
-      box-shadow:var(--glow);
-      border-color:rgba(255,255,255,.15);
-    }
+.brand p{
+  font-size:12px;
+  color:var(--muted);
+}
 
-    .meta{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:10px;
-    }
+/* =========================
+   BUTTONS
+========================= */
+.btn{
+  padding:10px 14px;
 
-    .title{
-      font-size:18px;
-      color:var(--accent);
-    }
+  border-radius:12px;
 
-    .date{
-      font-size:12px;
-      color:var(--muted);
-    }
+  border:1px solid var(--line);
 
-    .post-content{
-      margin-top:12px;
-      color:#ddd;
-    }
+  background:rgba(255,255,255,.04);
 
-    .extra{
-      max-height:0;
-      overflow:hidden;
-      transition:.3s ease;
-    }
+  color:#fff;
 
-    .extra.open{
-      max-height:2000px;
-      margin-top:10px;
-    }
+  cursor:pointer;
 
-    /* ================= ACTIONS ================= */
-    .actions{
-      display:flex;
-      gap:8px;
-      margin-top:12px;
-      flex-wrap:wrap;
-    }
+  transition:.25s ease;
+}
 
-    .action{
-      background:rgba(255,255,255,.03);
-      border:1px solid var(--border);
-      color:var(--text);
-      padding:8px 10px;
-      border-radius:10px;
-      cursor:pointer;
-      transition:.2s;
-      font-weight:600;
-    }
+.btn:hover{
+  transform:translateY(-2px);
+  border-color:var(--line2);
+}
 
-    .action:hover{
-      transform:translateY(-2px);
-      box-shadow:var(--glow);
-    }
+/* =========================
+   SEARCH
+========================= */
+.search-wrap{
+  display:flex;
+  align-items:center;
 
-    .action.secondary{
-      background:transparent;
-      color:var(--muted);
-      border:1px dashed var(--border);
-    }
+  padding:10px 14px;
 
-    /* ================= TOP BUTTON ================= */
-    #toTop{
-      position:fixed;
-      bottom:18px;
-      right:18px;
-      padding:10px 12px;
-      border-radius:50%;
-      background:var(--accent);
-      color:#111;
-      border:none;
-      display:none;
-      cursor:pointer;
-    }
+  border-radius:12px;
 
-    /* ================= RESPONSIVE ================= */
-    @media(max-width:700px){
-      .search-input{width:120px}
-      .brand p{display:none}
-    }
-  </style>
+  background:rgba(255,255,255,.03);
+
+  border:1px solid var(--line);
+}
+
+.search-input{
+  width:220px;
+
+  background:transparent;
+  border:none;
+  outline:none;
+
+  color:#fff;
+}
+
+.search-input::placeholder{
+  color:#777;
+}
+
+/* =========================
+   MAIN
+========================= */
+main{
+  max-width:980px;
+  margin:120px auto 80px;
+  padding:18px;
+}
+
+/* =========================
+   FILTERS
+========================= */
+.filterbar{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+
+  margin-bottom:24px;
+}
+
+.filterbtn{
+  padding:10px 16px;
+
+  border-radius:999px;
+
+  background:rgba(255,255,255,.03);
+
+  border:1px solid var(--line);
+
+  color:#d7d7d7;
+
+  cursor:pointer;
+}
+
+.filterbtn.active{
+  background:#fff;
+  color:#000;
+}
+
+/* =========================
+   POSTS
+========================= */
+.grid{
+  display:flex;
+  flex-direction:column;
+  gap:24px;
+}
+
+.post{
+  background:rgba(255,255,255,.03);
+
+  border:1px solid var(--line);
+
+  border-radius:24px;
+
+  padding:24px;
+
+  transition:.3s ease;
+}
+
+.post:hover{
+  transform:translateY(-4px);
+  border-color:var(--line2);
+}
+
+.meta{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:14px;
+}
+
+.title{
+  font-size:24px;
+  line-height:1.25;
+  margin-bottom:8px;
+}
+
+.date{
+  font-size:13px;
+  color:var(--muted);
+}
+/* =========================
+   IMAGE FIX
+========================= */
+.post-content img{
+  width:auto;
+  max-width:100%;
+  height:auto;
+
+  border-radius:18px;
+
+  margin:20px auto;
+
+  border:1px solid rgba(255,255,255,.08);
+}
+
+/* =========================
+   EXTRA CONTENT
+========================= */
+.extra{
+  max-height:0;
+  overflow:hidden;
+
+  opacity:0;
+
+  transition:
+    max-height .5s ease,
+    opacity .35s ease,
+    margin-top .35s ease;
+}
+
+.extra.open{
+  max-height:5000px;
+  opacity:1;
+  margin-top:16px;
+}
+
+/* =========================
+   ACTIONS
+========================= */
+.actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+
+  margin-top:24px;
+}
+
+.action{
+  border:none;
+  cursor:pointer;
+
+  padding:11px 16px;
+
+  border-radius:12px;
+
+  font-weight:700;
+
+  transition:.25s ease;
+}
+
+/* READ MORE */
+.action[data-action="toggle-read"]{
+  background:linear-gradient(
+    135deg,
+    #6bb8ff,
+    #8f7dff
+  );
+
+  color:#fff;
+}
+
+/* PIN */
+.action[data-action="pin"]{
+  background:rgba(255,255,255,.05);
+
+  border:1px solid rgba(255,255,255,.1);
+
+  color:#fff;
+}
+
+/* SHARE */
+.action.secondary{
+  background:transparent;
+
+  border:1px dashed rgba(255,255,255,.15);
+
+  color:#cbd2db;
+}
+
+.action:hover{
+  transform:translateY(-2px);
+}
+
+/* =========================
+   PIN BADGE
+========================= */
+.pinned-badge{
+  display:none;
+
+  background:rgba(116,185,255,.15);
+
+  border:1px solid rgba(116,185,255,.3);
+
+  color:#9ed0ff;
+
+  padding:6px 10px;
+
+  border-radius:999px;
+
+  font-size:11px;
+  font-weight:700;
+}
+
+/* =========================
+   TOP BUTTON
+========================= */
+#toTop{
+  position:fixed;
+
+  right:20px;
+  bottom:20px;
+
+  width:50px;
+  height:50px;
+
+  border:none;
+
+  border-radius:50%;
+
+  background:#fff;
+  color:#000;
+
+  font-size:18px;
+  font-weight:800;
+
+  cursor:pointer;
+
+  display:none;
+
+  z-index:999;
+}
+
+/* =========================
+   MOBILE
+========================= */
+@media(max-width:700px){
+
+  .title{
+    font-size:20px;
+  }
+
+  .search-input{
+    width:120px;
+  }
+
+  .post{
+    padding:20px;
+  }
+
+  .action{
+    width:100%;
+  }
+
+}
+</style>
+ 
 </head>
 
 <body>
@@ -291,7 +436,6 @@
         <p>Living, learning & thinking</p>
       </div>
     </div>
-<h1> Note:-THIS PAGE IS NOT FUNCTIONING PROPERLY.. I AM TRYING TO FIX IT</h1>
     <div style="display:flex;gap:10px;align-items:center">
       <a class="btn" href="index.html">← Home</a>
 
@@ -693,54 +837,69 @@ Thank you, Mr.Feynman.
 
 <script>
 
+
 /* =========================
-   FIX ALL DATES
+   DATE FORMAT
 ========================= */
 function formatDate(dateStr){
-  if(!dateStr) return "";
+
+  if(!dateStr) return "Unknown date";
+
   const d = new Date(dateStr);
 
-  if(isNaN(d)) return "";
+  if(isNaN(d)) return "Unknown date";
 
   return d.toLocaleDateString('en-US',{
     year:'numeric',
     month:'long',
     day:'numeric'
   });
+
 }
-
-function fixAllDates(){
-  document.querySelectorAll('.post').forEach(post=>{
-    const dateEl = post.querySelector('.date');
-    const raw = post.dataset.date;
-
-    if(dateEl){
-      const formatted = formatDate(raw);
-      dateEl.textContent = formatted || "Unknown date";
-    }
-  });
-}
-
 
 /* =========================
-   READ MORE BUTTON
+   FIX DATES
+========================= */
+function fixAllDates(){
+
+  document.querySelectorAll('.post').forEach(post=>{
+
+    const dateEl = post.querySelector('.date');
+
+    if(!dateEl) return;
+
+    dateEl.textContent =
+      formatDate(post.dataset.date);
+
+  });
+
+}
+
+/* =========================
+   READ MORE
 ========================= */
 function setupReadMore(){
 
-  document.querySelectorAll('[data-action="toggle-read"]').forEach(btn=>{
+  document.querySelectorAll(
+    '[data-action="toggle-read"]'
+  ).forEach(btn=>{
 
     btn.addEventListener('click',()=>{
 
-      const post = btn.closest('.post');
-      const extra = post.querySelector('.extra');
+      const post =
+        btn.closest('.post');
+
+      const extra =
+        post.querySelector('.extra');
+
+      if(!extra) return;
 
       extra.classList.toggle('open');
 
-      if(extra.classList.contains('open')){
-        btn.textContent = "Show Less";
-      }else{
-        btn.textContent = "Read More";
-      }
+      btn.textContent =
+        extra.classList.contains('open')
+        ? "Show Less"
+        : "Read More";
 
     });
 
@@ -748,43 +907,132 @@ function setupReadMore(){
 
 }
 
+/* =========================
+   SAVE PINNED
+========================= */
+function savePinnedPosts(){
+
+  const pinned = [];
+
+  document.querySelectorAll('.post').forEach(post=>{
+
+    if(post.dataset.pinned === "true"){
+
+      pinned.push(post.dataset.id);
+
+    }
+
+  });
+
+  localStorage.setItem(
+    'journalPinnedPosts',
+    JSON.stringify(pinned)
+  );
+
+}
 
 /* =========================
-   PIN SYSTEM
+   LOAD PINNED
+========================= */
+function loadPinnedPosts(){
+
+  const saved =
+    JSON.parse(
+      localStorage.getItem('journalPinnedPosts')
+    ) || [];
+
+  const container =
+    document.getElementById('posts');
+
+  saved.reverse().forEach(id=>{
+
+    const post =
+      document.querySelector(
+        `.post[data-id="${id}"]`
+      );
+
+    if(!post) return;
+
+    post.dataset.pinned = "true";
+
+    const badge =
+      post.querySelector('.pinned-badge');
+
+    const btn =
+      post.querySelector(
+        '[data-action="pin"]'
+      );
+
+    if(badge){
+
+      badge.style.display = "inline-block";
+
+    }
+
+    if(btn){
+
+      btn.textContent = "Pinned";
+
+    }
+
+    container.prepend(post);
+
+  });
+
+}
+
+/* =========================
+   PIN BUTTONS
 ========================= */
 function setupPinButtons(){
 
-  document.querySelectorAll('[data-action="pin"]').forEach(btn=>{
+  const container =
+    document.getElementById('posts');
+
+  document.querySelectorAll(
+    '[data-action="pin"]'
+  ).forEach(btn=>{
 
     btn.addEventListener('click',()=>{
 
-      const post = btn.closest('.post');
-      const badge = post.querySelector('.pinned-badge');
-      const container = document.getElementById('posts');
+      const post =
+        btn.closest('.post');
 
-      const isPinned = post.dataset.pinned === "true";
+      const badge =
+        post.querySelector('.pinned-badge');
+
+      const isPinned =
+        post.dataset.pinned === "true";
 
       if(isPinned){
 
         post.dataset.pinned = "false";
-        badge.style.display = "none";
+
         btn.textContent = "Pin";
+
+        if(badge){
+
+          badge.style.display = "none";
+
+        }
 
       }else{
 
         post.dataset.pinned = "true";
-        badge.style.display = "inline-block";
-        badge.style.background = "rgba(255,255,255,.08)";
-        badge.style.padding = "6px 10px";
-        badge.style.borderRadius = "999px";
-        badge.style.fontSize = "11px";
-        badge.style.color = "#fff";
 
         btn.textContent = "Pinned";
 
-        // move to top
+        if(badge){
+
+          badge.style.display = "inline-block";
+
+        }
+
         container.prepend(post);
+
       }
+
+      savePinnedPosts();
 
     });
 
@@ -792,30 +1040,36 @@ function setupPinButtons(){
 
 }
 
-
 /* =========================
-   COPY LINK
+   SHARE BUTTON
 ========================= */
 function setupShareButtons(){
 
-  document.querySelectorAll('[data-action="share"]').forEach(btn=>{
+  document.querySelectorAll(
+    '[data-action="share"]'
+  ).forEach(btn=>{
 
     btn.addEventListener('click',()=>{
 
-      const post = btn.closest('.post');
+      const post =
+        btn.closest('.post');
+
       const id = post.dataset.id;
 
-      const url = `${window.location.origin}${window.location.pathname}#${id}`;
+      const url =
+        `${window.location.origin}${window.location.pathname}#${id}`;
 
       navigator.clipboard.writeText(url);
 
-      const original = btn.textContent;
+      const old = btn.textContent;
 
       btn.textContent = "Copied!";
 
       setTimeout(()=>{
-        btn.textContent = original;
-      },2000);
+
+        btn.textContent = old;
+
+      },1800);
 
     });
 
@@ -823,27 +1077,31 @@ function setupShareButtons(){
 
 }
 
-
 /* =========================
-   SEARCH SYSTEM
+   SEARCH
 ========================= */
 function setupSearch(){
 
-  const input = document.getElementById('searchInput');
+  const input =
+    document.getElementById('searchInput');
+
+  if(!input) return;
 
   input.addEventListener('input',()=>{
 
-    const value = input.value.toLowerCase();
+    const value =
+      input.value.toLowerCase();
 
-    document.querySelectorAll('.post').forEach(post=>{
+    document.querySelectorAll('.post')
+    .forEach(post=>{
 
-      const text = post.innerText.toLowerCase();
+      const text =
+        post.innerText.toLowerCase();
 
-      if(text.includes(value)){
-        post.style.display = "block";
-      }else{
-        post.style.display = "none";
-      }
+      post.style.display =
+        text.includes(value)
+        ? "block"
+        : "none";
 
     });
 
@@ -851,28 +1109,38 @@ function setupSearch(){
 
 }
 
-
 /* =========================
-   FILTER SYSTEM
+   FILTERS
 ========================= */
 function setupFilters(){
 
-  const buttons = document.querySelectorAll('.filterbtn');
+  const buttons =
+    document.querySelectorAll('.filterbtn');
 
   buttons.forEach(button=>{
 
     button.addEventListener('click',()=>{
 
-      buttons.forEach(b=>b.classList.remove('active'));
+      buttons.forEach(btn=>
+        btn.classList.remove('active')
+      );
+
       button.classList.add('active');
 
-      const filter = button.dataset.filter;
+      const filter =
+        button.dataset.filter;
 
-      document.querySelectorAll('.post').forEach(post=>{
+      document.querySelectorAll('.post')
+      .forEach(post=>{
 
-        const hasImage = post.dataset.hasImage === "true";
-        const hasVideo = post.dataset.hasVideo === "true";
-        const pinned = post.dataset.pinned === "true";
+        const hasImage =
+          post.dataset.hasImage === "true";
+
+        const hasVideo =
+          post.dataset.hasVideo === "true";
+
+        const pinned =
+          post.dataset.pinned === "true";
 
         let show = true;
 
@@ -892,7 +1160,8 @@ function setupFilters(){
           show = pinned;
         }
 
-        post.style.display = show ? "block" : "none";
+        post.style.display =
+          show ? "block" : "none";
 
       });
 
@@ -902,23 +1171,29 @@ function setupFilters(){
 
 }
 
-
 /* =========================
-   AUTO HIDE TOPBAR
+   TOPBAR
 ========================= */
 function setupTopbar(){
 
   let lastScroll = 0;
-  const topbar = document.getElementById('topbar');
+
+  const topbar =
+    document.getElementById('topbar');
 
   window.addEventListener('scroll',()=>{
 
-    const current = window.pageYOffset;
+    const current =
+      window.pageYOffset;
 
     if(current > lastScroll && current > 100){
+
       topbar.classList.add('hidden');
+
     }else{
+
       topbar.classList.remove('hidden');
+
     }
 
     lastScroll = current;
@@ -927,21 +1202,20 @@ function setupTopbar(){
 
 }
 
-
 /* =========================
-   TO TOP BUTTON
+   TO TOP
 ========================= */
 function setupToTop(){
 
-  const btn = document.getElementById('toTop');
+  const btn =
+    document.getElementById('toTop');
 
   window.addEventListener('scroll',()=>{
 
-    if(window.scrollY > 400){
-      btn.style.display = "block";
-    }else{
-      btn.style.display = "none";
-    }
+    btn.style.display =
+      window.scrollY > 400
+      ? "block"
+      : "none";
 
   });
 
@@ -956,31 +1230,36 @@ function setupToTop(){
 
 }
 
-
 /* =========================
-   INIT EVERYTHING
+   INIT
 ========================= */
-document.addEventListener('DOMContentLoaded',()=>{
+document.addEventListener(
+  'DOMContentLoaded',
+  ()=>{
 
-  fixAllDates();
+    fixAllDates();
 
-  setupReadMore();
+    setupReadMore();
 
-  setupPinButtons();
+    setupPinButtons();
 
-  setupShareButtons();
+    setupShareButtons();
 
-  setupSearch();
+    setupSearch();
 
-  setupFilters();
+    setupFilters();
 
-  setupTopbar();
+    setupTopbar();
 
-  setupToTop();
+    setupToTop();
 
-});
+    loadPinnedPosts();
+
+  }
+);
 
 </script>
+
 
 </body>
 </html>
