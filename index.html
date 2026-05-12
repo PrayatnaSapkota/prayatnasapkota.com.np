@@ -574,17 +574,17 @@
 </section>
 
 
-<!-- RECENT BLOGS -->
+<!-- RECENT JOURNALS -->
 <section id="recent-blogs" class="container">
   <div class="division"></div>
 
-  <h2>Recent Blogs</h2>
+  <h2>Recent Journals</h2>
 
   <div class="blog-grid" id="recentBlogGrid"></div>
 
   <div class="blog-footer">
-    <a href="blog.html" class="btn btn-primary" target="_blank">
-      See All Blogs →
+    <a href="journal.html" class="btn btn-primary" target="_blank">
+      See All Posts →
     </a>
   </div>
 </section>
@@ -624,7 +624,7 @@
   <script>
     async function loadRecentBlogs() {
       try {
-        const res = await fetch('blog.html');
+        const res = await fetch('journal.html');
         const html = await res.text();
         const doc = new DOMParser().parseFromString(html, 'text/html');
         const posts = Array.from(doc.querySelectorAll('.post')).slice(0, 3);
@@ -637,7 +637,7 @@
           const card = document.createElement('div');
           card.className = 'recent-post-card';
           card.innerHTML = `
-            <a href="blog.html#${id}" target="_blank">
+            <a href="journal.html#${id}" target="_blank">
               ${img ? `<img src="${img}" alt="">` : ''}
               <h3>${title}</h3>
               <p>${new Date(date).toDateString()}</p>
